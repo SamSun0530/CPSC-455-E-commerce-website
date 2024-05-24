@@ -10,10 +10,10 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 
 ## Team Members
 
-- Person 1: one sentence about you!
-- Person 2: one sentence about you!
-- Person 3: one sentence about you!
-- Person 4: one sentence about you!
+- Andy Lee: one sentence about you!
+- Ivena Du: one sentence about you!
+- Sam Sun: one sentence about you!
+- Shreya Gupta: one sentence about you!
 
 ## Task Requirements
 
@@ -39,6 +39,20 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 - allow users to sign up for restock/discount email notifications for specific items.
 - Graphs/ visualizations of products sold, profits, etc. Seller performance insights?
 - Utilize ai-algorithm for product suggestion based on purchase or search history
+
+#### Task Breakdown
+
+- User login
+    - Frontend design: form inputs, username, password. Stylize UI, form input validations. Display error if incorrect password, or redirect to homepage if login successful.
+    - Database: create table to keep track of sessions (session id, user id, last_activity)
+    - Backend: create login API endpoint for frontend to call on form submit, validate/sanitize inputs, salt + hash password, compare with record in DB. If successful, return session/auth token/cookie to be used in subsequent API calls.
+    - Backend: create auth function for each API that returns guest page or logged in page depending on session validation
+
+- Account registration
+    - Frontend design: form inputs, username, password, email. Stylize UI, form input validations
+    - Database: create table to keep track of users with appropriate fields (do not store password in plaintext, salt + hash)
+    - Backend: create registration API endpoint for frontend to call on form submit, validate/sanitize inputs, create DB record.
+
 
 ## Images (Prototype Sketches for now)
 
