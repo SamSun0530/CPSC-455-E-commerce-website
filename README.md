@@ -12,7 +12,7 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 
 - Andy Lee: one sentence about you!
 - Ivena Du: one sentence about you!
-- Sam Sun: one sentence about you!
+- Sam Sun: 4th year CS student, have few experience about web design
 - Shreya Gupta: one sentence about you!
 
 ## Task Requirements
