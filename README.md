@@ -10,7 +10,7 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 
 ## Team Members
 
-- Andy Lee: one sentence about you!
+- Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
 - Ivena Du: one sentence about you!
 - Sam Sun: 4th year CS student, have few experience about web design
 - Shreya Gupta: one sentence about you!
