@@ -13,7 +13,7 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 - Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
 - Ivena Du: one sentence about you!
 - Sam Sun: 4th year CS student, have few experience about web design
-- Shreya Gupta: one sentence about you!
+- Shreya Gupta: M.Eng. student in Computer Engineering, recently worked at Powerex as full stack developer.
 
 ## Task Requirements
 
