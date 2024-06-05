@@ -1,9 +1,11 @@
+import Navbar from "../components/Navbar"
 import RegistrationForm from "../components/RegistrationForm"
+import '../css/RegistrationPage.css'
 export default function RegistrationPage() {
-	return(
+	return (
 		<>
-		<h1>Register for your account</h1>
-		<RegistrationForm/>
+			<Navbar />
+			<RegistrationForm />
 		</>
 	)
 }
