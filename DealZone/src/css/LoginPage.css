@@ -4,6 +4,10 @@
     align-items: center;
     height: 100vh;
     background: #f0f2f5;
+    background-image: url("../../public/loginBackground.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
   
 .login-form {
@@ -22,6 +26,10 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+#loginHeading {
+    align-self: center;
 }
   
 .input:focus {
