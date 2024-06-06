@@ -4,6 +4,7 @@ import UserAccountPage from './pages/UserAccountPage';
 import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import { IndividualListingPage } from './pages/IndividualListingPage';
 
 const App = () => {
     return (
@@ -15,6 +16,7 @@ const App = () => {
                     <Route path="/account" element={<UserAccountPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegistrationPage />} />
+                    <Route exact path="/listings/:productId" element={<IndividualListingPage/>} />
                 </Routes>
             </div>
         </Router>

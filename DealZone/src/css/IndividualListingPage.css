@@ -1,0 +1,17 @@
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin:0;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.product-image-container {
+    max-width: 500px;
+}
+
+
+img {
+    max-width: 100%;
+}

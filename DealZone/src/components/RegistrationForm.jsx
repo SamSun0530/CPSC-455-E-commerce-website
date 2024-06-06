@@ -51,22 +51,22 @@ export default function RegistrationForm() {
 				<h2 id="registerHeading">Welcome to DealZone</h2>
 
 				<label htmlFor="firstName">First Name *</label>
-				<input type="text" id="firstName" name="firstName" required value={formData.firstName} onChange={handleChange} />
+				<input className="input" type="text" id="firstName" name="firstName" required value={formData.firstName} onChange={handleChange} />
 
 				<label htmlFor="lastName">Last Name *</label>
-				<input type="text" id="lastName" name="lastName" required value={formData.lastName} onChange={handleChange} />
+				<input className="input" type="text" id="lastName" name="lastName" required value={formData.lastName} onChange={handleChange} />
 
 				<label htmlFor="email">Email *</label>
-				<input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} />
+				<input className="input" type="email" id="email" name="email" required value={formData.email} onChange={handleChange} />
 
 				<label htmlFor="phone">Phone Number</label>
-				<input type="text" id="phone" name="phone" placeholder="No spaces in between or punctuation permitted" pattern=" *\d{10,11} *" onInvalid={handleInvalidPhoneFormat} value={formData.phone} onChange={handlePhoneChange} />
+				<input className="input" type="text" id="phone" name="phone" placeholder="No spaces in between or punctuation permitted" pattern=" *\d{10,11} *" onInvalid={handleInvalidPhoneFormat} value={formData.phone} onChange={handlePhoneChange} />
 
 				<label htmlFor="address">Address</label>
-				<input type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
+				<input className="input" type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
 
 				<label htmlFor="password">Password *</label>
-				<input type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
+				<input className="input" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
 
 				<button className="register-button" type="submit">Register</button>
 				<label className="required-field">* Required fields</label>

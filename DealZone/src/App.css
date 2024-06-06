@@ -50,6 +50,7 @@ form {
     cursor: pointer;
     font-size: 14px;
     margin-top: 10px;
+    margin-right: 1rem;
 }
 
     .view-details-button:hover {
