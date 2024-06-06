@@ -5,13 +5,15 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import { IndividualListingPage } from './pages/IndividualListingPage';
+import Homepage from './pages/Homepage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     return (
         <Router>
             <div>
                 <Routes>
-                    <Route path="/" element={<div><Navbar /><h1>Welcome to the Shop</h1></div>} />
+                    <Route path="/" element={<Homepage/>} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/account" element={<UserAccountPage />} />
                     <Route path="/login" element={<LoginPage />} />
