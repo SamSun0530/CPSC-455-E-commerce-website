@@ -110,22 +110,4 @@ nav a {
         text-decoration: underline;
     }
 
-/* User account styles */
-.user-account div {
-    margin-bottom: 20px;
-}
 
-.user-account label {
-    font-weight: bold;
-}
-
-.user-account span {
-    margin-left: 10px;
-}
-
-.user-account input {
-    margin-left: 10px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}

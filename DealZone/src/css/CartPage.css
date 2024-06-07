@@ -1,0 +1,13 @@
+.cart-page {
+    padding: 20px;
+}
+
+.cart-items-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.action-button {
+    margin: 10px;
+}

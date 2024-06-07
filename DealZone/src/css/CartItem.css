@@ -1,0 +1,8 @@
+.small-card {
+    width: 100%;
+    margin: 10px auto;
+}
+
+    .small-card .btn {
+        margin: 5px;
+    }

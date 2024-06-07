@@ -1,0 +1,61 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.user-account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+    .user-account-container h1 {
+        margin-bottom: 20px;
+    }
+
+.user-account div {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.user-account label {
+    font-weight: bold;
+}
+
+.user-account span {
+    margin-left: 10px;
+}
+
+.user-account input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.user-account button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1em;
+    margin: 5px;
+}
+
+    .user-account button:hover {
+        background-color: #0056b3;
+    }
+
+    .user-account button:active {
+        transform: scale(0.98);
+    }
