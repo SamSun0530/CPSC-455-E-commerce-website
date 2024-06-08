@@ -1,25 +1,23 @@
 import React from 'react';
-import { Form, InputGroup, FormControl, Button } from 'react-bootstrap';
-import { FaSearch, FaFilter } from 'react-icons/fa';
-import '../css/SearchBar.css';
+import { Box, TextField, IconButton } from '@mui/material';
+import { Search as SearchIcon, FilterList as FilterListIcon } from '@mui/icons-material';
 
 const SearchBar = ({ onSearch }) => {
     return (
-        <Form className="search-bar">
-            <InputGroup>
-            {/* Bootstrap input */}
-                <FormControl
-                    placeholder="Search by Post Heading..."
-                    aria-label="Search"
-                />
-                <Button variant="outline-secondary" id="searchBtm">
-                    <FaSearch />
-                </Button>
-                <Button variant="outline-secondary" id="filterBtn">
-                    <FaFilter />
-                </Button>
-            </InputGroup>
-        </Form>
+        <Box display="flex" justifyContent="center" alignItems="center" my={2}>
+        <TextField
+            variant="outlined"
+            placeholder="Search by Post Heading..."
+            fullWidth
+            sx={{ maxWidth: 600, mr: 1 }}
+        />
+        <IconButton color="primary">
+            <SearchIcon />
+        </IconButton>
+        <IconButton color="primary">
+            <FilterListIcon />
+        </IconButton>
+        </Box>
     );
 };
 
