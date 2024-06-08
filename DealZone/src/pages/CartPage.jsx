@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import { Link } from "react-router-dom";
 import CartItem from '../components/CartItem';
 import { Button } from 'react-bootstrap';
 import '../css/CartPage.css';
@@ -18,7 +19,7 @@ const CartPage = () => {
             <Navbar />
             <div className="cart-page">
                 <h1>Shopping Cart</h1>
-                <Button variant="success" className="action-button">Buy All Items</Button>
+                <Link to='/checkout'><Button variant="success" className="action-button">Buy All Items</Button></Link>
                 <Button variant="danger" className="action-button">Delete All Items</Button>
                 <div className="cart-items-grid">
                     {cartItems.map(item => (

@@ -1,0 +1,59 @@
+.form-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.form-column {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.checkout-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0 0 0;
+}
+
+.checkout-info {
+    display: flex;
+    width: 60%;
+    margin: 0 0 0 10px;
+    padding: 0 0 0 10px;
+    background-color: #f4f4f4;
+}
+
+.cart-total {
+    width: 40%;
+    text-align: center;
+    margin: 0 10px 0 10px;
+    padding: 0 10px 0 10px;
+    background-color: #f4f4f4;
+}
+
+.cart-total ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.cart-total li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-total li .price {
+    margin-left: auto;
+}
+
+#checkoutButton {
+    margin: 0 5px 10px 0;
+}
+
+#cancelCheckoutButton {
+    margin: 0 0 0 5px;
+    background-color: gray;
+}
+
+
+#cancelCheckoutButton:hover {
+    background-color: rgb(94, 94, 94);
+}
