@@ -65,7 +65,7 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 
 ## References
 
-{Add your stuff here}
+DZ Logo used from: https://www.freepik.com/premium-vector/logo-dz_42660603.htm 
 
 
 

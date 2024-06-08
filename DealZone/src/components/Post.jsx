@@ -7,6 +7,7 @@ const Post = ({ post }) => {
         <Card className='small-card'>
             <Card.Img variant="top" src={post.image} />
             <Card.Body>
+                <Card.Text className="post-price">${post.price}</Card.Text>
                 <Card.Title>{post.name}</Card.Title>
                 <Card.Text>{post.desc}</Card.Text>
             </Card.Body>
