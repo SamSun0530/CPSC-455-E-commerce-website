@@ -2,13 +2,19 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { PersonLinesFill, Cart } from 'react-bootstrap-icons';
+import { logOut } from '../slices/auth';
 
 const Navbar = () => {
+    const dispatch = useDispatch();
 
     const isLoggedIn = useSelector((state) => {
         return state.auth.isLoggedIn;
     });
     console.log(isLoggedIn);
+
+    const handleLogOut = () => {
+        dispatch(logOut());
+    }
 
     const navBarAccountIcon = (<PersonLinesFill color="white" className="account-menu-icon"/>);
     const cartIcon = (<span><Cart color="white" className="cart-icon"/></span>);
@@ -25,6 +31,7 @@ const Navbar = () => {
                     <NavDropdown.Item as={Link} to="">
                         Wishlist
                     </NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogOut}>Log Out</NavDropdown.Item>
                 </NavDropdown>}
             </div>
 
