@@ -7,6 +7,8 @@ import { IndividualListingPage } from './pages/IndividualListingPage';
 import Homepage from './pages/Homepage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckOutPage from './pages/CheckOutPage';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const App = () => {
     return (
@@ -18,12 +20,19 @@ const App = () => {
                     <Route path="/account" element={<UserAccountPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegistrationPage />} />
-                    <Route exact path="/listings/:productId" element={<IndividualListingPage/>} />
+                    <Route exact path="/listings/:productId" element={<IndividualListingWrapper/>} />
                     <Route path="/checkout" element={<CheckOutPage />} />
                 </Routes>
             </div>
         </Router>
     );
 };
-
+function IndividualListingWrapper() {
+    const items = useSelector((state) => state.items.items);
+    const { productId } = useParams();
+    const item = items.find((i) => i.id == productId);
+  
+    return item ? <IndividualListingPage item={item} /> : <div>Item not found</div>;
+  }
+  
 export default App;
