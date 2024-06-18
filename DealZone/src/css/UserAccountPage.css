@@ -1,61 +1,64 @@
-body, html {
+body {
     margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
 .user-account-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #f4f4f4;
+    height: 100vh;
     padding: 20px;
 }
 
-    .user-account-container h1 {
+.user-account-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+    .user-account-card h1 {
         margin-bottom: 20px;
     }
 
-.user-account div {
+.user-account-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
-    width: 100%;
-    max-width: 800px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
 
-.user-account label {
-    font-weight: bold;
-}
-
-.user-account span {
-    margin-left: 10px;
-}
-
-.user-account input {
-    margin-left: 10px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.user-account button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 1em;
-    margin: 5px;
-}
-
-    .user-account button:hover {
-        background-color: #0056b3;
+    .user-account-item label {
+        font-weight: bold;
+        width: 100px;
     }
 
-    .user-account button:active {
-        transform: scale(0.98);
+    .user-account-item span {
+        flex-grow: 1;
+        margin-left: 10px;
+    }
+
+    .user-account-item input {
+        flex-grow: 1;
+        margin-left: 10px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+.edit-icon {
+    color: #007bff;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: color 0.3s;
+}
+
+    .edit-icon:hover {
+        color: #0056b3;
     }
