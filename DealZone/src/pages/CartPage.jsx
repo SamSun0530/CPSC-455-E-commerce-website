@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItemFromCart } from '../slices/cart';
 import Navbar from '../components/Navbar';
 import { Link } from "react-router-dom";
 import CartItem from '../components/CartItem';
@@ -6,16 +8,14 @@ import { Button, Card } from 'react-bootstrap';
 import '../css/CartPage.css';
 
 const CartPage = () => {
-    const cartItems = [
-        // Your cart items here
-        { id: 1, name: 'Item 1', price: '$10', image: 'https://via.placeholder.com/150' },
-        { id: 2, name: 'Item 2', price: '$20', image: 'https://via.placeholder.com/150' },
-        { id: 3, name: 'Item 3', price: '$30', image: 'https://via.placeholder.com/150' },
-        { id: 4, name: 'Item 4', price: '$40', image: 'https://via.placeholder.com/150' },
-        { id: 5, name: 'Item 5', price: '$50', image: 'https://via.placeholder.com/150' },
-    ];
+    const cartItems = useSelector((state) => state.cart.items);
+    const dispatch = useDispatch();
 
-    const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price.replace('$', '')), 0);
+    const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0);
+
+    const handleRemoveItem = (id) => {
+        dispatch(removeItemFromCart(id));
+    };
 
     return (
         <div>
@@ -26,7 +26,7 @@ const CartPage = () => {
                 <div className="cart-content">
                     <div className="cart-items-grid">
                         {cartItems.map(item => (
-                            <CartItem key={item.id} cartItem={item} />
+                            <CartItem key={item.id} cartItem={item} onRemove={() => handleRemoveItem(item.id)} />
                         ))}
                     </div>
                     <div className="cart-summary">
