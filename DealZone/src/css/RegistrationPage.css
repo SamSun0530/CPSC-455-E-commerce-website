@@ -2,17 +2,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    height: 100vh;
+    background: #f0f2f5;
+    background-image: url("../../public/loginBackground.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .register-form {
-    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    max-width: 500px;
     width: 100%;
-    padding: 5px;
 }
 
 #registerHeading {
-    padding: 10px;
     align-self: center;
 }
 

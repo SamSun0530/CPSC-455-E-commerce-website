@@ -57,7 +57,7 @@ export default function RegistrationForm() {
 				<input className="input" type="email" id="email" name="email" required value={formData.email} onChange={handleChange} />
 
 				<label htmlFor="phone">Phone Number</label>
-				<input className="input" type="text" id="phone" name="phone" placeholder="No spaces in between or punctuation permitted" pattern=" *\d{10,11} *" onInvalid={handleInvalidPhoneFormat} value={formData.phone} onChange={handlePhoneChange} />
+				<input className="input" type="text" id="phone" name="phone" placeholder="10 - 11 digits" pattern=" *\d{10,11} *" onInvalid={handleInvalidPhoneFormat} value={formData.phone} onChange={handlePhoneChange} />
 
 				<label htmlFor="password">Password *</label>
 				<input className="input" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
