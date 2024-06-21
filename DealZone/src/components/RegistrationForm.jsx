@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 export default function RegistrationForm() {
-	const blankState = { firstName: "", lastName: "", email: "", phone: "", address: "", password: "" };
+	const blankState = { username: "", email: "", phone: "", password: "" };
 	const [formData, setFormData] = useState(blankState);
 	//   const dispatch = useDispatch();
 	const handleChange = (event) => {
@@ -15,7 +15,7 @@ export default function RegistrationForm() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (areTextFieldsValid(formData.firstName, formData.lastName, formData.username, formData.password)) {
+		if (areTextFieldsValid(formData.username, formData.password)) {
 			// TODO: Functionality using Redux
 
 			//   dispatch(
@@ -29,7 +29,7 @@ export default function RegistrationForm() {
 			// 	  password: formData.password
 			//     })
 			//   )
-			alert(`Full Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}\nUsername: ${formData.username}\nPassword: ${formData.password}`); // alert for testing purpose
+			// alert(`Username: ${formData.username} \nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}\nUsername: ${formData.username}\nPassword: ${formData.password}`); // alert for testing purpose
 			setFormData(blankState);
 		} else {
 			alert("Invalid form inputs detected."); // alert for testing purpose
@@ -50,20 +50,14 @@ export default function RegistrationForm() {
 			<form className="register-form" onSubmit={handleSubmit}>
 				<h2 id="registerHeading">Welcome to DealZone</h2>
 
-				<label htmlFor="firstName">First Name *</label>
-				<input className="input" type="text" id="firstName" name="firstName" required value={formData.firstName} onChange={handleChange} />
-
-				<label htmlFor="lastName">Last Name *</label>
-				<input className="input" type="text" id="lastName" name="lastName" required value={formData.lastName} onChange={handleChange} />
+				<label htmlFor="username">Username *</label>
+				<input className="input" type="text" id="username" name="username" required value={formData.username} onChange={handleChange} />
 
 				<label htmlFor="email">Email *</label>
 				<input className="input" type="email" id="email" name="email" required value={formData.email} onChange={handleChange} />
 
 				<label htmlFor="phone">Phone Number</label>
 				<input className="input" type="text" id="phone" name="phone" placeholder="No spaces in between or punctuation permitted" pattern=" *\d{10,11} *" onInvalid={handleInvalidPhoneFormat} value={formData.phone} onChange={handlePhoneChange} />
-
-				<label htmlFor="address">Address</label>
-				<input className="input" type="text" id="address" name="address" value={formData.address} onChange={handleChange} />
 
 				<label htmlFor="password">Password *</label>
 				<input className="input" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
@@ -77,6 +71,6 @@ export default function RegistrationForm() {
 	);
 }
 
-function areTextFieldsValid(firstName, lastName, username, password) {
-	return !(firstName.trim().length === 0 || lastName.trim().length === 0 || password.trim().length === 0);
+function areTextFieldsValid(username, password) {
+	return !(username.trim().length === 0|| password.trim().length === 0);
 }
