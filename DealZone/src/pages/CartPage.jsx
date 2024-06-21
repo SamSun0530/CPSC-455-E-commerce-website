@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartItem from '../components/CartItem';
 import { Button, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart } from '../slices/cart';
+import { removeItemFromCart, clearCart } from '../slices/cart';
 import '../css/CartPage.css';
 
 const CartPage = () => {
@@ -15,6 +15,10 @@ const CartPage = () => {
 
     const handleRemoveItem = (id) => {
         dispatch(removeItemFromCart(id));
+    };
+
+    const handleClearCart = () => {
+        dispatch(clearCart());
     };
 
     return (
@@ -34,9 +38,9 @@ const CartPage = () => {
                                 <Card.Title>Summary</Card.Title>
                                 <Card.Text>Total Price: ${totalPrice.toFixed(2)}</Card.Text>
                                 <Link to='/checkout'>
-                                    <Button variant="success" className="action-button">Buy All Items</Button>
+                                    <button className="cart-item-button move">Buy All Items</button>
                                 </Link>
-                                <Button variant="danger" className="action-button">Delete All Items</Button>
+                                <button className="cart-item-button delete" onClick={handleClearCart}>Delete All Items</button>
                             </Card.Body>
                         </Card>
                     </div>
