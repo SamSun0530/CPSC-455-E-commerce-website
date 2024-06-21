@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart } from '../slices/cart';
 import Navbar from '../components/Navbar';
 import { Link } from "react-router-dom";
 import CartItem from '../components/CartItem';
 import { Button, Card } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeItemFromCart } from '../slices/cart';
 import '../css/CartPage.css';
 
 const CartPage = () => {
@@ -22,7 +22,6 @@ const CartPage = () => {
             <Navbar />
             <div className="cart-page">
                 <h1>Shopping Cart</h1>
-
                 <div className="cart-content">
                     <div className="cart-items-grid">
                         {cartItems.map(item => (
@@ -32,6 +31,7 @@ const CartPage = () => {
                     <div className="cart-summary">
                         <Card className="cart-summary-card">
                             <Card.Body>
+                                <Card.Title>Summary</Card.Title>
                                 <Card.Text>Total Price: ${totalPrice.toFixed(2)}</Card.Text>
                                 <Link to='/checkout'>
                                     <Button variant="success" className="action-button">Buy All Items</Button>
