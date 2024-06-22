@@ -1,12 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { useDispatch } from 'react-redux'
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUserAsync } from "../thunks/auth";
+import { clearAPIStatus } from "../slices/auth";
 // import { nanoid } from '@reduxjs/toolkit'
 
 
 export default function RegistrationForm() {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const blankState = { username: "", email: "", phone: "", password: "" };
 	const [formData, setFormData] = useState(blankState);
+	const authState = useSelector((state) => state.auth);
+	
+	useEffect(() => {
+		dispatch(clearAPIStatus());
+	}, []);
+
+	useEffect(() => {
+		if (authState.registerUser === 'FULFILLED') {
+			navigate('/login');
+			dispatch(clearAPIStatus());
+		}
+	}, [authState.registerUser]);
+
+
 	//   const dispatch = useDispatch();
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -16,7 +35,7 @@ export default function RegistrationForm() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (areTextFieldsValid(formData.username, formData.password)) {
-			// TODO: Functionality using Redux
+			// TODO: maybe pass in more fields, only email and pw for now.
 
 			//   dispatch(
 			//     registerUser({
@@ -30,6 +49,7 @@ export default function RegistrationForm() {
 			//     })
 			//   )
 			// alert(`Username: ${formData.username} \nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}\nUsername: ${formData.username}\nPassword: ${formData.password}`); // alert for testing purpose
+			dispatch(registerUserAsync({email: formData.email, password: formData.password}));
 			setFormData(blankState);
 		} else {
 			alert("Invalid form inputs detected."); // alert for testing purpose
@@ -61,7 +81,7 @@ export default function RegistrationForm() {
 
 				<label htmlFor="password">Password *</label>
 				<input className="input" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
-
+				{authState.registerUser === 'REJECTED' && <p style={{ color: 'red' }}>Registration Failed</p>}
 				<button className="register-button" type="submit">Register</button>
 				<label className="required-field">* Required fields</label>
 				<p><Link to="/login">Login</Link> with existing account or continue as <Link to="/">Guest</Link>.</p>
