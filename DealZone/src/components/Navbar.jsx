@@ -31,6 +31,9 @@ const Navbar = () => {
                     <NavDropdown.Item as={Link} to="">
                         Wishlist
                     </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/createListing">
+                        Add a listing
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLogOut}>Log Out</NavDropdown.Item>
                 </NavDropdown>}
             </div>

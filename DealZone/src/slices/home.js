@@ -30,14 +30,21 @@ const initialState = {
             desc: 'This is the description for Post 4',
             image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg/188px-Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg',
         }
-    ]
+    ],
+    idCounter: 500
 };
 
 const homeSlice = createSlice({
     name: 'home',
     initialState,
     reducers: {
+        addListing: (state, action) => {
+            const newListing = { id: state.idCounter, ...action.payload };
+            state.items.push(newListing);
+            state.idCounter += 1;
+        },
     }
 });
 
+export const { addListing } = homeSlice.actions;
 export default homeSlice.reducer;

@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import { IndividualListingPage } from './pages/IndividualListingPage';
 import Homepage from './pages/Homepage';
+import CreateListingPage from './pages/CreateListingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckOutPage from './pages/CheckOutPage';
 import { useSelector } from 'react-redux';
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/register" element={<RegistrationPage />} />
                     <Route exact path="/listings/:productId" element={<IndividualListingWrapper/>} />
                     <Route path="/checkout" element={<CheckOutPage />} />
+                    <Route path="/createListing" element={<CreateListingPage />} />
                 </Routes>
             </div>
         </Router>

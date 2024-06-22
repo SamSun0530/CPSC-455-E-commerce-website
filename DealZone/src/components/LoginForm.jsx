@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/LoginPage.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../slices/auth';
 import Navbar from './Navbar';
 
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
     // Will add functionality later
     const handleLogin = (e) => {
@@ -17,6 +20,13 @@ const LoginForm = () => {
         setEmail('');
         setPassword('');
     };
+
+    useEffect(() => {
+        console.log("login state?", isLoggedIn);
+        if (isLoggedIn) {
+            navigate('/');
+        }
+    }, [isLoggedIn]);
 
     return (
         <>
