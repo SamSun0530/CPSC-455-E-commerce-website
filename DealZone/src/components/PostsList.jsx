@@ -1,41 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Post from './Post';
 
 export default function PostsList() {
-    const testListings = [
-        {
-            id: 123,
-            name: 'Post 1',
-            price: 20,
-            desc: 'This is the description for Post 1',
-            image: 'https://via.placeholder.com/150',
-        },
-        {
-            id:222,
-            name: 'Post 2',
-            price: 30,
-            desc: 'This is the description for Post 2',
-            image: 'https://via.placeholder.com/150',
-        },
-        {
-            id:123,
-            name: 'Post 3',
-            price: 40,
-            desc: 'This is the description for Post 3',
-            image: 'https://via.placeholder.com/150',
-        },
-        {
-            id:222,
-            name: 'Post 4',
-            price: 5,
-            desc: 'This is the description for Post 4',
-            image: 'https://via.placeholder.com/150',
-        }
-    ];
 
-    const [listings, setListings] = useState(testListings);
+    const listings = useSelector((state) => state.home.items);
     const navigate = useNavigate();
 
     const handleCardClick = (postId) => {

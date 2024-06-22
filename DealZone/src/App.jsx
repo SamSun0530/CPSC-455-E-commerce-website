@@ -28,7 +28,7 @@ const App = () => {
     );
 };
 function IndividualListingWrapper() {
-    const items = useSelector((state) => state.items.items);
+    const items = useSelector((state) => state.home.items);
     const { productId } = useParams();
     const item = items.find((i) => i.id == productId);
   

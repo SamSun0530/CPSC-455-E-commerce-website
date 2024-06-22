@@ -16,13 +16,14 @@ export const IndividualListingPage = ({ item }) => {
             <Navbar />
             <div className="product-container">
                 <div className="product-image-container">
-                    <img src={item.images[0]} alt="Item" />
-                    <div className="product-thumbnails">
-                        <img src={item.images[0]} alt="Thumbnail 1" />
-                        <img src={item.images[1]} alt="Thumbnail 2" />
-                        <img src={item.images[2]} alt="Thumbnail 3" />
-                        <img src={item.images[3]} alt="Thumbnail 4" />
-                    </div>
+                    <img src={item.image} alt="Item" />
+                    {item.images && item.images.length > 0 && (
+                        <div className="product-thumbnails">
+                            {item.images.map((image, index) => (
+                                <img key={index} src={image} alt={`Thumbnail ${index + 1}`} />
+                            ))}
+                        </div>
+                    )}
                 </div>
                 <div className="product-details-container">
                     <h2 className='product-name'>{item.name}</h2>
@@ -31,7 +32,7 @@ export const IndividualListingPage = ({ item }) => {
                         <span className="rating-stars">★★★★☆</span> {/* TODO: Add item rating */}
                     </div>
                     <p className="product-description">
-                        {item.description}
+                        {item.desc}
                     </p>
                     <button 
                         className='add-to-cart-button'
