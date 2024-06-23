@@ -32,7 +32,7 @@ const CreateListingPage = () => {
             <Container maxWidth="sm">
                 <Box mt={4}>
                     <Typography variant="h4" component="h1" gutterBottom>
-                        Create a New Listing
+                        Create a new listing
                     </Typography>
                     <form onSubmit={handleSubmit}>
                         <TextField

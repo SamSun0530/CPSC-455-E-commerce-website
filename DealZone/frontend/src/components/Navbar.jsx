@@ -28,7 +28,7 @@ const Navbar = () => {
                 {!isLoggedIn && <Link className="navbar-right" to="/register">Sign Up</Link>}
                 {isLoggedIn && <NavDropdown title={navBarAccountIcon} className="navbar-right navbar-icon">
                     <NavDropdown.Item as={Link} to="/account">Account</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="">
+                    <NavDropdown.Item as={Link} to="/wishlist">
                         Wishlist
                     </NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/createListing">

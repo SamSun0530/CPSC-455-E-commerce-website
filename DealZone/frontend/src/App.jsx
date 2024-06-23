@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckOutPage from './pages/CheckOutPage';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Wishlist from './pages/Wishlist'
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                     <Route exact path="/listings/:productId" element={<IndividualListingWrapper/>} />
                     <Route path="/checkout" element={<CheckOutPage />} />
                     <Route path="/createListing" element={<CreateListingPage />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
                 </Routes>
             </div>
         </Router>
