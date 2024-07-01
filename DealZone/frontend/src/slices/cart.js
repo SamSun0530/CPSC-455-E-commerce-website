@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     items: [
-        { id: 1, name: 'Item 1', price: 10, image: 'https://via.placeholder.com/150' },
+        { id: 1, name: 'This is a simulation of long title product, the alignment of picture, title, price and buttons should not interfere each other', price: 10, image: 'https://via.placeholder.com/150' },
         { id: 2, name: 'Item 2', price: 20, image: 'https://via.placeholder.com/150' },
         { id: 3, name: 'Item 3', price: 30, image: 'https://via.placeholder.com/150' },
         { id: 4, name: 'Item 4', price: 40, image: 'https://via.placeholder.com/150' },

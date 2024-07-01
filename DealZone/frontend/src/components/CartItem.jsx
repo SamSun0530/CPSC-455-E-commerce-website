@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Button } from 'react-bootstrap';
 import '../css/CartItem.css';
 
 const CartItem = ({ cartItem, onRemove }) => {
     return (
         <div className="cart-item">
-            <img src={cartItem.image} alt={cartItem.name} className="cart-item-image" />
+            <div className="cart-item-image-container">
+                <img src={cartItem.image} alt={cartItem.name} className="cart-item-image" />
+            </div>
             <div className="cart-item-details">
                 <h2>{cartItem.name}</h2>
                 <span>${cartItem.price.toFixed(2)}</span>
