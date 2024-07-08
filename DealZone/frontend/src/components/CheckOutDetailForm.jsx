@@ -1,5 +1,10 @@
-import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+import {
+    TextField, Select, MenuItem, InputLabel, FormControl, Grid, Typography,
+    Accordion, AccordionSummary, AccordionDetails
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 export default function CheckOutDetailForm() {
 
@@ -7,114 +12,176 @@ export default function CheckOutDetailForm() {
         <>
             <div className='checkout-container'>
                 <div className='checkout-info'>
-                    <Form>
-                        <h2>Shipping Information</h2>
-                        <Form.Group className='form-row'>
-                            <Form.Group className='form-column'>
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control
-                                    name="firstname"
-                                    placeholder='John'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control
-                                    name='lastname'
-                                    placeholder='Smith'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    name='email'
-                                    placeholder='123@example.com'
-                                    type='email'
-                                />
-                            </Form.Group>
-                        </Form.Group>
-                        <Form.Group className='form-row'>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control
-                                    name='street'
-                                    placeholder='123 Main St'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>City</Form.Label>
-                                <Form.Control
-                                    name='city'
-                                    placeholder='Vancouver'
-                                />
-                            </Form.Group>
-                        </Form.Group>
-                        <Form.Group className='form-row'>
-                            <Form.Group className='form-column'>
-                                <Form.Label>State/Province</Form.Label>
-                                <Form.Control
-                                    name='state_province'
-                                    placeholder='BC'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Country</Form.Label>
-                                <Form.Select>
-                                    <option>Select a Country</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="us">United States</option>
-                                </Form.Select>
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Postal/Zip Code</Form.Label>
-                                <Form.Control
-                                    name='postal_code'
-                                    placeholder='A1B2C3'
-                                />
-                            </Form.Group>
-                        </Form.Group>
-                        <h2>Payment Information</h2>
-                        <Form.Group className='form-row'>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Card Number</Form.Label>
-                                <Form.Control
-                                    name='card_number'
-                                    placeholder='4520-1234-5678-0000'
-                                    pattern='[0-9]*'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>CVC</Form.Label>
-                                <Form.Control
-                                    name='cvc'
-                                    placeholder='123'
-                                />
-                            </Form.Group>
-                        </Form.Group>
-                        <Form.Group className='form-row'>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Month</Form.Label>
-                                <Form.Control
-                                    name='month'
-                                    placeholder='Dec'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Year</Form.Label>
-                                <Form.Control
-                                    name='year'
-                                    placeholder='2030'
-                                />
-                            </Form.Group>
-                            <Form.Group className='form-column'>
-                                <Form.Label>Postal Code</Form.Label>
-                                <Form.Control
-                                    name='card_postal_code'
-                                    placeholder='A1B2C3'
-                                />
-                            </Form.Group>
-                        </Form.Group>
-                    </Form>
+                    <form>
+                        <Accordion defaultExpanded>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="shipping-content"
+                                id="shipping-header"
+                            >
+                                <Typography variant="h6">Shipping Information</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="firstname"
+                                            name="firstname"
+                                            label="First Name"
+                                            fullWidth
+                                            autoComplete="given-name"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="lastname"
+                                            name="lastname"
+                                            label="Last Name"
+                                            fullWidth
+                                            autoComplete="family-name"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            id="email"
+                                            name="email"
+                                            label="Email"
+                                            fullWidth
+                                            autoComplete="email"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            id="address"
+                                            name="street"
+                                            label="Street Address"
+                                            fullWidth
+                                            autoComplete="street-address"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="city"
+                                            name="city"
+                                            label="City"
+                                            fullWidth
+                                            autoComplete="address-level2"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="state_province"
+                                            name="state_province"
+                                            label="State/Province"
+                                            fullWidth
+                                            autoComplete="address-level1"
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <FormControl fullWidth>
+                                            <InputLabel id="country-label">Country</InputLabel>
+                                            <Select
+                                                labelId="country-label"
+                                                id="country"
+                                                name="country"
+                                                defaultValue=""
+                                                label="Country"
+                                                autoComplete="country-name"
+                                            >
+                                                <MenuItem value="">
+                                                    <em>Select a Country</em>
+                                                </MenuItem>
+                                                <MenuItem value="canada">Canada</MenuItem>
+                                                <MenuItem value="us">United States</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            required
+                                            id="postal_code"
+                                            name="postal_code"
+                                            label="Postal Code"
+                                            fullWidth
+                                            autoComplete="postal-code"
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+
+                        <Accordion style={{ marginTop: '2rem' }}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="payment-content"
+                                id="payment-header"
+                            >
+                                <Typography variant="h6">Payment Information</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12} sm={9}>
+                                        <TextField
+                                            required
+                                            id="card_number"
+                                            name="card_number"
+                                            label="Card Number"
+                                            fullWidth
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                            // autoComplete='cc-number'
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={3}>
+                                        <TextField
+                                            required
+                                            id="cvc"
+                                            name="cvc"
+                                            label="CVC"
+                                            fullWidth
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                                            // autoComplete='cc-csc'
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={3}>
+                                        <TextField
+                                            required
+                                            id="month"
+                                            name="month"
+                                            label="Month"
+                                            fullWidth
+                                            // autoComplete='cc-exp-month'
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={3}>
+                                        <TextField
+                                            required
+                                            id="year"
+                                            name="year"
+                                            label="Year"
+                                            fullWidth
+                                            // autoComplete='cc-exp-year'
+                                        />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            required
+                                            id="card_postal_code"
+                                            name="card_postal_code"
+                                            label="Postal Code"
+                                            fullWidth
+                                            autoComplete='postal-code'
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+                    </form>
                 </div>
                 <div className='cart-total'>
                     <h3>Cart Total</h3>
