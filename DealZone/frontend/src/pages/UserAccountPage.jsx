@@ -1,58 +1,113 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { FaPencilAlt } from 'react-icons/fa';
 import '../css/UserAccountPage.css';
 
 const UserAccountPage = () => {
-    const [isEditingName, setIsEditingName] = useState(false);
-    const [isEditingPassword, setIsEditingPassword] = useState(false);
-    const [isEditingAddress, setIsEditingAddress] = useState(false);
+    const initialUser = JSON.parse(localStorage.getItem('user')) || {
+        username: 'defaultUsername',
+        email: 'defaultEmail@example.com',
+        address: 'defaultAddress',
+    };
+
+    const [editingField, setEditingField] = useState(null);
+    const [formData, setFormData] = useState(initialUser);
+
+    useEffect(() => {
+        localStorage.setItem('user', JSON.stringify(formData));
+    }, [formData]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleEdit = (field) => {
+        setEditingField(field);
+    };
+
+    const handleSave = () => {
+        setEditingField(null);
+        localStorage.setItem('user', JSON.stringify(formData));
+    };
 
     return (
-        <div>
+        <>
             <Navbar />
-            <div className="user-account-container">
-                <div className="user-account-card">
-                    <h1>User Account</h1>
-                    <div className="user-account-item">
+            <div className="user-account-page">
+                <h1>Account Information</h1>
+                <div className="account-info-card">
+                    <div className="info-row">
                         <label>Username:</label>
-                        {isEditingName ? (
-                            <input type="text" defaultValue="John Doe" />
+                        {editingField === 'username' ? (
+                            <input
+                                type="text"
+                                name="username"
+                                value={formData.username}
+                                onChange={handleChange}
+                            />
                         ) : (
-                            <span>John Doe</span>
+                            <span>{formData.username}</span>
                         )}
-                        <FaPencilAlt
-                            className="edit-icon"
-                            onClick={() => setIsEditingName(!isEditingName)}
-                        />
+                        <button
+                            onClick={() =>
+                                editingField === 'username'
+                                    ? handleSave()
+                                    : handleEdit('username')
+                            }
+                        >
+                            {editingField === 'username' ? 'Save' : 'Edit'}
+                        </button>
                     </div>
-                    <div className="user-account-item">
-                        <label>Password:</label>
-                        {isEditingPassword ? (
-                            <input type="password" defaultValue="******" />
+                    <div className="info-row">
+                        <label>Email:</label>
+                        {editingField === 'email' ? (
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
                         ) : (
-                            <span>******</span>
+                            <span>{formData.email}</span>
                         )}
-                        <FaPencilAlt
-                            className="edit-icon"
-                            onClick={() => setIsEditingPassword(!isEditingPassword)}
-                        />
+                        <button
+                            onClick={() =>
+                                editingField === 'email'
+                                    ? handleSave()
+                                    : handleEdit('email')
+                            }
+                        >
+                            {editingField === 'email' ? 'Save' : 'Edit'}
+                        </button>
                     </div>
-                    <div className="user-account-item">
+                    <div className="info-row">
                         <label>Address:</label>
-                        {isEditingAddress ? (
-                            <input type="text" defaultValue="123 Main St" />
+                        {editingField === 'address' ? (
+                            <input
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                            />
                         ) : (
-                            <span>123 Main St</span>
+                            <span>{formData.address}</span>
                         )}
-                        <FaPencilAlt
-                            className="edit-icon"
-                            onClick={() => setIsEditingAddress(!isEditingAddress)}
-                        />
+                        <button
+                            onClick={() =>
+                                editingField === 'address'
+                                    ? handleSave()
+                                    : handleEdit('address')
+                            }
+                        >
+                            {editingField === 'address' ? 'Save' : 'Edit'}
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

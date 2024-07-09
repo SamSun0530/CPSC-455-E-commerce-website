@@ -23,6 +23,18 @@ router.post('/register', function(req, res, next) {
   }
 });
 
+/* Update user information */
+router.put('/:id', async (req, res) => {
+    const userId = req.params.id;
+    const userData = req.body;
+    try {
+        const updatedUser = await UserService.updateUser(userId, userData);
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 /* User logout */
 router.post('/logout', function(req, res, next) {
   // TODO set session token expiration to now OR remove session token record.

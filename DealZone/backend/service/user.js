@@ -50,9 +50,20 @@ const deleteUser = (email) => {
     return true;
 }
 
+// Update user information
+const updateUser = async (id, userData) => {
+    const userIndex = users.findIndex(user => user.id === parseInt(id));
+    if (userIndex === -1) {
+        throw new Error('User not found');
+    }
+    users[userIndex] = { ...users[userIndex], ...userData };
+    return users[userIndex];
+};
+
 module.exports = {
     authUser,
     registerUser,
     changeUserPassword,
-    deleteUser
+    deleteUser,
+    updateUser
 };

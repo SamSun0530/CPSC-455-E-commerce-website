@@ -25,3 +25,11 @@ export const registerUserAsync = createAsyncThunk(
         }
     }
 )
+
+export const updateUserAsync = createAsyncThunk(
+    'auth/updateUser',
+    async (userData) => {
+        const response = await AuthService.updateUser(userData);
+        return response;
+    }
+);
