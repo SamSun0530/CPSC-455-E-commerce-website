@@ -13,23 +13,20 @@ export const getCartAsync = createAsyncThunk(
 export const addToCartAsync = createAsyncThunk(
     cartActions.ADD_TO_CART,
     async (item) => {
-        const response = await cartService.addToCart(item);
-        return response;
+        return await cartService.addToCart(item);
     }
 );
 
 export const deleteFromCartAsync = createAsyncThunk(
     cartActions.DELETE_FROM_CART,
     async (id) => {
-        const response = await cartService.deleteFromCart(id);
-        return response;
+        return await cartService.deleteFromCart(id);
     }
 );
 
 export const clearCartAsync = createAsyncThunk(
     cartActions.CLEAR_CART,
     async () => {
-        const response = await cartService.clearCart();
-        return response;
+        return await cartService.clearCart();
     }
 );
