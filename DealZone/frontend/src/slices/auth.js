@@ -1,16 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './util';
-import { authUserAsync, registerUserAsync, updateUserAsync } from '../thunks/auth';
-
-const initialState = {
-    user: {
-        id: 1, // Assuming an initial user ID
-        username: '',
-        email: '',
-        address: ''
-    },
-    status: 'idle',
-};
+import { authUserAsync, registerUserAsync } from '../thunks/auth';
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -26,8 +16,8 @@ export const authSlice = createSlice({
         },
         clearAPIStatus: (state) => {
             state.authUser = REQUEST_STATE.IDLE,
-            state.registerUser = REQUEST_STATE.IDLE,
-            state.error = null;
+                state.registerUser = REQUEST_STATE.IDLE,
+                state.error = null;
         }
     },
     extraReducers: (builder) => {
@@ -56,9 +46,6 @@ export const authSlice = createSlice({
             .addCase(registerUserAsync.rejected, (state, action) => {
                 state.registerUser = REQUEST_STATE.REJECTED;
                 state.error = action.error;
-            })
-            .addCase(updateUserAsync.fulfilled, (state, action) => {
-                state.user = { ...state.user, ...action.payload };
             });
     }
 });

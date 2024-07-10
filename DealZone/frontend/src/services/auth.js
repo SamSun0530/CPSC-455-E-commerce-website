@@ -4,7 +4,7 @@ const authUser = async (email, password) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({ email, password })
     });
     return response.json();
 }
@@ -15,25 +15,10 @@ const registerUser = async (email, password) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({ email, password })
     });
     return response.json();
 }
-
-const updateUser = async (userData) => {
-    const response = await fetch(`http://localhost:3000/user/${userData.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-    });
-    if (!response.ok) {
-        throw new Error('Failed to update user');
-    }
-    return response.json();
-}
-
 
 const logOutUser = async () => {
     // TODO: send logout req to backend server.
@@ -41,6 +26,5 @@ const logOutUser = async () => {
 
 export default {
     authUser,
-    registerUser,
-    updateUser
+    registerUser
 }

@@ -3,41 +3,29 @@ var router = express.Router();
 const UserService = require('../service/user');
 
 /* User login */
-router.post('/login', function(req, res, next) {
-  console.log(req.body);
-  const {email, password} = req.body;
-  if (UserService.authUser(email, password)) {
-    return res.send({success: true});
-  } else {
-    return res.status(401).send({success: false});
-  }
+router.post('/login', function (req, res, next) {
+    console.log(req.body);
+    const { email, password } = req.body;
+    if (UserService.authUser(email, password)) {
+        return res.send({ success: true });
+    } else {
+        return res.status(401).send({ success: false });
+    }
 });
 
 /* User Registration */
-router.post('/register', function(req, res, next) {
-  const {email, password} = req.body;
-  if (UserService.registerUser(email, password)) {
-     return res.send({created: true});
-  } else {
-    return res.status(400).send({created: false});
-  }
-});
-
-/* Update user information */
-router.put('/:id', async (req, res) => {
-    const userId = req.params.id;
-    const userData = req.body;
-    try {
-        const updatedUser = await UserService.updateUser(userId, userData);
-        res.json(updatedUser);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+router.post('/register', function (req, res, next) {
+    const { email, password } = req.body;
+    if (UserService.registerUser(email, password)) {
+        return res.send({ created: true });
+    } else {
+        return res.status(400).send({ created: false });
     }
 });
 
 /* User logout */
-router.post('/logout', function(req, res, next) {
-  // TODO set session token expiration to now OR remove session token record.
+router.post('/logout', function (req, res, next) {
+    // TODO set session token expiration to now OR remove session token record.
 });
 
 // app.use(midd)
