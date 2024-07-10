@@ -8,7 +8,12 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     const item = req.body;
-    res.send(WishlistService.addToWishlist(item));
+    if (WishlistService.addToWishlist(item)) {
+        res.send(item)
+    } else {
+        return res.status(409).send("Item already in wishlist");
+    }
+    // res.send(WishlistService.addToWishlist(item));
 });
 
 router.delete('/:id', function (req, res, next) {

@@ -16,28 +16,29 @@ let wishlist = [
 ]
 
 const getWishlist = () => {
-	// console.log(wishlist)
 	return wishlist;
 };
 
 const addToWishlist = (item) => {
-	wishlist.push(item);
-	return item;
+	if (!wishlist.find(obj => obj.id === item.id)) {
+		console.log(item.id)
+		console.log(wishlist)
+		wishlist.push(item);
+		return item;
+	} else {
+		console.log("Already in wishlist")
+		console.log(wishlist)
+		return null;
+	}
 };
 
 const deleteFromWishlist = (id) => {
-	// wishlist = wishlist.filter(item => item.id !== id);
 	const item = wishlist.find(item => item.id == id);
 	if (item) {
 		wishlist = wishlist.filter(item => item.id !== id);
 		return id;
 	}
 
-	// 	console.log(`del`+item)
-	// 	return item
-	// } else {
-	// 	return res.status(404).send(`No wishlist item found with id ${id}`);
-	// }
 
 };
 

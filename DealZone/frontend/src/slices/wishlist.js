@@ -42,6 +42,7 @@ export const wishlistSlice = createSlice({
           })
           .addCase(addToWishlistAsync.fulfilled, (state, action) => {
             state.addToWishlist = REQUEST_STATE.FULFILLED;
+            console.log(action.payload)
             state.items.push(action.payload);
           })
           .addCase(addToWishlistAsync.rejected, (state, action) => {

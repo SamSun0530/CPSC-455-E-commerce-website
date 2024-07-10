@@ -3,12 +3,16 @@ import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../slices/cart';
 import Navbar from '../components/Navbar';
 import '../css/IndividualListingPage.css';
-
+import { addToWishlistAsync } from '../thunks/wishlistThunk';
 export const IndividualListingPage = ({ item }) => {
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
         dispatch(addItemToCart(item));
+    };
+
+    const handleAddToWishlist = (item) => {
+        dispatch(addToWishlistAsync(item));
     };
 
     return (
@@ -28,23 +32,21 @@ export const IndividualListingPage = ({ item }) => {
                 <div className="product-details-container">
                     <h2 className='product-name'>{item.name}</h2>
                     <h3 className="product-price">${item.price}</h3>
-                    <div className="product-rating">
-                        <span className="rating-stars">★★★★☆</span> {/* TODO: Add item rating */}
-                    </div>
                     <p className="product-description">
                         {item.desc}
                     </p>
-                    <button 
+                    <button
                         className='add-to-cart-button'
                         onClick={handleAddToCart}
                     >
                         Add to Cart
                     </button>
-                    <div className="product-info-tabs">
-                        <div className="tab">Features</div> {/* TODO: Add additional info */}
-                        <div className="tab">Shipping</div> {/* TODO: Add shipping info */}
-                        <div className="tab">Returns</div> {/* TODO: Add return options */}
-                    </div>
+                    <button
+                        className='add-to-wishlist-button'
+                        onClick={() => { handleAddToWishlist(item) }}
+                    >
+                        Add to Wishlist
+                    </button>
                 </div>
             </div>
         </>
