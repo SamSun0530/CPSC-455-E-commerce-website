@@ -25,7 +25,7 @@ const deleteFromCart = (id) => {
 
 const clearCart = () => {
     cart = [];
-   
+    return true;
 };
 
 module.exports = {

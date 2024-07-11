@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addItemToCart } from '../slices/cart';
 import Navbar from '../components/Navbar';
 import '../css/IndividualListingPage.css';
 import { addToWishlistAsync } from '../thunks/wishlistThunk';
+import { addToCartAsync } from '../thunks/cartThunk';
 export const IndividualListingPage = ({ item }) => {
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
-        dispatch(addItemToCart(item));
+        dispatch(addToCartAsync(item));
     };
 
     const handleAddToWishlist = (item) => {

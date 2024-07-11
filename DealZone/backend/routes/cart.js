@@ -26,7 +26,9 @@ router.delete('/:id', function (req, res, next) {
 
 // Clear cart
 router.delete('/', function (req, res, next) {
-    res.send(CartService.clearCart());
+    let response = CartService.clearCart();
+    console.log(response);
+    res.send(response);
 });
 
 module.exports = router;

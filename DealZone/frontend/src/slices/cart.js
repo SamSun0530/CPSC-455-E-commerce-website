@@ -2,18 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCartAsync, addToCartAsync, deleteFromCartAsync, clearCartAsync } from '../thunks/cartThunk';
 import { REQUEST_STATE } from './util';
 
-const initialState = {
-    items: [],
-    getCart: REQUEST_STATE.IDLE,
-    addToCart: REQUEST_STATE.IDLE,
-    deleteFromCart: REQUEST_STATE.IDLE,
-    clearCart: REQUEST_STATE.IDLE,
-    error: null
-};
-
-export const cartSlice = createSlice({
+export var cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: {
+        items: [],
+        getCart: REQUEST_STATE.IDLE,
+        addToCart: REQUEST_STATE.IDLE,
+        deleteFromCart: REQUEST_STATE.IDLE,
+        clearCart: REQUEST_STATE.IDLE,
+        error: null
+    },
     /*reducers: {
         addItemToCart(state, action) {
             state.items.push(action.payload);
@@ -78,5 +76,5 @@ export const cartSlice = createSlice({
     }
 });
 
-export const { addItemToCart, removeItemFromCart, clearCart } = cartSlice.actions;
+// export const { addItemToCart, removeItemFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

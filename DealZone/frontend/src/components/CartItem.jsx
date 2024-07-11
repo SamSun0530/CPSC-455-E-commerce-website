@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/CartItem.css';
 
-const CartItem = ({ cartItem, onRemove }) => {
+const CartItem = ({ cartItem, remove, moveToWishlist }) => {
     return (
         <div className="cart-item">
             <div className="cart-item-image-container">
@@ -13,8 +13,8 @@ const CartItem = ({ cartItem, onRemove }) => {
                 <span>${cartItem.price.toFixed(2)}</span>
             </div>
             <div className="cart-item-actions">
-                <button className="cart-item-button move">Move to Wishlist</button>
-                <button className="cart-item-button delete" onClick={onRemove}>Delete</button>
+                <button className="cart-item-button move" onClick={moveToWishlist}>Move to Wishlist</button>
+                <button className="cart-item-button delete" onClick={remove}>Delete</button>
             </div>
         </div>
     );

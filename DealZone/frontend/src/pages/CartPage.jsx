@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from "react-router-dom";
 import CartItem from '../components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart, clearCart } from '../slices/cart';
 import '../css/CartPage.css';
+import { clearCartAsync, deleteFromCartAsync, getCartAsync } from '../thunks/cartThunk';
+import { addToWishlistAsync } from '../thunks/wishlistThunk';
 
 const CartPage = () => {
     const cartItems = useSelector((state) => state.cart.items);
+    console.log(cartItems);
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getCartAsync());
+    }, []);
 
     const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0);
 
     const handleRemoveItem = (id) => {
-        dispatch(removeItemFromCart(id));
+        dispatch(deleteFromCartAsync(id));
+    };
+
+    const handleMoveItemToWishlist = (item) => {
+        dispatch(deleteFromCartAsync(item.id));
+        dispatch(addToWishlistAsync(item));
     };
 
     const handleClearCart = () => {
-        dispatch(clearCart());
+        dispatch(clearCartAsync());
     };
 
     return (
@@ -28,7 +38,9 @@ const CartPage = () => {
                 <div className="cart-content">
                     <div className="cart-items-grid">
                         {cartItems.map(item => (
-                            <CartItem key={item.id} cartItem={item} onRemove={() => handleRemoveItem(item.id)} />
+                            <CartItem key={item.id} cartItem={item}
+                                remove={() => handleRemoveItem(item.id)}
+                                moveToWishlist={() => handleMoveItemToWishlist(item)} />
                         ))}
                     </div>
                     <div className="cart-summary">

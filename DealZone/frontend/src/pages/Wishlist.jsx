@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid, Typography, Card, CardContent, CardActions, Button, CardMedia } from '@mui/material';
-import { removeItemFromWishlist } from '../slices/wishlist';
 import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
 const WishlistPage = () => {
@@ -10,7 +9,7 @@ const WishlistPage = () => {
 
     useEffect(() => {
         dispatch(getWishlistAsync());
-    }, [])
+    }, []);
 
     const handleRemoveFromWishlist = (id) => {
         dispatch(deleteFromWishlistAsync(id));
@@ -18,7 +17,7 @@ const WishlistPage = () => {
 
     const handleClearWishlist = () => {
         dispatch(clearWishlistAsync());
-    }
+    };
 
     return (
         <>

@@ -32,6 +32,7 @@ const clearCart = async () => {
 	const response = await fetch('http://localhost:3000/cart', {
 		method: 'DELETE'
 	});
+	console.log(response);
 	return response.json();
 };
 
