@@ -49,7 +49,7 @@ export default function RegistrationForm() {
 			//     })
 			//   )
 			// alert(`Username: ${formData.username} \nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}\nUsername: ${formData.username}\nPassword: ${formData.password}`); // alert for testing purpose
-			dispatch(registerUserAsync({email: formData.email, password: formData.password}));
+			dispatch(registerUserAsync({username: formData.username, email: formData.email, phone_number: formData.phone_number, password: formData.password}));
 			setFormData(blankState);
 		} else {
 			alert("Invalid form inputs detected."); // alert for testing purpose
