@@ -8,15 +8,15 @@ const Post = ({ post }) => {
         component="img"
         height="180"
         image={post.image}
-        alt={post.name}
+        alt={post.image}
       />
       <CardContent>
         <Typography variant="subtitle1" sx={{ color: 'red' }}>
           ${post.price}
         </Typography>
-        <Typography variant="h6">{post.name}</Typography>
+        <Typography variant="h6">{post.title}</Typography>
         <Typography variant="body2" color="textSecondary">
-          {post.desc}
+          {post.description}
         </Typography>
       </CardContent>
     </Card>

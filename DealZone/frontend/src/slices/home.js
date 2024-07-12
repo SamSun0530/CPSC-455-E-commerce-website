@@ -1,48 +1,54 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-    items: [
-        {
-            id: 123,
-            name: 'Post 1',
-            price: 20,
-            desc: 'This is the description for Post 1',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaTEG_xpBkCdkRDedJ1ei1BoVjqD3J5muqhQ&s',
-        },
-        {
-            id:124,
-            name: 'Post 2',
-            price: 30,
-            desc: 'This is the description for Post 2',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmj0wqdcbsV4OHlipy3rxoZDk_YPFhKUmtHg&s',
-        },
-        {
-            id:125,
-            name: 'Post 3',
-            price: 40,
-            desc: 'This is the description for Post 3',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxUGeuodP9ldBqMv_KLjPTocwntmdiQ5kKA&s',
-        },
-        {
-            id:126,
-            name: 'Post 4',
-            price: 5,
-            desc: 'This is the description for Post 4',
-            image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg/188px-Pendulum_clock_by_Jacob_Kock%2C_antique_furniture_photography%2C_IMG_0931_edit.jpg',
-        }
-    ],
-    idCounter: 500
-};
+import { REQUEST_STATE } from './util';
+import { getPostsListAsync, addToPostsListAsync, deleteFromPostsListAsync } from '../thunks/postsListThunk';
 
 const homeSlice = createSlice({
     name: 'home',
-    initialState,
-    reducers: {
-        addListing: (state, action) => {
-            const newListing = { id: state.idCounter, ...action.payload };
-            state.items.push(newListing);
-            state.idCounter += 1;
-        },
+    initialState: {
+        items: [],
+        fetchPosts: REQUEST_STATE.IDLE,
+        addPost: REQUEST_STATE.IDLE,
+        deletePost: REQUEST_STATE.IDLE,
+        error: null
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getPostsListAsync.pending, (state) => {
+                state.fetchPosts = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(getPostsListAsync.fulfilled, (state, action) => {
+                state.fetchPosts = REQUEST_STATE.FULFILLED;
+                state.items = action.payload;
+            })
+            .addCase(getPostsListAsync.rejected, (state, action) => {
+                state.fetchPosts = REQUEST_STATE.REJECTED;
+                state.error = action.error.message;
+            })
+            .addCase(addToPostsListAsync.pending, (state) => {
+                state.addPost = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(addToPostsListAsync.fulfilled, (state, action) => {
+                state.addPost = REQUEST_STATE.FULFILLED;
+                state.items.push(action.payload);
+            })
+            .addCase(addToPostsListAsync.rejected, (state, action) => {
+                state.addPost = REQUEST_STATE.REJECTED;
+                state.error = action.error.message;
+            })
+            .addCase(deleteFromPostsListAsync.pending, (state) => {
+                state.deletePost = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(deleteFromPostsListAsync.fulfilled, (state, action) => {
+                state.deletePost = REQUEST_STATE.FULFILLED;
+                state.items = state.items.filter(item => item.id !== action.payload);
+            })
+            .addCase(deleteFromPostsListAsync.rejected, (state, action) => {
+                state.deletePost = REQUEST_STATE.REJECTED;
+                state.error = action.error.message;
+            });
     }
 });
 

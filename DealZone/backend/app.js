@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var cartRouter = require('./routes/cart'); // Added line
 var wishlistRouter = require('./routes/wishlist');
+var postsRouter = require('./routes/posts');
 
 var app = express();
 app.use(cors());
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/cart', cartRouter); // Added line
 app.use('/wishlist', wishlistRouter)
+app.use('/posts', postsRouter)
 
 module.exports = app;

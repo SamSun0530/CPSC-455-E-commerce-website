@@ -6,6 +6,7 @@ export const getPostsListAsync = createAsyncThunk(
 	postsListActions.GET_POSTS,
 	async () => {
 		const response = await postsListService.getPostsList();
+		console.log("res of postlist: ", response);
 		return response;
 	}
 );

@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Post from './Post';
+import { getPostsListAsync } from '../thunks/postsListThunk';
 
 export default function PostsList() {
 
     const listings = useSelector((state) => state.home.items);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getPostsListAsync());
+    }, []);
 
     const handleCardClick = (postId) => {
       navigate(`/listings/${postId}`);

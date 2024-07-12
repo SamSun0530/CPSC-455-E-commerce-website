@@ -10,7 +10,6 @@ const Navbar = () => {
     const isLoggedIn = useSelector((state) => {
         return state.auth.isLoggedIn;
     });
-    console.log(isLoggedIn);
 
     const handleLogOut = () => {
         dispatch(logOut());

@@ -3,9 +3,10 @@ import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { useDispatch } from 'react-redux';
 import { addListing } from '../slices/home';
+import { addToPostsListAsync } from '../thunks/postsListThunk';
 
 const CreateListingPage = () => {
-    const [name, setName] = useState('');
+    const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [image, setImage] = useState('');
     const [price, setPrice] = useState('');
@@ -14,13 +15,13 @@ const CreateListingPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const newListing = {
-            name,
+            title,
             desc,
             image,
             price: parseFloat(price)
         };
-        dispatch(addListing(newListing));
-        setName('');
+        dispatch(addToPostsListAsync(newListing));
+        setTitle('');
         setDesc('');
         setImage('');
         setPrice('');
@@ -40,8 +41,8 @@ const CreateListingPage = () => {
                             label="Name"
                             variant="outlined"
                             margin="normal"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             required
                         />
                         <TextField
