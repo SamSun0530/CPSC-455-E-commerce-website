@@ -1,14 +1,14 @@
-let users = [
-    { email: "test@a", password: "testing123" }
-]
+const db = require('../db/db');
+const User = require('../db/models/user');
 
-function getUserByEmail(email) {
-    return users.find(user => user.email === email);
+async function getUserByEmail(email) {
+    const user = await User.findOne({ email });
+    return user;
 }
 
-const authUser = (email, password) => {
+const authUser = async (email, password) => {
     console.log('at userService', email, password);
-    const user = getUserByEmail(email);
+    const user = await getUserByEmail(email);
     // hash password param here in future when db is implemented
     if (user && user.password === password) {
         console.log(`User: ${email} logged in`);
@@ -19,20 +19,21 @@ const authUser = (email, password) => {
     }
 }
 
-const registerUser = (email, password) => {
-    if (getUserByEmail(email)) {
+const registerUser = async (username, email, phone_number, password) => {
+    if (await getUserByEmail(email)) {
         console.log(`User with ${email} already exists.`);
         return false;
     }
-    users.push({ email, password });
+    const newUser = await User.create({username, email, phone_number, password});
     console.log(`User: ${email} registered.`);
+    // here is where session token would be created and returned
     return true;
 }
 
 // even if user is already logged in, should require current and new password
 // check current password first using authUser, then if successful call this function
-const changeUserPassword = (email, newPassword) => {
-    const user = getUserByEmail(email);
+const changeUserPassword = async (email, newPassword) => {
+    const user = await getUserByEmail(email);
     if (user) {
         user.password = newPassword;
         console.log(`User: ${email} password changed.`);

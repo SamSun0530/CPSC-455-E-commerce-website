@@ -9,13 +9,13 @@ const authUser = async (email, password) => {
     return response.json();
 }
 
-const registerUser = async (email, password) => {
+const registerUser = async (username, email, phone_number, password) => {
     const response = await fetch('http://localhost:3000/user/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ username, email, phone_number, password })
     });
     return response.json();
 }

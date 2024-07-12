@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
@@ -6,6 +7,7 @@ const userSchema = new Schema({
     password: String,
     first_name: String,
     last_name: String,
+    phone_number: String,
     address: {
         street: String,
         city: String,

@@ -16,8 +16,8 @@ export const authUserAsync = createAsyncThunk(
 
 export const registerUserAsync = createAsyncThunk(
     authActions.REGISTER,
-    async ({ email, password }) => {
-        const { created } = await AuthService.registerUser(email, password);
+    async ({ username, email, phone_number, password }) => {
+        const { created } = await AuthService.registerUser(username, email, phone_number, password);
         if (created) {
             return { created };
         } else {

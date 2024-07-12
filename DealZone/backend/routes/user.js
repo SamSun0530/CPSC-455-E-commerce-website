@@ -15,8 +15,8 @@ router.post('/login', function (req, res, next) {
 
 /* User Registration */
 router.post('/register', function (req, res, next) {
-    const { email, password } = req.body;
-    if (UserService.registerUser(email, password)) {
+    const { username, email, phone_number, password } = req.body;
+    if (UserService.registerUser(username, email, phone_number, password)) {
         return res.send({ created: true });
     } else {
         return res.status(400).send({ created: false });
