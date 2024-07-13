@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid, Typography, Card, CardContent, CardActions, Button, CardMedia } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
+import { addToCartAsync } from '../thunks/cartThunk';
 const WishlistPage = () => {
     const {items} = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
@@ -20,8 +21,9 @@ const WishlistPage = () => {
     };
 
     const handleMoveToCart = (item) => {
-        dispatch(deleteFromCartAsync(item.id));
-        dispatch(addToWishlistAsync(item));
+        dispatch(deleteFromWishlistAsync(item._id));
+        dispatch(addToCartAsync(item));
+        
     };
 
     return (
@@ -47,14 +49,14 @@ const WishlistPage = () => {
                                         {item.name}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {item.desc}
+                                        {item.description}
                                     </Typography>
                                     <Typography variant="h6" color="textPrimary" sx={{ mt: 2 }}>
                                         ${item.price}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button className="addToCartButton" size="small" color="primary" onClick={() => handleRemoveFromWishlist(item)}>
+                                    <Button className="addToCartButton" size="small" color="primary" onClick={() => handleMoveToCart(item)}>
                                         Move to cart
                                     </Button>
                                     <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item._id)} >
