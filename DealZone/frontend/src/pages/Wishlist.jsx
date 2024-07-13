@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
 const WishlistPage = () => {
-    const {items} = useSelector((state) => state.wishlist);
+    const { items } = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const WishlistPage = () => {
     const handleMoveToCart = (item) => {
         dispatch(deleteFromWishlistAsync(item._id));
         dispatch(addToCartAsync(item));
-        
+
     };
 
     return (
@@ -34,7 +34,7 @@ const WishlistPage = () => {
                     Wishlist
                 </Typography>
                 <Grid container spacing={3}>
-                    
+
                     {items.map((item) => (
                         <Grid item key={item._id} xs={12} sm={6} md={4}>
                             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -66,7 +66,15 @@ const WishlistPage = () => {
                             </Card>
                         </Grid>
                     ))}
+
                 </Grid>
+                <Button className="clearWishlistButton" onClick={() => handleClearWishlist()}
+                    style={{
+                        backgroundColor: '#007bff',
+                        color: '#fff',
+                        padding: '0.75rem 1.5rem',
+                        marginTop: '1.5rem'
+                    }}>Clear Wishlist</Button>
             </Container>
         </>
     );

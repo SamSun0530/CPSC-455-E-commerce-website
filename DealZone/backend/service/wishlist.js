@@ -67,7 +67,7 @@ const deleteFromWishlist = async (listing_id, user_id = null) => {
 				{},
 				{ $set: { items: updatedItems } }
 			);
-			return listing_id.toString();
+			return listing_id;
 		}
 	}
 };
@@ -75,12 +75,12 @@ const deleteFromWishlist = async (listing_id, user_id = null) => {
 // Clear user's wishlist
 const clearWishlist = async (user_id = null) => {
 	if (user_id) {
-		await Wishlist.findOneAndUpdate(
+		return await Wishlist.findOneAndUpdate(
 			{ user_id: user_id },
 			{ $set: { items: [] } }
 		);
 	} else {
-		await Wishlist.findOneAndUpdate(
+		return await Wishlist.findOneAndUpdate(
 			{},
 			{ $set: { items: [] } }
 		);
