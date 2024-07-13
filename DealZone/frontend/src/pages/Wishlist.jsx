@@ -19,6 +19,11 @@ const WishlistPage = () => {
         dispatch(clearWishlistAsync());
     };
 
+    const handleMoveToCart = (item) => {
+        dispatch(deleteFromCartAsync(item.id));
+        dispatch(addToWishlistAsync(item));
+    };
+
     return (
         <>
             <Navbar />
@@ -29,7 +34,7 @@ const WishlistPage = () => {
                 <Grid container spacing={3}>
                     
                     {items.map((item) => (
-                        <Grid item key={item.id} xs={12} sm={6} md={4}>
+                        <Grid item key={item._id} xs={12} sm={6} md={4}>
                             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                                 <CardMedia
                                     component="img"
@@ -49,10 +54,10 @@ const WishlistPage = () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button className="addToCartButton" size="small" color="primary">
+                                    <Button className="addToCartButton" size="small" color="primary" onClick={() => handleRemoveFromWishlist(item)}>
                                         Move to cart
                                     </Button>
-                                    <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item.id)} >
+                                    <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item._id)} >
                                         Remove
                                     </Button>
                                 </CardActions>
