@@ -6,6 +6,14 @@ async function getUserByEmail(email) {
     return user;
 }
 
+const getUser = async (id) => {
+    return await User.findById(id);
+};
+
+const updateUser = async (id, data) => {
+    return await User.findByIdAndUpdate(id, data, { new: true });
+};
+
 const authUser = async (email, password) => {
     console.log('at userService', email, password);
     const user = await getUserByEmail(email);

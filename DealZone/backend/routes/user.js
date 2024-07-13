@@ -42,5 +42,25 @@ router.post('/logout', function (req, res, next) {
 
 // app.use(midd)
 
+// Get user data by email
+router.get('/:email', async function (req, res, next) {
+    try {
+        const user = await UserService.getUserByEmail(req.params.email);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Update user data by email
+router.put('/:email', async function (req, res, next) {
+    try {
+        const user = await UserService.updateUserByEmail(req.params.email, req.body);
+        res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 module.exports = router;
