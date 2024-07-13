@@ -23,7 +23,7 @@ export default function PostsList() {
         <Box mt={2}>
             <Grid container spacing={3}>
                 {listings.map((post, index) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={index} onClick={() => handleCardClick(post.id)}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={index} onClick={() => handleCardClick(post._id)}>
                         <Post post={post} />
                     </Grid>
                 ))}

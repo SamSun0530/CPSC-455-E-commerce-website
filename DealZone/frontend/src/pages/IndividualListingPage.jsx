@@ -33,7 +33,7 @@ export const IndividualListingPage = ({ item }) => {
                     <h2 className='product-name'>{item.name}</h2>
                     <h3 className="product-price">${item.price}</h3>
                     <p className="product-description">
-                        {item.desc}
+                        {item.description}
                     </p>
                     <button
                         className='add-to-cart-button'
