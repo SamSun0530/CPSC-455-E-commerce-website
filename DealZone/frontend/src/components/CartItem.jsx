@@ -1,32 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../css/CartItem.css';
+import { useDispatch } from 'react-redux';
+import { deleteFromCartAsync } from '../thunks/cartThunk';
 
-const CartItem = ({ cartItem, remove, moveToWishlist }) => {
+const CartItem = ({ cartItem }) => {
+    const dispatch = useDispatch();
+
+    const handleRemove = () => {
+        dispatch(deleteFromCartAsync(cartItem._id));
+    };
+
     return (
         <div className="cart-item">
-            <div className="cart-item-image-container">
-                <img src={cartItem.image} alt={cartItem.name} className="cart-item-image" />
-            </div>
+            <img src={cartItem.image} alt={cartItem.title} className="cart-item-image" />
             <div className="cart-item-details">
-                <h2>{cartItem.name}</h2>
-                <span>${cartItem.price.toFixed(2)}</span>
-            </div>
-            <div className="cart-item-actions">
-                <button className="cart-item-button move" onClick={moveToWishlist}>Move to Wishlist</button>
-                <button className="cart-item-button delete" onClick={remove}>Delete</button>
+                <h3>{cartItem.title}</h3>
+                <p>${cartItem.price}</p>
+                <button onClick={handleRemove} className="cart-item-button delete">Remove</button>
+                <button className="cart-item-button move">Move to Wishlist</button>
             </div>
         </div>
     );
-};
-
-CartItem.propTypes = {
-    cartItem: PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        image: PropTypes.string,
-        name: PropTypes.string,
-        price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    }).isRequired,
 };
 
 export default CartItem;

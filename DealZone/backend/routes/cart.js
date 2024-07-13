@@ -3,32 +3,48 @@ var router = express.Router();
 const CartService = require('../service/cart');
 
 // Get cart
-router.get('/', function (req, res, next) {
-    res.send(CartService.getCart());
+router.get('/', async function (req, res, next) {
+    try {
+        const cart = await CartService.getCart();
+        res.send(cart);
+    } catch (error) {
+        next(error);
+    }
 });
 
 // Add item to cart
-router.post('/', function (req, res, next) {
-    const item = req.body;
-    res.send(CartService.addToCart(item));
+router.post('/', async function (req, res, next) {
+    try {
+        const item = req.body;
+        const newItem = await CartService.addToCart(item);
+        res.send(newItem);
+    } catch (error) {
+        next(error);
+    }
 });
 
 // Delete item from cart
-router.delete('/:id', function (req, res, next) {
-    const { id } = req.params;
-    if (CartService.deleteFromCart(Number(id))) {
-        return res.send(id);
-    }
-    else {
-        return res.status(404).send("Specified wishlist item not found");
+router.delete('/:id', async function (req, res, next) {
+    try {
+        const { id } = req.params;
+        if (await CartService.deleteFromCart(id)) {
+            res.send(id);
+        } else {
+            res.status(404).send("Specified cart item not found");
+        }
+    } catch (error) {
+        next(error);
     }
 });
 
 // Clear cart
-router.delete('/', function (req, res, next) {
-    let response = CartService.clearCart();
-    console.log(response);
-    res.send(response);
+router.delete('/', async function (req, res, next) {
+    try {
+        const response = await CartService.clearCart();
+        res.send(response);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

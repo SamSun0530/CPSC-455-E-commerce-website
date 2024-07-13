@@ -12,17 +12,6 @@ export var cartSlice = createSlice({
         clearCart: REQUEST_STATE.IDLE,
         error: null
     },
-    /*reducers: {
-        addItemToCart(state, action) {
-            state.items.push(action.payload);
-        },
-        removeItemFromCart(state, action) {
-            state.items = state.items.filter(item => item.id !== action.payload);
-        },
-        clearCart(state) {
-            state.items = [];
-        }
-    },*/
     extraReducers: (builder) => {
         builder
             .addCase(getCartAsync.pending, (state) => {
@@ -55,7 +44,7 @@ export var cartSlice = createSlice({
             })
             .addCase(deleteFromCartAsync.fulfilled, (state, action) => {
                 state.deleteFromCart = REQUEST_STATE.FULFILLED;
-                state.items = state.items.filter(item => item.id !== action.payload);
+                state.items = state.items.filter(item => item._id !== action.payload);
             })
             .addCase(deleteFromCartAsync.rejected, (state, action) => {
                 state.deleteFromCart = REQUEST_STATE.REJECTED;

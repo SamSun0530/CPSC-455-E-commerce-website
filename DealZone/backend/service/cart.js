@@ -1,30 +1,22 @@
-let cart = [
-    { id: 1, name: 'Item 1', price: 10, image: 'https://via.placeholder.com/150' },
-    { id: 2, name: 'Item 2', price: 20, image: 'https://via.placeholder.com/150' },
-    { id: 3, name: 'Item 3', price: 30, image: 'https://via.placeholder.com/150' },
-    { id: 4, name: 'Item 4', price: 40, image: 'https://via.placeholder.com/150' },
-    { id: 5, name: 'Item 5', price: 50, image: 'https://via.placeholder.com/150' }
-];
+const Cart = require('../db/models/cart');
 
-const getCart = () => {
-    return cart;
+const getCart = async () => {
+    return await Cart.find({});
 };
 
-const addToCart = (item) => {
-    cart.push(item);
-    return item;
+const addToCart = async (item) => {
+    const newItem = new Cart(item);
+    await newItem.save();
+    return newItem;
 };
 
-const deleteFromCart = (id) => {
-    const item = cart.find(item => item.id == id);
-    if (item) {
-        cart = cart.filter(item => item.id !== id);
-        return id;
-    }
+const deleteFromCart = async (id) => {
+    const result = await Cart.findByIdAndDelete(id);
+    return result !== null;
 };
 
-const clearCart = () => {
-    cart = [];
+const clearCart = async () => {
+    await Cart.deleteMany({});
     return true;
 };
 
