@@ -34,9 +34,9 @@ const App = () => {
 function IndividualListingWrapper() {
     const items = useSelector((state) => state.home.items);
     const { productId } = useParams();
-    const item = items.find((i) => i.id == productId);
+    const item = items.find((i) => i._id == productId);
   
-    return item ? <IndividualListingPage item={item} /> : <div>Item not found</div>;
+    return item ? <IndividualListingPage item={item} /> : <div>Item not found </div>;
   }
   
 export default App;

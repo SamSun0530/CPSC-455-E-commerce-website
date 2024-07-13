@@ -5,8 +5,7 @@ import wishlistService from '../services/wishlistService';
 export const getWishlistAsync = createAsyncThunk(
 	wishlistActions.GET_WISHLIST,
   async () => {
-	const response = await wishlistService.getWishlist();
-    return response;
+	return await wishlistService.getWishlist();
   }
 );
 

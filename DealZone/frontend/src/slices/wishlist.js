@@ -14,14 +14,6 @@ const initialState = {
 export const wishlistSlice = createSlice({
     name: 'wishlist',
     initialState,
-    // reducers: {
-    //     addItemToWishlist: (state, action) => {
-    //         state.items.push(action.payload);
-    //     },
-    //     removeItemFromWishlist: (state, action) => {
-    //         state.items = state.items.filter(item => item.id !== action.payload);
-    //     },
-    // },
     extraReducers: (builder) => {
         builder
           .addCase(getWishlistAsync.pending, (state) => {
@@ -42,7 +34,6 @@ export const wishlistSlice = createSlice({
           })
           .addCase(addToWishlistAsync.fulfilled, (state, action) => {
             state.addToWishlist = REQUEST_STATE.FULFILLED;
-            console.log(action.payload)
             state.items.push(action.payload);
           })
           .addCase(addToWishlistAsync.rejected, (state, action) => {
@@ -55,7 +46,7 @@ export const wishlistSlice = createSlice({
           })
           .addCase(deleteFromWishlistAsync.fulfilled, (state, action) => {
             state.deleteFromWishlist = REQUEST_STATE.FULFILLED;
-            state.items = state.items.filter(item => item.id !== action.payload);
+            state.items = state.items.filter(item => item._id !== action.payload);
           })
           .addCase(deleteFromWishlistAsync.rejected, (state, action) => {
             state.deleteFromWishlist = REQUEST_STATE.REJECTED;
@@ -75,7 +66,5 @@ export const wishlistSlice = createSlice({
           });
       }
 });
-
-// export const { addItemToWishlist, removeItemFromWishlist } = wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid, Typography, Card, CardContent, CardActions, Button, CardMedia } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
+import { addToCartAsync } from '../thunks/cartThunk';
 const WishlistPage = () => {
     const {items} = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
@@ -19,6 +20,12 @@ const WishlistPage = () => {
         dispatch(clearWishlistAsync());
     };
 
+    const handleMoveToCart = (item) => {
+        dispatch(deleteFromWishlistAsync(item._id));
+        dispatch(addToCartAsync(item));
+        
+    };
+
     return (
         <>
             <Navbar />
@@ -29,7 +36,7 @@ const WishlistPage = () => {
                 <Grid container spacing={3}>
                     
                     {items.map((item) => (
-                        <Grid item key={item.id} xs={12} sm={6} md={4}>
+                        <Grid item key={item._id} xs={12} sm={6} md={4}>
                             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                                 <CardMedia
                                     component="img"
@@ -42,17 +49,17 @@ const WishlistPage = () => {
                                         {item.name}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p">
-                                        {item.desc}
+                                        {item.description}
                                     </Typography>
                                     <Typography variant="h6" color="textPrimary" sx={{ mt: 2 }}>
                                         ${item.price}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button className="addToCartButton" size="small" color="primary">
+                                    <Button className="addToCartButton" size="small" color="primary" onClick={() => handleMoveToCart(item)}>
                                         Move to cart
                                     </Button>
-                                    <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item.id)} >
+                                    <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item._id)} >
                                         Remove
                                     </Button>
                                 </CardActions>

@@ -2,7 +2,6 @@ const getWishlist = async () => {
 	const response = await fetch('http://localhost:3000/wishlist', {
 		method: 'GET'
 	});
-	// console.log(response.json())
 	return response.json();
 };
 
@@ -26,7 +25,12 @@ const deleteFromWishlist = async (id) => {
 	const response = await fetch(`http://localhost:3000/wishlist/${id}`, {
 		method: 'DELETE'
 	});
-	return response.json();
+	const data = await response.json();
+	if (!response.ok) {
+		const errorMsg = data?.message;
+		throw new Error(errorMsg)
+	}
+	return data;
 }
 
 const clearWishlist = async () => {

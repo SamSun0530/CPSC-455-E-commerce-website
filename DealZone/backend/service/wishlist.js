@@ -1,49 +1,91 @@
-let wishlist = [
-	{
-		id: 123,
-		name: 'Post 1',
-		price: 20,
-		desc: 'This is the description for Post 1',
-		image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaTEG_xpBkCdkRDedJ1ei1BoVjqD3J5muqhQ&s',
-	},
-	{
-		id: 124,
-		name: 'Post 2',
-		price: 30,
-		desc: 'This is the description for Post 2',
-		image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmj0wqdcbsV4OHlipy3rxoZDk_YPFhKUmtHg&s',
-	}
-]
+const db = require('../db/db');
+const Wishlist = require('../db/models/wishlist');
+const Listings = require('../db/models/listing');
 
-const getWishlist = () => {
-	return wishlist;
-};
+const getWishlistListings = async (wishlist) => {
+	const ids = wishlist.items
+	return await Listings.find({ _id: { $in: ids } })
+}
 
-const addToWishlist = (item) => {
-	if (!wishlist.find(obj => obj.id === item.id)) {
-		console.log(item.id)
-		console.log(wishlist)
-		wishlist.push(item);
-		return item;
+// Returns wishlist corresponding to user.
+const getWishlist = async (user_id = null) => {
+	if (user_id) {
+		const wishlist = await Wishlist.findOne({ user_id: user_id });
+		return await getWishlistListings(wishlist);
 	} else {
-		console.log("Already in wishlist")
-		console.log(wishlist)
-		return null;
+		const wishlist = await Wishlist.findOne({});
+		return await getWishlistListings(wishlist);
+	}
+}
+
+// Add item corresponding to listing_id to user's (user_id) wishlist
+const addToWishlist = async (listing, user_id = null) => {
+	const listing_id = listing._id;
+	if (user_id) {
+		const wishlist = await Wishlist.findOne({ user_id: user_id });
+		if (!wishlist.items.find(id => id === listing_id)) {
+			await Wishlist.findOneAndUpdate(
+				{ user_id: user_id },
+				{ $push: { items: listing_id } }
+			);
+			return await Listings.findOne({ _id: listing_id })
+		}
+	} else {
+		const wishlist = await Wishlist.findOne({});
+		if (!wishlist.items.find(id => id === listing_id)) {
+			await Wishlist.findOneAndUpdate(
+				{},
+				{ $push: { items: listing_id } }
+			);
+			return await Listings.findOne({ _id: listing_id })
+		}
+	}
+}
+
+// Remove item corresponding to listing_id from user's (user_id) wishlist
+const deleteFromWishlist = async (listing_id, user_id = null) => {
+	if (user_id) {
+		const wishlist = await Wishlist.findOne({ user_id: user_id });
+		const item = wishlist.items.find(item_id => item_id === listing_id);
+		if (item) {
+			const updatedItems = wishlist.items.filter(item_id => item_id !== listing_id);
+			await Wishlist.findOneAndUpdate(
+				{ user_id: user_id },
+				{ $set: { items: updatedItems } }
+			);
+			return listing_id;
+		}
+
+	} else {
+		const wishlist = await Wishlist.findOne({});
+		// console.log('wishlist delete:\n' + wishlist.items)
+		const item = wishlist.items.find(item_id => item_id=== listing_id);
+		if (item) {
+			const updatedItems = wishlist.items.filter(item_id => item_id !== listing_id);
+			// console.log('wishlist deletedd:\n' + updatedItems)
+			await Wishlist.findOneAndUpdate(
+				{},
+				{ $set: { items: updatedItems } }
+			);
+			return listing_id.toString();
+		}
 	}
 };
 
-const deleteFromWishlist = (id) => {
-	const item = wishlist.find(item => item.id == id);
-	if (item) {
-		wishlist = wishlist.filter(item => item.id !== id);
-		return id;
+// Clear user's wishlist
+const clearWishlist = async (user_id = null) => {
+	if (user_id) {
+		await Wishlist.findOneAndUpdate(
+			{ user_id: user_id },
+			{ $set: { items: [] } }
+		);
+	} else {
+		await Wishlist.findOneAndUpdate(
+			{},
+			{ $set: { items: [] } }
+		);
 	}
 
-
-};
-
-const clearWishlist = () => {
-	wishlist = [];
 };
 
 module.exports = {
