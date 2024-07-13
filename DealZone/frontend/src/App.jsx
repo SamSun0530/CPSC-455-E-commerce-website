@@ -4,8 +4,9 @@ import UserAccountPage from './pages/UserAccountPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import { IndividualListingPage } from './pages/IndividualListingPage';
+import SellerView from './pages/SellerView';
 import Homepage from './pages/Homepage';
-import CreateListingPage from './pages/CreateListingPage';
+import CreateListingPage from './pages/CreateListing';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckOutPage from './pages/CheckOutPage';
 import { useSelector } from 'react-redux';
@@ -25,6 +26,7 @@ const App = () => {
                     <Route exact path="/listings/:productId" element={<IndividualListingWrapper/>} />
                     <Route path="/checkout" element={<CheckOutPage />} />
                     <Route path="/createListing" element={<CreateListingPage />} />
+                    <Route path="/sellerView" element={<SellerView />} />
                     <Route path="/wishlist" element={<Wishlist />} />
                 </Routes>
             </div>

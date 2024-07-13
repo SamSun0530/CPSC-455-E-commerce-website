@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { useDispatch } from 'react-redux';
-import { addListing } from '../slices/home';
 import { addToPostsListAsync } from '../thunks/postsListThunk';
 
-const CreateListingPage = () => {
+const AddPost = () => {
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [image, setImage] = useState('');
@@ -91,4 +90,4 @@ const CreateListingPage = () => {
     );
 };
 
-export default CreateListingPage;
+export default AddPost;

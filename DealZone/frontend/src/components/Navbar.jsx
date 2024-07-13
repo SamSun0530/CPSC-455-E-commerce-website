@@ -30,8 +30,8 @@ const Navbar = () => {
                     <NavDropdown.Item as={Link} to="/wishlist">
                         Wishlist
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/createListing">
-                        Add a listing
+                    <NavDropdown.Item as={Link} to="/sellerView">
+                        Seller View
                     </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLogOut}>Log Out</NavDropdown.Item>
                 </NavDropdown>}
