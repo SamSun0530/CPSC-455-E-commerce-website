@@ -1,15 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const UserService = require('../service/user');
+const SessionService = require('../service/session');
 
 /* User login */
 router.post('/login', function (req, res, next) {
     console.log(req.body);
     const { email, password } = req.body;
-    UserService.authUser(email, password).then((auth) => {
-        if (auth) {
+    UserService.authUser(email, password).then(async (user_id) => {
+        if (user_id) {
+            const session = await SessionService.createSession(user_id);
             console.log('returning login true');
-            return res.send({ success: true });
+            return res.send({ success: true, session });
         } else {
             console.log('returning login false');
             return res.status(401).send({ success: false });

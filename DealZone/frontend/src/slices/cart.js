@@ -44,7 +44,7 @@ export const cartSlice = createSlice({
             })
             .addCase(deleteFromCartAsync.fulfilled, (state, action) => {
                 state.deleteFromCart = REQUEST_STATE.FULFILLED;
-                state.items = state.items.filter(item => item._id !== action.payload);
+                state.items = state.items.filter(item => item._id !== action.payload.id);
             })
             .addCase(deleteFromCartAsync.rejected, (state, action) => {
                 state.deleteFromCart = REQUEST_STATE.REJECTED;

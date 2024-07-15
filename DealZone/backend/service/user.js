@@ -20,7 +20,7 @@ const authUser = async (email, password) => {
     // hash password param here in future when db is implemented
     if (user && user.password === password) {
         console.log(`User: ${email} logged in`);
-        return true;
+        return user._id;
     } else {
         console.log(`User: ${email} login failed. No account with email or wrong password`);
         return false;

@@ -6,5 +6,5 @@ const sellerPostsSchema = new Schema({
     items: [String]
 });
 
-const Cart = model('Cart', sellerPostsSchema);
-module.exports = Cart;
+const SellerPost = model('SellerPost', sellerPostsSchema);
+module.exports = SellerPost;
