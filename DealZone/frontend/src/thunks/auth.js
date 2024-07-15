@@ -5,7 +5,8 @@ import AuthService from '../services/auth';
 export const authUserAsync = createAsyncThunk(
     authActions.LOG_IN,
     async ({ email, password }) => {
-        const { success } = await AuthService.authUser(email, password);
+        const { success, session } = await AuthService.authUser(email, password);
+        document.cookie = `sessionToken=${session.session_token}; expires=${new Date(session.expires_on).toUTCString()}; SameSite=Strict; path=/`;
         if (success) {
             return { success };
         } else {

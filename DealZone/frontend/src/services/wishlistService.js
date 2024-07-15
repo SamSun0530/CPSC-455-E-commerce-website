@@ -1,6 +1,7 @@
 const getWishlist = async () => {
 	const response = await fetch('http://localhost:3000/wishlist', {
-		method: 'GET'
+		method: 'GET',
+		credentials: 'include'
 	});
 	return response.json();
 };
@@ -11,7 +12,8 @@ const addToWishlist = async (item) => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(item)
+		body: JSON.stringify(item),
+		credentials: 'include'
 	});
 	const data = await response.json();
 	if (!response.ok) {
@@ -23,7 +25,8 @@ const addToWishlist = async (item) => {
 
 const deleteFromWishlist = async (id) => {
 	const response = await fetch(`http://localhost:3000/wishlist/${id}`, {
-		method: 'DELETE'
+		method: 'DELETE',
+		credentials: 'include'
 	});
 	const data = await response.json();
 	if (!response.ok) {
@@ -35,7 +38,8 @@ const deleteFromWishlist = async (id) => {
 
 const clearWishlist = async () => {
 	const response = await fetch('http://localhost:3000/wishlist', {
-		method: 'DELETE'
+		method: 'DELETE',
+		credentials: 'include'
 	});
 	return response.json();
 };

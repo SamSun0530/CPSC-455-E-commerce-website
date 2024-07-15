@@ -13,8 +13,9 @@ const CartPage = () => {
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
 
     useEffect(() => {
+        console.log('fetching cart');
         dispatch(getCartAsync());
-    }, [dispatch]);
+    }, []);
 
     const handleClearCart = () => {
         dispatch(clearCartAsync());

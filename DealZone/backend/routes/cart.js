@@ -5,6 +5,7 @@ const CartService = require('../service/cart');
 // Get cart
 router.get('/', async function (req, res, next) {
     try {
+        console.log(req.cookies);
         const cart = await CartService.getCart();
         res.send(cart);
     } catch (error) {
