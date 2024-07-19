@@ -9,6 +9,10 @@ const getUser = async (id) => {
     return await User.findById(id);
 };
 
+const getUserBasic = async (id) => {
+    return await User.findById(id).select('_id username email');
+}
+
 const updateUser = async (id, data) => {
     return await User.findByIdAndUpdate(id, data, { new: true });
 };
@@ -63,5 +67,5 @@ module.exports = {
     registerUser,
     changeUserPassword,
     deleteUser,
-    getUser
+    getUserBasic
 };
