@@ -1,4 +1,3 @@
-const db = require('../db/db');
 const Wishlist = require('../db/models/wishlist');
 const Listings = require('../db/models/listing');
 

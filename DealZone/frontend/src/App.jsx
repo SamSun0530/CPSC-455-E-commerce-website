@@ -9,11 +9,18 @@ import Homepage from './pages/Homepage';
 import CreateListingPage from './pages/CreateListing';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CheckOutPage from './pages/CheckOutPage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Wishlist from './pages/Wishlist'
+import { useEffect } from 'react';
+import { checkSessionAsync } from './thunks/auth';
 
 const App = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(checkSessionAsync());
+    }, []);
+
     return (
         <Router>
             <div>

@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const CartService = require('../service/cart');
+const verifySession = require('../middleware/session');
 
+router.use(verifySession);
 // Get cart
 router.get('/', async function (req, res, next) {
     try {
         console.log(req.cookies);
+        console.log(req.session);
         const cart = await CartService.getCart();
         res.send(cart);
     } catch (error) {

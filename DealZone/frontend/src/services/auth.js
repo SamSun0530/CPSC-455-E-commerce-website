@@ -1,3 +1,12 @@
+const checkSession = async () => {
+    const response = await fetch('http://localhost:3000/session', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    console.log(response);
+    return response.json();
+}
+
 const authUser = async (email, password) => {
     const response = await fetch('http://localhost:3000/user/login', {
         method: 'POST',
@@ -26,5 +35,6 @@ const logOutUser = async () => {
 
 export default {
     authUser,
-    registerUser
+    registerUser,
+    checkSession
 }

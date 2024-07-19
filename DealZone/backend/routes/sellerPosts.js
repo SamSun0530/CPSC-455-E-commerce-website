@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const SellerPostsService = require('../service/cart');
+const verifySession = require('../middleware/session');
 
+router.use(verifySession);
 // Get seller posts
 router.get('/', function (req, res, next) {
     res.send(SellerPostsService.getPosts());

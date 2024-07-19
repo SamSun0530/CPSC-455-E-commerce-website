@@ -1,4 +1,3 @@
-const db = require('../db/db');
 const Listing = require('../db/models/listing');
 
 async function getListings() {

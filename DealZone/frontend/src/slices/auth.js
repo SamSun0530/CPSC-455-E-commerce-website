@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './util';
-import { authUserAsync, registerUserAsync } from '../thunks/auth';
+import { authUserAsync, checkSessionAsync, registerUserAsync } from '../thunks/auth';
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -8,6 +8,7 @@ export const authSlice = createSlice({
         isLoggedIn: false,
         authUser: REQUEST_STATE.IDLE,
         registerUser: REQUEST_STATE.IDLE,
+        checkSession: REQUEST_STATE.IDLE,
         error: null
     },
     reducers: {
@@ -16,8 +17,9 @@ export const authSlice = createSlice({
         },
         clearAPIStatus: (state) => {
             state.authUser = REQUEST_STATE.IDLE,
-                state.registerUser = REQUEST_STATE.IDLE,
-                state.error = null;
+            state.registerUser = REQUEST_STATE.IDLE,
+            state.checkSession = REQUEST_STATE.IDLE,
+            state.error = null;
         }
     },
     extraReducers: (builder) => {
@@ -45,6 +47,18 @@ export const authSlice = createSlice({
             })
             .addCase(registerUserAsync.rejected, (state, action) => {
                 state.registerUser = REQUEST_STATE.REJECTED;
+                state.error = action.error;
+            })
+            .addCase(checkSessionAsync.pending, (state) => {
+                state.checkSession = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(checkSessionAsync.fulfilled, (state) => {
+                state.checkSession = REQUEST_STATE.FULFILLED;
+                state.isLoggedIn = true;
+            })
+            .addCase(checkSessionAsync.rejected, (state, action) => {
+                state.checkSession = REQUEST_STATE.REJECTED;
                 state.error = action.error;
             });
     }

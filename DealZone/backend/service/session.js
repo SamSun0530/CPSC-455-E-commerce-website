@@ -1,4 +1,3 @@
-const db = require('../db/db');
 const Session = require('../db/models/session');
 const { v4: uuidv4 } = require('uuid');
 

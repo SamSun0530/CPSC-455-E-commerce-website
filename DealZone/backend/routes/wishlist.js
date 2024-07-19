@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const WishlistService = require('../service/wishlist');
+const verifySession = require('../middleware/session');
 
+router.use(verifySession);
 router.get('/', async function (req, res, next) {
     res.send(await WishlistService.getWishlist());
 });

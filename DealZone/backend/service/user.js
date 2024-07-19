@@ -1,4 +1,3 @@
-const db = require('../db/db');
 const User = require('../db/models/user');
 
 async function getUserByEmail(email) {
@@ -63,5 +62,6 @@ module.exports = {
     authUser,
     registerUser,
     changeUserPassword,
-    deleteUser
+    deleteUser,
+    getUser
 };

@@ -2,11 +2,25 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authActions } from "../actions/auth";
 import AuthService from '../services/auth';
 
+
+export const checkSessionAsync = createAsyncThunk(
+    authActions.CHECK_SESSION,
+    async () => {
+        const { loggedIn } = await AuthService.checkSession();
+        if (loggedIn) {
+            return { loggedIn };
+        } else {
+            throw new Error('session invalid');
+        }
+    }
+)
+
 export const authUserAsync = createAsyncThunk(
     authActions.LOG_IN,
     async ({ email, password }) => {
         const { success, session } = await AuthService.authUser(email, password);
-        document.cookie = `sessionToken=${session.session_token}; expires=${new Date(session.expires_on).toUTCString()}; SameSite=Strict; path=/`;
+        document.cookie = `sessionToken=${session.session_token}; SameSite=Strict; path=/`;
+        // expires=${new Date(session.expires_on).toUTCString()};
         if (success) {
             return { success };
         } else {

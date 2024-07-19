@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cors = require('cors');
 require('dotenv').config();
 
+const db = require('./db/db');
 var indexRouter = require('./routes/index');
+var sessionRouter = require('./routes/session');
 var userRouter = require('./routes/user');
-var cartRouter = require('./routes/cart'); // Added line
+var cartRouter = require('./routes/cart');
 var wishlistRouter = require('./routes/wishlist');
 var postsRouter = require('./routes/posts');
 
@@ -28,9 +30,10 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
+app.use('/session', sessionRouter);
 app.use('/user', userRouter);
-app.use('/cart', cartRouter); // Added line
-app.use('/wishlist', wishlistRouter)
-app.use('/posts', postsRouter)
+app.use('/cart', cartRouter);
+app.use('/wishlist', wishlistRouter);
+app.use('/posts', postsRouter);
 
 module.exports = app;
