@@ -36,7 +36,7 @@ export const cartSlice = createSlice({
             })
             .addCase(addToCartAsync.rejected, (state, action) => {
                 state.addToCart = REQUEST_STATE.REJECTED;
-                state.error = action.error;
+                state.error = action.payload;
             })
             .addCase(deleteFromCartAsync.pending, (state) => {
                 state.deleteFromCart = REQUEST_STATE.PENDING;

@@ -4,11 +4,10 @@ const CartService = require('../service/cart');
 const verifySession = require('../middleware/session');
 
 router.use(verifySession);
+
 // Get cart
 router.get('/', async function (req, res, next) {
     try {
-        console.log(req.cookies);
-        console.log(req.session);
         const cart = await CartService.getCart();
         res.send(cart);
     } catch (error) {
@@ -23,7 +22,11 @@ router.post('/', async function (req, res, next) {
         const newItem = await CartService.addToCart(item);
         res.send(newItem);
     } catch (error) {
-        next(error);
+        if (error.message === 'Item already in cart') {
+            res.status(400).send({ error: error.message });
+        } else {
+            next(error);
+        }
     }
 });
 
@@ -32,7 +35,7 @@ router.delete('/:id', async function (req, res, next) {
     try {
         const { id } = req.params;
         if (await CartService.deleteFromCart(id)) {
-            res.send({id});
+            res.send({ id });
         } else {
             res.status(404).send("Specified cart item not found");
         }

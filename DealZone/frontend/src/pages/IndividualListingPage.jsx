@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Navbar';
 import '../css/IndividualListingPage.css';
 import { addToWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
 export const IndividualListingPage = ({ item }) => {
     const dispatch = useDispatch();
+    const cartError = useSelector(state => state.cart.error);
 
     const handleAddToCart = () => {
         dispatch(addToCartAsync(item));
@@ -41,6 +42,7 @@ export const IndividualListingPage = ({ item }) => {
                     >
                         Add to Cart
                     </button>
+                    {cartError && <p className="error-message">{cartError}</p>}
                     <button
                         className='add-to-wishlist-button'
                         onClick={() => { handleAddToWishlist(item) }}

@@ -5,6 +5,10 @@ const getCart = async () => {
 };
 
 const addToCart = async (item) => {
+    const existingItem = await Cart.findOne({ user_id: item.user_id, title: item.title });
+    if (existingItem) {
+        throw new Error('Item already in cart');
+    }
     const newItem = new Cart(item);
     await newItem.save();
     return newItem;
