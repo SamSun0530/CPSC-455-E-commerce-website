@@ -15,7 +15,11 @@ const Post = ({ post }) => {
           ${post.price}
         </Typography>
         <Typography variant="h6">{post.title}</Typography>
-        <Typography variant="body2" color="textSecondary">
+        <Typography variant="body2" color="textSecondary" sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                }}>
           {post.description}
         </Typography>
       </CardContent>
