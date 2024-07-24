@@ -4,8 +4,9 @@ const PostsService = require('../service/posts');
 
 // Get posts
 router.get('/', async function (req, res, next) {
+    const query = req.query.q || "";
     try {
-        const listings = await PostsService.getListings();
+        const listings = await PostsService.getListings(query);
         console.log(listings);
         res.send(listings);
     } catch (err) {

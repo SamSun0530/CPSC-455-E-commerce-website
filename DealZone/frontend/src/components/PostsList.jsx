@@ -16,7 +16,7 @@ export default function PostsList() {
     }, []);
 
     const handleCardClick = (postId) => {
-      navigate(`/listings/${postId}`);
+        navigate(`/listings/${postId}`);
     };
 
     return (

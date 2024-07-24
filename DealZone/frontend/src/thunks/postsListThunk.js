@@ -25,3 +25,10 @@ export const deleteFromPostsListAsync = createAsyncThunk(
 	}
 );
 
+export const queryPostsListAsync = createAsyncThunk(
+	postsListActions.QUERY_POSTS,
+	async (query) => {
+		return await postsListService.queryPostsList(query);
+	}
+)
+

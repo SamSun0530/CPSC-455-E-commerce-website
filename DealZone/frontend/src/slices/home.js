@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './util';
-import { getPostsListAsync, addToPostsListAsync, deleteFromPostsListAsync } from '../thunks/postsListThunk';
+import { getPostsListAsync, addToPostsListAsync, deleteFromPostsListAsync, queryPostsListAsync } from '../thunks/postsListThunk';
 
 const homeSlice = createSlice({
     name: 'home',
@@ -9,6 +9,7 @@ const homeSlice = createSlice({
         fetchPosts: REQUEST_STATE.IDLE,
         addPost: REQUEST_STATE.IDLE,
         deletePost: REQUEST_STATE.IDLE,
+        queryPosts: REQUEST_STATE.IDLE,
         error: null
     },
     extraReducers: (builder) => {
@@ -48,7 +49,20 @@ const homeSlice = createSlice({
             .addCase(deleteFromPostsListAsync.rejected, (state, action) => {
                 state.deletePost = REQUEST_STATE.REJECTED;
                 state.error = action.error.message;
+            })
+            .addCase(queryPostsListAsync.pending, (state) => {
+                state.queryPosts = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(queryPostsListAsync.fulfilled, (state, action) => {
+                state.queryPosts = REQUEST_STATE.FULFILLED;
+                state.items = action.payload;
+            })
+            .addCase(queryPostsListAsync.rejected, (state, action) => {
+                state.queryPosts = REQUEST_STATE.REJECTED;
+                state.error = action.error;
             });
+
     }
 });
 
