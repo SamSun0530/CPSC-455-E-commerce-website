@@ -1,7 +1,7 @@
 const Cart = require('../db/models/cart');
 
-const getCart = async () => {
-    return await Cart.find({});
+const getCart = async (userId) => {
+    return await Cart.find({ user_id: userId });
 };
 
 const addToCart = async (item) => {
@@ -14,13 +14,13 @@ const addToCart = async (item) => {
     return newItem;
 };
 
-const deleteFromCart = async (id) => {
-    const result = await Cart.findByIdAndDelete(id);
+const deleteFromCart = async (userId, itemId) => {
+    const result = await Cart.findOneAndDelete({ _id: itemId, user_id: userId });
     return result !== null;
 };
 
-const clearCart = async () => {
-    await Cart.deleteMany({});
+const clearCart = async (userId) => {
+    await Cart.deleteMany({ user_id: userId });
     return true;
 };
 
