@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const PostsService = require('../service/posts');
+const verifySession = require('../middleware/session');
 
+router.use(verifySession);
 // Get posts
 router.get('/', async function (req, res, next) {
     const query = req.query.q || "";
@@ -16,10 +18,14 @@ router.get('/', async function (req, res, next) {
 
 // Add new post
 router.post('/', async function (req, res, next) {
-    const {title, desc, image, price, user_id} = req.body;
-    const posted_on = new Date();
-
     try {
+        if (!req.session.user) {
+            return res.status(401).send("Unauthorized");
+        }
+        const {title, desc, image, price} = req.body;
+        const posted_on = new Date();
+        const user_id = req.session.user._id;
+    
         await PostsService.addListing(title, desc, image, price, posted_on, user_id);
         res.status(201).send();
     } catch (err) {
