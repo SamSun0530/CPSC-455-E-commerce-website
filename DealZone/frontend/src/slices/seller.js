@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getSellerPostAsync, deleteFromSellerPostAsync } from '../thunks/sellerPostThunk';
+import { getSellerPostAsync, deleteFromSellerPostAsync, updatePostAsync } from '../thunks/sellerPostThunk';
 import { REQUEST_STATE } from './util';
 
 export const sellerSlice = createSlice({
@@ -8,33 +8,46 @@ export const sellerSlice = createSlice({
         items: [],
         getSellerPost: REQUEST_STATE.IDLE,
         deleteSellerPost: REQUEST_STATE.IDLE,
+        updateSellerPost: REQUEST_STATE.IDLE,
         error: null
     },
     extraReducers: (builder) => {
         builder
             .addCase(getSellerPostAsync.pending, (state) => {
-                state.getCart = REQUEST_STATE.PENDING;
+                state.getSellerPost = REQUEST_STATE.PENDING;
                 state.error = null;
             })
             .addCase(getSellerPostAsync.fulfilled, (state, action) => {
-                state.getCart = REQUEST_STATE.FULFILLED;
+                state.getSellerPost = REQUEST_STATE.FULFILLED;
                 state.items = action.payload;
             })
             .addCase(getSellerPostAsync.rejected, (state, action) => {
-                state.getCart = REQUEST_STATE.REJECTED;
+                state.getSellerPost = REQUEST_STATE.REJECTED;
                 state.error = action.error;
             })
             .addCase(deleteFromSellerPostAsync.pending, (state) => {
-                state.addToCart = REQUEST_STATE.PENDING;
+                state.deleteSellerPost = REQUEST_STATE.PENDING;
                 state.error = null;
             })
             .addCase(deleteFromSellerPostAsync.fulfilled, (state, action) => {
-                state.addToCart = REQUEST_STATE.FULFILLED;
-                state.items.push(action.payload);
+                state.deleteSellerPost = REQUEST_STATE.FULFILLED;
+                state.items = state.items.filter(item => item._id !== action.payload);
             })
             .addCase(deleteFromSellerPostAsync.rejected, (state, action) => {
-                state.addToCart = REQUEST_STATE.REJECTED;
+                state.deleteSellerPost = REQUEST_STATE.REJECTED;
                 state.error = action.payload;
+            })
+            .addCase(updatePostAsync.pending, (state) => {
+                state.getSellerPost = REQUEST_STATE.PENDING;
+                state.error = null;
+            })
+            .addCase(updatePostAsync.fulfilled, (state, action) => {
+                state.getSellerPost = REQUEST_STATE.FULFILLED;
+                state.items = state.items.map(item => item._id === action.payload._id ? action.payload : item)
+            })
+            .addCase(updatePostAsync.rejected, (state, action) => {
+                state.getSellerPost = REQUEST_STATE.REJECTED;
+                state.error = action.error;
             });
     }
 });

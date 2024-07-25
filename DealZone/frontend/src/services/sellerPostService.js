@@ -12,10 +12,23 @@ const deleteSellerPost = async (id) => {
         credentials: 'include'
     });
     return response.json();
-}
+};
 
+const updateSellerPost = async (updatedMember) => { 
+    const res = fetch(`http://localhost:3000/sellerPosts/${updatedMember._id}`,{
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedMember)
+    });
+
+    return res.json();
+};
 
 export default {
     getSellerPost,
-    deleteSellerPost
+    deleteSellerPost,
+    updateSellerPost
 };

@@ -9,10 +9,9 @@ router.get('/', async function (req, res, next) {
     const query = req.query.q || "";
     try {
         const listings = await PostsService.getListings(query);
-        console.log(listings);
         res.send(listings);
     } catch (err) {
-        console.log("Error in getting listings: ", err);
+        console.error("Error in getting listings: ", err);
     }
 });
 
@@ -29,7 +28,7 @@ router.post('/', async function (req, res, next) {
         await PostsService.addListing(title, desc, image, price, posted_on, user_id);
         res.status(201).send();
     } catch (err) {
-        console.log("error adding new listing: ", err);
+        console.error("error adding new listing: ", err);
     }
     
 });
