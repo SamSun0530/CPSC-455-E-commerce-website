@@ -15,7 +15,7 @@ const deleteSellerPost = async (id) => {
 };
 
 const updateSellerPost = async (updatedMember) => { 
-    const res = fetch(`http://localhost:3000/sellerPosts/${updatedMember._id}`,{
+    const response = await fetch(`http://localhost:3000/sellerPosts/${updatedMember._id}`,{
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -24,7 +24,7 @@ const updateSellerPost = async (updatedMember) => {
         body: JSON.stringify(updatedMember)
     });
 
-    return res.json();
+    return response.json(); 
 };
 
 export default {

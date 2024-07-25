@@ -31,7 +31,6 @@ export default function SellerView() {
 
     const handleSaveEdit = async (updatedPost) => {
         dispatch(updatePostAsync(updatedPost));
-        dispatch(getSellerPostAsync());
         handleCloseEdit();
     };
 
