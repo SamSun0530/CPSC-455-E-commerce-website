@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField, IconButton, Typography } from '@mui/material';
-import { Edit as EditIcon, Save as SaveIcon, Cancel as CancelIcon } from '@mui/icons-material';
+import { Edit as EditIcon, Save as SaveIcon, Cancel as CancelIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import '../css/sellerView.css'
 
-const EditPost = ({ post, onClose, onSave }) => {
+const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const [editableFields, setEditableFields] = useState({});
     const [editingField, setEditingField] = useState(null);
+
+    if (!post) return null;
 
     useEffect(() => {
         if (post) {
@@ -37,7 +39,9 @@ const EditPost = ({ post, onClose, onSave }) => {
         setEditingField(null);
     };
 
-    if (!post) return null;
+    const handleDeleteClick = () => {
+        onDelete(post._id);
+    };
 
     return (
         <div className="popup">
@@ -75,6 +79,14 @@ const EditPost = ({ post, onClose, onSave }) => {
                         </Button>
                         <Button variant="contained" color="secondary" onClick={onClose}>
                             Cancel
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={handleDeleteClick}
+                            startIcon={<DeleteIcon />}
+                        >
+                            Delete Post
                         </Button>
                     </Box>
                 </Box>

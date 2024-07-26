@@ -3,7 +3,7 @@ import { Box, Button, Typography, Container, Grid } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSellerPostAsync, updatePostAsync } from '../thunks/sellerPostThunk';
+import { getSellerPostAsync, updatePostAsync, deleteFromSellerPostAsync } from '../thunks/sellerPostThunk';
 import Post from '../components/Post';
 import EditPost from '../components/EditPost';
 
@@ -29,8 +29,13 @@ export default function SellerView() {
         setSelectedPost(null);
     };
 
-    const handleSaveEdit = async (updatedPost) => {
+    const handleSaveEdit = (updatedPost) => {
         dispatch(updatePostAsync(updatedPost));
+        handleCloseEdit();
+    };
+
+    const handleDelete = (postId) => {
+        dispatch(deleteFromSellerPostAsync(postId));
         handleCloseEdit();
     };
 
@@ -61,7 +66,12 @@ export default function SellerView() {
                     </Grid>
                 </Box>
                 {selectedPost && (
-                    <EditPost post={selectedPost} onClose={handleCloseEdit} onSave={handleSaveEdit} />
+                    <EditPost 
+                        post={selectedPost} 
+                        onClose={handleCloseEdit} 
+                        onSave={handleSaveEdit} 
+                        onDelete={handleDelete}
+                    />
                 )}
             </Container>
         </>

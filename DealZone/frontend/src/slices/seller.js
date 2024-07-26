@@ -31,11 +31,11 @@ export const sellerSlice = createSlice({
             })
             .addCase(deleteFromSellerPostAsync.fulfilled, (state, action) => {
                 state.deleteSellerPost = REQUEST_STATE.FULFILLED;
-                state.items = state.items.filter(item => item._id !== action.payload);
+                state.items = state.items.filter(item => item._id !== action.payload.id);
             })
             .addCase(deleteFromSellerPostAsync.rejected, (state, action) => {
                 state.deleteSellerPost = REQUEST_STATE.REJECTED;
-                state.error = action.payload;
+                state.error = action.error;
             })
             .addCase(updatePostAsync.pending, (state) => {
                 state.getSellerPost = REQUEST_STATE.PENDING;

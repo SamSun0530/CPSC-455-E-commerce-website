@@ -11,7 +11,8 @@ const deleteSellerPost = async (id) => {
         method: 'DELETE',
         credentials: 'include'
     });
-    return response.json();
+
+    return await response.json();
 };
 
 const updateSellerPost = async (updatedMember) => { 
