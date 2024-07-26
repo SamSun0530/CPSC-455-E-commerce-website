@@ -29,6 +29,7 @@ router.post('/', async function (req, res, next) {
         res.send(newItem);
     } catch (error) {
         if (error.message === 'Item already in cart') {
+            console.log("Item already in cart");
             res.status(400).send({ error: error.message });
         } else {
             next(error);

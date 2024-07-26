@@ -9,6 +9,9 @@ const addToCart = async (item) => {
     if (existingItem) {
         throw new Error('Item already in cart');
     }
+    if (item._id) {
+        delete item._id;
+    }
     const newItem = new Cart(item);
     await newItem.save();
     return newItem;
