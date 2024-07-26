@@ -7,7 +7,8 @@ const listingSchema = new Schema({
     image: String,
     price: Number,
     posted_on: Date,
-    user_id: String
+    user_id: String,
+    tags: [String]
 });
 
 const Listing = model('Listing', listingSchema);
