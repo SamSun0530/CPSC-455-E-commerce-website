@@ -5,31 +5,48 @@ const verifySession = require('../middleware/session');
 
 router.use(verifySession);
 router.get('/', async function (req, res, next) {
-    res.send(await WishlistService.getWishlist());
+    if (req.session) {
+        res.send(await WishlistService.getWishlist(req.session.user._id));
+    } else {
+        res.status(401).send("Unauthorized");
+    }
 });
 
 router.post('/', async function (req, res, next) {
-    const item = req.body;
-    if (await WishlistService.addToWishlist(item)) {
-        res.send(item)
+    if (req.session) {
+        const item = req.body;
+        if (await WishlistService.addToWishlist(item, req.session.user._id)) {
+            res.send(item)
+        } else {
+            return res.status(409).send("Item already in wishlist");
+        }
     } else {
-        return res.status(409).send("Item already in wishlist");
+        res.status(401).send("Unauthorized");
     }
     // res.send(WishlistService.addToWishlist(item));
 });
 
 router.delete('/:id', async function (req, res, next) {
-    const { id } = req.params;
-    if (await WishlistService.deleteFromWishlist(id)) {
-        return res.send(JSON.stringify(id));
+    if (req.session) {
+        const { id } = req.params;
+        if (await WishlistService.deleteFromWishlist(id, req.session.user._id)) {
+            return res.send(JSON.stringify(id));
+        }
+        else {
+            return res.status(404).send("Specified wishlist item not found");
+        }
+    } else {
+        res.status(401).send("Unauthorized");
     }
-    else {
-        return res.status(404).send("Specified wishlist item not found");
-    }
+
 });
 
 router.delete('/', async function (req, res, next) {
-    res.send(await WishlistService.clearWishlist());
+    if (req.session) {
+        res.send(await WishlistService.clearWishlist(req.session.user._id));
+    } else {
+        res.status(401).send("Unauthorized");
+    }
 });
 
 module.exports = router;

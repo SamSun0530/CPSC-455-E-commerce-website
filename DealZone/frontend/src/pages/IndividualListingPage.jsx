@@ -31,7 +31,7 @@ export const IndividualListingPage = ({ item }) => {
                     )}
                 </div>
                 <div className="product-details-container">
-                    <h2 className='product-name'>{item.name}</h2>
+                    <h2 className='product-name'>{item.title}</h2>
                     <h3 className="product-price">${item.price}</h3>
                     <p className="product-description">
                         {item.description}
