@@ -8,7 +8,7 @@ export default function Homepage() {
     <>
       <Navbar />
       <Container>
-        <SearchBar />
+        <SearchBar/>
         <PostsList />
       </Container>
 	</>

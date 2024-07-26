@@ -12,11 +12,12 @@ var userRouter = require('./routes/user');
 var cartRouter = require('./routes/cart');
 var wishlistRouter = require('./routes/wishlist');
 var postsRouter = require('./routes/posts');
+var sellerPostsRouter = require('./routes/sellerPosts');
 
 var app = express();
 app.use(cors({
     origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
 }));
@@ -32,5 +33,6 @@ app.use('/user', userRouter);
 app.use('/cart', cartRouter);
 app.use('/wishlist', wishlistRouter);
 app.use('/posts', postsRouter);
+app.use('/sellerPosts', sellerPostsRouter);
 
 module.exports = app;

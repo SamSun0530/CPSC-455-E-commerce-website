@@ -1,36 +1,48 @@
 var express = require('express');
 var router = express.Router();
-const SellerPostsService = require('../service/cart');
+const SellerPostsService = require('../service/sellerPostService');
 const verifySession = require('../middleware/session');
 
 router.use(verifySession);
+
 // Get seller posts
-router.get('/', function (req, res, next) {
-    res.send(SellerPostsService.getPosts());
-});
-
-// Add item to cart
-router.post('/', function (req, res, next) {
-    const item = req.body;
-    res.send(SellerPostsService.addToCart(item));
-});
-
-// Delete item from cart
-router.delete('/:id', function (req, res, next) {
-    const { id } = req.params;
-    if (SellerPostsService.deleteFromCart(Number(id))) {
-        return res.send(id);
-    }
-    else {
-        return res.status(404).send("Specified wishlist item not found");
+router.get('/', async function (req, res, next) {
+    try {
+        if (!req.session.user) {
+            return res.status(401).send("Unauthorized");
+        }
+        const sellerPosts = await SellerPostsService.getSellerPosts(req.session.user._id);
+        res.send(sellerPosts);
+    } catch(err) {
+        next(err);
     }
 });
 
-// Clear cart
-router.delete('/', function (req, res, next) {
-    let response = SellerPostsService.clearCart();
-    console.log(response);
-    res.send(response);
+// Delete seller post
+router.delete('/:id', async function (req, res, next) {
+    try {
+        if (!req.session.user) {
+            return res.status(401).send("Unauthorized");
+        }
+        const { id } = req.params;
+        if (await SellerPostsService.deleteSellerPost(req.session.user._id, id)) {
+            res.send({ id });
+        } else {
+            res.status(404).send("Error deleting post");
+        }
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Edit seller post
+router.patch('/:_id', async function (req, res, next) {
+    try {
+        const post = await SellerPostsService.updatePost(req.params._id, req.body);
+        res.send(post);
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

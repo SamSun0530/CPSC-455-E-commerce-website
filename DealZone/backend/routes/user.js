@@ -7,7 +7,6 @@ const verifySession = require('../middleware/session');
 router.use(verifySession);
 /* User login */
 router.post('/login', function (req, res, next) {
-    console.log(req.body);
     const { email, password } = req.body;
     UserService.authUser(email, password).then(async (user_id) => {
         if (user_id) {
