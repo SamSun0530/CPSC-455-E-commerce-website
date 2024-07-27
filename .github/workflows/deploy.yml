@@ -24,7 +24,7 @@ jobs:
         node-version: '16'
     - name: Install dependencies
       run: npm install
-      working-directory: .DealZone/backend
+      working-directory: DealZone/backend
       
     - name: Deploy
       env: 
