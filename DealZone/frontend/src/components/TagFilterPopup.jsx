@@ -3,9 +3,8 @@ import { IconButton } from '@mui/material';
 import { Clear as ClearIcon, Check as CheckIcon } from '@mui/icons-material';
 import '../css/TagFilterPopup.css';
 
-const TagFilterPopup = ({ tags, onClose, onConfirm }) => {
-  //TODO: filter by the selected tags upon confirmation
-  const [selectedTags, setSelectedTags] = useState([]);
+const TagFilterPopup = ({ tags, selected, onClose, onConfirm }) => {
+  const [selectedTags, setSelectedTags] = useState(selected);
 
   const toggleTag = (tag) => {
     setSelectedTags((prevSelectedTags) =>
@@ -15,10 +14,16 @@ const TagFilterPopup = ({ tags, onClose, onConfirm }) => {
     );
   };
 
-  //TODO
   const handleConfirm = () => {
+    onConfirm(selectedTags);
+    // alert(selectedTags.join("\n"));
     onClose();
   };
+
+  const handleClear = () => {
+    setSelectedTags([]);
+    onClose();
+  }
 
   return (
     <div className="tag-filter-popup">
@@ -26,7 +31,7 @@ const TagFilterPopup = ({ tags, onClose, onConfirm }) => {
         <IconButton onClick={handleConfirm} className="confirm-btn">
           <CheckIcon />
         </IconButton>
-        <IconButton onClick={onClose} className="close-btn">
+        <IconButton onClick={handleClear} className="close-btn">
           <ClearIcon />
         </IconButton>
       </div>

@@ -32,8 +32,8 @@ const deleteFromPostsList = async (id) => {
 	return response.json();
 }
 
-const queryPostsList = async (query) => {
-	const response = await fetch(`http://localhost:3000/posts?q=${query}`, {
+const queryPostsList = async (query, tags) => {
+	const response = await fetch(`http://localhost:3000/posts?q=${query}&tags=${encodeURIComponent(JSON.stringify(tags))}`, {
 		method: 'GET',
 		credentials: 'include'
 	});

@@ -6,9 +6,21 @@ const verifySession = require('../middleware/session');
 router.use(verifySession);
 // Get posts
 router.get('/', async function (req, res, next) {
+    console.log(req.query)
     const query = req.query.q || "";
+    let tags = req.query.tags || [];
+    // let tags = JSON.stringify(req.query.tags);
+    if (tags) {
+        try {
+            tags = JSON.parse(tags);
+            // console.log(tags)
+        } catch (err) {
+            console.error("Error in JSON.parse(tags): ", err);
+            tags = null;
+        }
+    }
     try {
-        const listings = await PostsService.getListings(query);
+        const listings = await PostsService.getListings(query, tags);
         res.send(listings);
     } catch (err) {
         console.error("Error in getting listings: ", err);
