@@ -15,13 +15,18 @@ jobs:
     permissions:
       deployments: write
     steps:
-      - uses: actions/checkout@v2.3.5
-      - uses: ubc-cpsc455-2024S/project-10_tech_titans@p5
-        with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          clear_cache: true
-          wait_deploy: true
-          github_deployment: true
-          deployment_environment: 'production'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Install dependencies
+      run: npm install
+      working-directory: .DealZone/backend
+      
+    - name: Deploy
+      env: 
+        deploy_url: ${{ secrets.RENDER_API_KEY }}
+      run: |
+        curl "$deploy_url"
