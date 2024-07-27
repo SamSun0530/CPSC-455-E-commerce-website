@@ -19,7 +19,7 @@ export const authUserAsync = createAsyncThunk(
     authActions.LOG_IN,
     async ({ email, password }) => {
         const { success, session } = await AuthService.authUser(email, password);
-        document.cookie = `sessionToken=${session.session_token}; SameSite=Strict; path=/`;
+        document.cookie = `sessionToken=${session.session_token}; SameSite=None; path=/`;
         // expires=${new Date(session.expires_on).toUTCString()};
         if (success) {
             return { success };
