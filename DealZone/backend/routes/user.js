@@ -12,6 +12,11 @@ router.post('/login', function (req, res, next) {
         if (user_id) {
             const session = await SessionService.createSession(user_id);
             console.log('returning login true');
+            res.cookie('sessionToken', session.session_token, {
+                sameSite: 'none',
+                secure: true,
+                path: '/',
+            });
             return res.send({ success: true, session });
         } else {
             console.log('returning login false');
