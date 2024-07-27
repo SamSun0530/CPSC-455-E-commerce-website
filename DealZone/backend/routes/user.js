@@ -13,7 +13,7 @@ router.post('/login', function (req, res, next) {
             const session = await SessionService.createSession(user_id);
             console.log('returning login true');
             res.cookie('sessionToken', session.session_token, {
-                sameSite: 'none',
+                sameSite: 'None',
                 secure: true,
                 path: '/',
             });
