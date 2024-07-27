@@ -1,19 +1,16 @@
 const getCart = async () => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch('http://localhost:3000/cart', {
         method: 'GET',
-        headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+        credentials: 'include'
     });
     return response.json();
 };
 
 const addToCart = async (item) => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch('http://localhost:3000/cart', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'session-token': sessionStorage.getItem('sessionToken')
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(item),
         credentials: 'include'
@@ -27,22 +24,21 @@ const addToCart = async (item) => {
 };
 
 const deleteFromCart = async (id) => {
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/cart/${id}`, {
+    const response = await fetch(`http://localhost:3000/cart/${id}`, {
         method: 'DELETE',
-        headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
         credentials: 'include'
     });
-    return response.json();
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg)
+    }
+    return data;
 }
 
 const clearCart = async () => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch('http://localhost:3000/cart', {
         method: 'DELETE',
-        headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
         credentials: 'include'
     });
     return response.json();
