@@ -18,7 +18,7 @@ var app = express();
 app.use(cors({
     origin: 'https://project-10-tech-titans-1.onrender.com', //'http://localhost:5173',
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'session-token'],
     credentials: true
 }));
 app.use(logger('dev'));
