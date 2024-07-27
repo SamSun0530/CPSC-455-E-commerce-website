@@ -16,7 +16,7 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v3
-      - uses: ubc-cpsc455-2024S/project-10_tech_titans/p5
+      - uses: ubc-cpsc455-2024S/project-10_tech_titans@p5
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
