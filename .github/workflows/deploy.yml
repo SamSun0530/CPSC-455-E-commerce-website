@@ -15,7 +15,7 @@ jobs:
     permissions:
       deployments: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2.3.5
       - uses: ubc-cpsc455-2024S/project-10_tech_titans@p5
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }}
