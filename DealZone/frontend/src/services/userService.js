@@ -1,5 +1,5 @@
 const getUser = async (id) => {
-    const response = await fetch(`http://localhost:3000/users/${id}`, {
+    const response = await fetch(`https://project-10-tech-titans.onrender.com/users/${id}`, {
         method: 'GET',
         credentials: 'include'
     });
@@ -7,7 +7,7 @@ const getUser = async (id) => {
 };
 
 const updateUser = async (id, data) => {
-    const response = await fetch(`http://localhost:3000/users/${id}`, {
+    const response = await fetch(`https://project-10-tech-titans.onrender.com/users/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

@@ -1,5 +1,5 @@
 const getWishlist = async () => {
-	const response = await fetch('http://localhost:3000/wishlist', {
+	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
 		method: 'GET',
 		credentials: 'include'
 	});
@@ -7,7 +7,7 @@ const getWishlist = async () => {
 };
 
 const addToWishlist = async (item) => {
-	const response = await fetch('http://localhost:3000/wishlist', {
+	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ const addToWishlist = async (item) => {
 };
 
 const deleteFromWishlist = async (id) => {
-	const response = await fetch(`http://localhost:3000/wishlist/${id}`, {
+	const response = await fetch(`https://project-10-tech-titans.onrender.com/wishlist/${id}`, {
 		method: 'DELETE',
 		credentials: 'include'
 	});
@@ -37,7 +37,7 @@ const deleteFromWishlist = async (id) => {
 }
 
 const clearWishlist = async () => {
-	const response = await fetch('http://localhost:3000/wishlist', {
+	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
 		method: 'DELETE',
 		credentials: 'include'
 	});

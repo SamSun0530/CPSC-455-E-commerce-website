@@ -1,5 +1,5 @@
 const checkSession = async () => {
-    const response = await fetch('http://localhost:3000/session', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/session', {
         method: 'GET',
         credentials: 'include'
     });
@@ -8,7 +8,7 @@ const checkSession = async () => {
 }
 
 const authUser = async (email, password) => {
-    const response = await fetch('http://localhost:3000/user/login', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ const authUser = async (email, password) => {
 }
 
 const registerUser = async (username, email, phone_number, password) => {
-    const response = await fetch('http://localhost:3000/user/register', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/user/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

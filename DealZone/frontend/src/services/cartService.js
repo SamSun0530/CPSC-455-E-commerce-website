@@ -1,5 +1,5 @@
 const getCart = async () => {
-    const response = await fetch('http://localhost:3000/cart', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
         method: 'GET',
         credentials: 'include'
     });
@@ -7,7 +7,7 @@ const getCart = async () => {
 };
 
 const addToCart = async (item) => {
-    const response = await fetch('http://localhost:3000/cart', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ const addToCart = async (item) => {
 };
 
 const deleteFromCart = async (id) => {
-    const response = await fetch(`http://localhost:3000/cart/${id}`, {
+    const response = await fetch(`https://project-10-tech-titans.onrender.com/cart/${id}`, {
         method: 'DELETE',
         credentials: 'include'
     });
@@ -32,7 +32,7 @@ const deleteFromCart = async (id) => {
 }
 
 const clearCart = async () => {
-    const response = await fetch('http://localhost:3000/cart', {
+    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
         method: 'DELETE',
         credentials: 'include'
     });
