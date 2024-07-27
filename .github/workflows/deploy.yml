@@ -1,0 +1,39 @@
+name: deploy
+
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Deploy to Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          # Install Render CLI
+          curl -fsSL https://render.com/static/cli/render -o /usr/local/bin/render
+          chmod +x /usr/local/bin/render
+          
+          # Deploy to Render
+          render deploy --service-id srv-cqihiq2j1k6c739f1sgg --branch p5
