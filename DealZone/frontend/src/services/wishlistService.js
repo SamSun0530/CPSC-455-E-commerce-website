@@ -1,5 +1,7 @@
+import SERVER_URL from '../../config';
+
 const getWishlist = async () => {
-	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
+	const response = await fetch(SERVER_URL + '/wishlist', {
 		method: 'GET',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -10,7 +12,7 @@ const getWishlist = async () => {
 };
 
 const addToWishlist = async (item) => {
-	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
+	const response = await fetch(SERVER_URL + '/wishlist', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -28,7 +30,7 @@ const addToWishlist = async (item) => {
 };
 
 const deleteFromWishlist = async (id) => {
-	const response = await fetch(`https://project-10-tech-titans.onrender.com/wishlist/${id}`, {
+	const response = await fetch(`${SERVER_URL}/wishlist/${id}`, {
 		method: 'DELETE',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -44,7 +46,7 @@ const deleteFromWishlist = async (id) => {
 }
 
 const clearWishlist = async () => {
-	const response = await fetch('https://project-10-tech-titans.onrender.com/wishlist', {
+	const response = await fetch(SERVER_URL + '/wishlist', {
 		method: 'DELETE',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')

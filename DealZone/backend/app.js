@@ -16,7 +16,7 @@ var sellerPostsRouter = require('./routes/sellerPosts');
 
 var app = express();
 app.use(cors({
-    origin: 'https://project-10-tech-titans-1.onrender.com', //'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'session-token'],
     credentials: true

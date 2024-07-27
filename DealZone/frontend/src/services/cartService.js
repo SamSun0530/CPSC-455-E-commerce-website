@@ -1,5 +1,7 @@
+import SERVER_URL from '../../config';
+
 const getCart = async () => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch(SERVER_URL + '/cart', {
         method: 'GET',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -9,7 +11,7 @@ const getCart = async () => {
 };
 
 const addToCart = async (item) => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch(SERVER_URL + '/cart', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ const addToCart = async (item) => {
 };
 
 const deleteFromCart = async (id) => {
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/cart/${id}`, {
+    const response = await fetch(`${SERVER_URL}/cart/${id}`, {
         method: 'DELETE',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -38,7 +40,7 @@ const deleteFromCart = async (id) => {
 }
 
 const clearCart = async () => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/cart', {
+    const response = await fetch(SERVER_URL + '/cart', {
         method: 'DELETE',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')

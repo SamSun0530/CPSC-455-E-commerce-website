@@ -1,5 +1,7 @@
+import SERVER_URL from '../../config';
+
 const getSellerPost = async () => {
-    const response = await fetch('https://project-10-tech-titans.onrender.com/sellerPosts', {
+    const response = await fetch(SERVER_URL + '/sellerPosts', {
         method: 'GET',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -10,7 +12,7 @@ const getSellerPost = async () => {
 };
 
 const deleteSellerPost = async (id) => {
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/sellerPosts/${id}`, {
+    const response = await fetch(`${SERVER_URL}/sellerPosts/${id}`, {
         method: 'DELETE',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -22,7 +24,7 @@ const deleteSellerPost = async (id) => {
 };
 
 const updateSellerPost = async (updatedMember) => { 
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/sellerPosts/${updatedMember._id}`,{
+    const response = await fetch(`${SERVER_URL}/sellerPosts/${updatedMember._id}`,{
         method: 'PATCH',
         credentials: 'include',
         headers: {

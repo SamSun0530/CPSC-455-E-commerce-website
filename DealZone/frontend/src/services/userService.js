@@ -1,5 +1,7 @@
+import SERVER_URL from '../../config';
+
 const getUser = async (id) => {
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/users/${id}`, {
+    const response = await fetch(`${SERVER_URL}/users/${id}`, {
         method: 'GET',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -10,7 +12,7 @@ const getUser = async (id) => {
 };
 
 const updateUser = async (id, data) => {
-    const response = await fetch(`https://project-10-tech-titans.onrender.com/users/${id}`, {
+    const response = await fetch(`${SERVER_URL}/users/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -1,5 +1,7 @@
+import SERVER_URL from '../../config';
+
 const getPostsList = async () => {
-	const response = await fetch('https://project-10-tech-titans.onrender.com/posts', {
+	const response = await fetch(SERVER_URL + '/posts', {
 		method: 'GET',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -10,7 +12,7 @@ const getPostsList = async () => {
 };
 
 const addToPostsList = async (item) => {
-	const response = await fetch('https://project-10-tech-titans.onrender.com/posts', {
+	const response = await fetch(SERVER_URL + '/posts', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -28,7 +30,7 @@ const addToPostsList = async (item) => {
 };
 
 const deleteFromPostsList = async (id) => {
-	const response = await fetch(`https://project-10-tech-titans.onrender.com/posts/${id}`, {
+	const response = await fetch(`${SERVER_URL}/posts/${id}`, {
 		method: 'DELETE',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')
@@ -40,7 +42,7 @@ const deleteFromPostsList = async (id) => {
 }
 
 const queryPostsList = async (query, tags) => {
-	const response = await fetch(`https://project-10-tech-titans.onrender.com/posts?q=${query}&tags=${encodeURIComponent(JSON.stringify(tags))}`, {
+	const response = await fetch(`${SERVER_URL}/posts?q=${query}&tags=${encodeURIComponent(JSON.stringify(tags))}`, {
 		method: 'GET',
 		headers: {
             'session-token': sessionStorage.getItem('sessionToken')
