@@ -6,7 +6,7 @@ import { queryPostsListAsync } from '../thunks/postsListThunk';
 import TagFilterPopup from './TagFilterPopup';
 
 const SearchBar = ({ onSearch }) => {
-    const tags = ['Electronics', 'Kitchen', 'Toys', 'Clothes', 'Pet Supplies', 'Furniture', 'Footwear', 'Miscellaneous']; // TODO: Remove when there are tags to fetch
+    const tags = ['Electronics', 'Free', 'Kitchen', 'Toys', 'Clothes', 'Pet Supplies', 'Furniture', 'Footwear', 'Miscellaneous']; // TODO: Remove when there are tags to fetch
     const [query, setQuery] = useState('');
     const [showTagFilterPopup, setShowTagFilterPopup] = useState(false);
     const [selectedTags, setSelectedTags] = useState([]);
@@ -39,6 +39,11 @@ const SearchBar = ({ onSearch }) => {
 
     const handleConfirmTags = (tags) => {
         setSelectedTags(tags);
+        const searchCriteria = {
+            query: query,
+            tags: tags
+        }
+        dispatch(queryPostsListAsync(searchCriteria));
         // alert(tags);
     }
 
