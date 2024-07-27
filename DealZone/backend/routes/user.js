@@ -16,6 +16,7 @@ router.post('/login', function (req, res, next) {
                 sameSite: 'None',
                 secure: true,
                 path: '/',
+                domain: 'project-10-tech-titans.onrender.com'
             });
             return res.send({ success: true, session });
         } else {
