@@ -1,30 +1,76 @@
 const Cart = require('../db/models/cart');
+const Listings = require('../db/models/listing');
 
-const getCart = async (userId) => {
-    return await Cart.find({ user_id: userId });
-};
+const getCartListings = async (cart) => {
+    const ids = cart.items
+    return await Listings.find({ _id: { $in: ids } })
+}
 
-const addToCart = async (item) => {
-    const existingItem = await Cart.findOne({ user_id: item.user_id, title: item.title });
-    if (existingItem) {
-        throw new Error('Item already in cart');
+
+const getCart = async (user_id) => {
+
+    const cart = await Cart.findOne({ user_id: user_id });
+    if (cart) {
+        return await getCartListings(cart);
+    } else {
+        const new_cart = new Cart({
+            user_id: user_id,
+            items: []
+        })
+        await new_cart.save();
+        return await getCartListings(new_cart)
     }
-    if (item._id) {
-        delete item._id;
+
+
+}
+
+//
+const addToCart = async (listing, user_id = null) => {
+    const listing_id = listing._id;
+    const cart = await Cart.findOne({ user_id: user_id });
+    if (cart) {
+        if (!cart.items.find(id => id === listing_id)) {
+            await Cart.findOneAndUpdate(
+                { user_id: user_id },
+                { $push: { items: listing_id } }
+            );
+            return await Listings.findOne({ _id: listing_id })
+        }
+    } else {
+        await new Cart({
+            user_id: user_id,
+            items: [listing_id]
+        }).save()
+        return await Listings.findOne({ _id: listing_id })
     }
-    const newItem = new Cart(item);
-    await newItem.save();
-    return newItem;
+
+}
+
+//
+const deleteFromCart = async (listing_id, user_id) => {
+
+    const cart = await Cart.findOne({ user_id: user_id });
+    const item = cart.items.find(item_id => item_id === listing_id);
+    if (item) {
+        const updatedItems = cart.items.filter(item_id => item_id !== listing_id);
+        await Cart.findOneAndUpdate(
+            { user_id: user_id },
+            { $set: { items: updatedItems } }
+        );
+        return listing_id;
+    }
+
+
 };
 
-const deleteFromCart = async (userId, itemId) => {
-    const result = await Cart.findOneAndDelete({ _id: itemId, user_id: userId });
-    return result !== null;
-};
+//
+const clearCart = async (user_id = null) => {
+    return await Cart.findOneAndUpdate(
+        { user_id: user_id },
+        { $set: { items: [] } }
+    );
 
-const clearCart = async (userId) => {
-    await Cart.deleteMany({ user_id: userId });
-    return true;
+
 };
 
 module.exports = {
