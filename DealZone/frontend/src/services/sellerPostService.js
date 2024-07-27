@@ -1,6 +1,9 @@
 const getSellerPost = async () => {
     const response = await fetch('https://project-10-tech-titans.onrender.com/sellerPosts', {
         method: 'GET',
+        headers: {
+            'session-token': sessionStorage.getItem('sessionToken')
+        },
         credentials: 'include'
     });
     return response.json();
@@ -9,6 +12,9 @@ const getSellerPost = async () => {
 const deleteSellerPost = async (id) => {
     const response = await fetch(`https://project-10-tech-titans.onrender.com/sellerPosts/${id}`, {
         method: 'DELETE',
+        headers: {
+            'session-token': sessionStorage.getItem('sessionToken')
+        },
         credentials: 'include'
     });
 
@@ -21,6 +27,7 @@ const updateSellerPost = async (updatedMember) => {
         credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
+          'session-token': sessionStorage.getItem('sessionToken')
         },
         body: JSON.stringify(updatedMember)
     });
