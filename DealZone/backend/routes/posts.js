@@ -10,7 +10,7 @@ router.get('/', async function (req, res, next) {
     const query = req.query.q || "";
     let tags = req.query.tags || [];
     // let tags = JSON.stringify(req.query.tags);
-    if (tags) {
+    if (tags && tags.length) {
         try {
             tags = JSON.parse(tags);
             // console.log(tags)

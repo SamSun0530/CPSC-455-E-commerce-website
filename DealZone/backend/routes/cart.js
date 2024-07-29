@@ -34,7 +34,7 @@ router.delete('/:id', async function (req, res, next) {
     if (req.session) {
         const { id } = req.params;
         if (await CartService.deleteFromCart(id, req.session.user._id)) {
-            return res.send(JSON.stringify(id));
+            return res.send({id});
         }
         else {
             return res.status(404).send("Specified cart item not found");
