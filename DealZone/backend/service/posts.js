@@ -16,8 +16,8 @@ async function getListings(query, tags) {
     return listings;
 }
 
-const addListing = async (title, description, image, price, posted_on, user_id) => {
-    await Listing.create({ title, description, image, price, posted_on, user_id });
+const addListing = async (title, description, image, price, posted_on, user_id, tags) => {
+    await Listing.create({ title, description, image, price, posted_on, user_id, tags });
 }
 
 module.exports = {

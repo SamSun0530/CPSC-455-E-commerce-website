@@ -19,20 +19,28 @@ const AddPost = () => {
         dispatch(getTagsAsync());
     }, [dispatch]);
 
-    const handleTagAddition = async (tag) => {
-        try {
-            setNewTags([...newTags, tag]);
-            setSelectedTags([...selectedTags, { tag }]);
-        } catch (error) {
-            console.error('Error adding new tag:', error);
-        }
+    const handleTagAddition = (tag) => {
+        console.log("tag addition: ", tag);
+        setNewTags([...newTags, { tag }]);
+        setSelectedTags([...selectedTags, { tag }]);
     };
 
-    const handleSubmit = async (e) => {
+    const handleTagRemoval = (tagToRemove) => {
+        console.log("tag removal: ", tagToRemove);
+        setNewTags(newTags.filter(tag => tag.tag !== tagToRemove.tag));
+        setSelectedTags(selectedTags.filter(tag => tag.tag !== tagToRemove.tag));
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
 
+        const allSelectedTags = selectedTags.map(tag => tag.tag);
+        const finalTags = [...new Set(allSelectedTags)];
+
+        console.log('final tags: ', finalTags);
         if (newTags.length > 0) {
-            dispatch(addTagAsync(newTags));
+            const newTagsToAdd = newTags.map(tag => tag.tag);
+            dispatch(addTagAsync(newTagsToAdd));
         }
 
         const newListing = {
@@ -40,9 +48,10 @@ const AddPost = () => {
             desc,
             image,
             price: parseFloat(price),
-            tags: selectedTags.map(tag => tag.tag)
+            tags: finalTags
         };
 
+        console.log("new: ", newListing);
         dispatch(addToPostsListAsync(newListing));
         setTitle('');
         setDesc('');
@@ -137,6 +146,7 @@ const AddPost = () => {
                                             variant="outlined"
                                             label={option.tag}
                                             {...tagProps}
+                                            onDelete={() => handleTagRemoval(option)}
                                         />
                                     );
                                 })

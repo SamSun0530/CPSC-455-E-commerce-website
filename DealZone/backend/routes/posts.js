@@ -33,11 +33,12 @@ router.post('/', async function (req, res, next) {
         if (!req.session.user) {
             return res.status(401).send("Unauthorized");
         }
-        const {title, desc, image, price} = req.body;
+        console.log("posts req.body ", req.body);
+        const {title, desc, image, price, tags} = req.body;
         const posted_on = new Date();
         const user_id = req.session.user._id;
     
-        await PostsService.addListing(title, desc, image, price, posted_on, user_id);
+        await PostsService.addListing(title, desc, image, price, posted_on, user_id, tags);
         res.status(201).send();
     } catch (err) {
         console.error("error adding new listing: ", err);
