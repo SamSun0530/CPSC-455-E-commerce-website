@@ -51,8 +51,8 @@ const SearchBar = ({ onSearch }) => {
     }
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" my={2} position="relative">
-            <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+        <Box display="flex" justifyContent="center" alignItems="center" my={2} width="100%">
+            <Box display="flex" justifyContent="center" alignItems="center" width="100%" maxWidth={600}>
                 <TextField
                     variant="outlined"
                     placeholder="Search by Post Heading..."
