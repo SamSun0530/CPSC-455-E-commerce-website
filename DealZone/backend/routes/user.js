@@ -24,7 +24,7 @@ router.post('/login', function (req, res, next) {
             return res.status(401).send({ success: false });
         }
     }).catch((err) => {
-        console.log(err);
+        console.log("User error: ", err);
         return res.status(500).send("Encountered error");
     });
 });
@@ -39,7 +39,7 @@ router.post('/register', function (req, res, next) {
             return res.status(400).send({ created: false });
         }
     }).catch((err) => {
-        console.log(err);
+        console.log("User error: ", err);
         return res.status(500).send("Encountered error");
     })
 });

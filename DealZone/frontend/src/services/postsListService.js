@@ -37,7 +37,6 @@ const deleteFromPostsList = async (id) => {
         },
 		credentials: 'include'
 	});
-	console.log(response.json)
 	return response.json();
 }
 

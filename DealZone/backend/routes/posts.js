@@ -6,7 +6,7 @@ const verifySession = require('../middleware/session');
 router.use(verifySession);
 // Get posts
 router.get('/', async function (req, res, next) {
-    console.log(req.query)
+    console.log("query: ", req.query);
     const query = req.query.q || "";
     let tags = req.query.tags || [];
     // let tags = JSON.stringify(req.query.tags);
