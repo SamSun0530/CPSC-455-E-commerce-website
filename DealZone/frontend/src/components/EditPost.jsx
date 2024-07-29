@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, IconButton, Typography } from '@mui/material';
+import { Box, Button, TextField, IconButton, Typography, Autocomplete, Chip } from '@mui/material';
 import { Edit as EditIcon, Save as SaveIcon, Cancel as CancelIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import { addTagAsync, getTagsAsync } from '../thunks/tagsThunk';
+import { useDispatch, useSelector } from 'react-redux';
 import '../css/sellerView.css'
 
 const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const [editableFields, setEditableFields] = useState({});
     const [editingField, setEditingField] = useState(null);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [newTags, setNewTags] = useState([]);
+    const tags = useSelector((state) => state.tags.items);
+    const dispatch = useDispatch();
 
     if (!post) return null;
+
+    useEffect(() => {
+        dispatch(getTagsAsync());
+    }, [dispatch]);
 
     useEffect(() => {
         if (post) {
@@ -17,6 +27,7 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                 image: post.image,
                 price: post.price,
             });
+            setSelectedTags(post.tags.map(tag => ({ tag })));
         }
     }, [post]);
 
@@ -32,7 +43,14 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
     };
 
     const handleSaveClick = async () => {
-        await onSave({ ...post, ...editableFields });
+        const allSelectedTags = selectedTags.map(tag => tag.tag);
+        const finalTags = [...new Set(allSelectedTags)];
+        await onSave({ ...post, ...editableFields, tags: finalTags });
+        if (newTags.length > 0) {
+            const newTagsToAdd = newTags.map(tag => tag.tag);
+            dispatch(addTagAsync(newTagsToAdd));
+        }
+        setEditingField(null);
     };
 
     const handleCancelClick = () => {
@@ -41,6 +59,18 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
 
     const handleDeleteClick = () => {
         onDelete(post._id);
+    };
+
+    const handleTagAddition = (tag) => {
+        console.log("tag addition: ", tag);
+        setNewTags([...newTags, { tag }]);
+        setSelectedTags([...selectedTags, { tag }]);
+    };
+
+    const handleTagRemoval = (tagToRemove) => {
+        console.log("tag removal: ", tagToRemove);
+        setNewTags(newTags.filter(tag => tag.tag !== tagToRemove.tag));
+        setSelectedTags(selectedTags.filter(tag => tag.tag !== tagToRemove.tag));
     };
 
     return (
@@ -73,6 +103,50 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                             )}
                         </Box>
                     ))}
+                    <Autocomplete
+                            multiple
+                            options={tags}
+                            getOptionLabel={(option) => option.tag}
+                            value={selectedTags}
+                            onChange={(event, newValue, reason) => {
+                                if (newValue.length <= 3) {
+                                    if (reason === 'createOption') {
+                                        const lastTag = newValue[newValue.length - 1];
+                                        if (lastTag && !tags.some(tag => tag.tag === lastTag)) {
+                                            handleTagAddition(lastTag);
+                                        } else {
+                                            setSelectedTags(newValue);
+                                        }
+                                    } else {
+                                        setSelectedTags(newValue);
+                                    }
+                                }
+                            }}
+                            filterSelectedOptions
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="outlined"
+                                    label="Tags"
+                                    placeholder="Select or add 3 tags"
+                                />
+                            )}
+                            renderTags={(value, getTagProps) =>
+                                value.map((option, index) => {
+                                    const { key, ...tagProps } = getTagProps({ index });
+                                    return (
+                                        <Chip
+                                            key={key}
+                                            variant="outlined"
+                                            label={option.tag}
+                                            {...tagProps}
+                                            onDelete={() => handleTagRemoval(option)}
+                                        />
+                                    );
+                                })
+                            }
+                            freeSolo
+                        />
                     <Box display="flex" justifyContent="space-between" mt={2}>
                         <Button variant="contained" color="primary" onClick={handleSaveClick}>
                             Save All
