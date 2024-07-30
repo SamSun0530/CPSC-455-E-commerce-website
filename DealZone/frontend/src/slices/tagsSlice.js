@@ -19,7 +19,6 @@ const tagsSlice = createSlice({
             .addCase(getTagsAsync.fulfilled, (state, action) => {
                 state.fetchTags = REQUEST_STATE.FULFILLED;
                 state.items = action.payload;
-                console.log("fetched tags: ", state.items);
             })
             .addCase(getTagsAsync.rejected, (state, action) => {
                 state.fetchTags = REQUEST_STATE.REJECTED;

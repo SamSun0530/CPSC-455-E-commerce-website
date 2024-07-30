@@ -59,8 +59,8 @@ export default function SellerView() {
                 <Box mt={4}>
                     <Grid container spacing={3}>
                         {sellerPosts.map((post, index) => (
-                            <Grid item xs={12} sm={6} md={4} lg={3} key={index} onClick={() => handlePostClick(post)}>
-                                <Post key={post._id} post={post} />
+                            <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                                <Post key={post._id} post={post} onClick={() => handlePostClick(post)} />
                             </Grid>
                         ))}
                     </Grid>

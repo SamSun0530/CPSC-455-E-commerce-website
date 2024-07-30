@@ -8,6 +8,7 @@ import '../css/sellerView.css'
 const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const [editableFields, setEditableFields] = useState({});
     const [editingField, setEditingField] = useState(null);
+    const [editingTags, setEditingTags] = useState(false); // State for Tags field edit mode
     const [selectedTags, setSelectedTags] = useState([]);
     const [newTags, setNewTags] = useState([]);
     const tags = useSelector((state) => state.tags.items);
@@ -51,10 +52,12 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
             dispatch(addTagAsync(newTagsToAdd));
         }
         setEditingField(null);
+        setEditingTags(false); // Exit Tags edit mode on save
     };
 
     const handleCancelClick = () => {
         setEditingField(null);
+        setEditingTags(false); // Exit Tags edit mode on cancel
     };
 
     const handleDeleteClick = () => {
@@ -103,7 +106,19 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                             )}
                         </Box>
                     ))}
-                    <Autocomplete
+                    <Box display="flex" alignItems="center">
+                        <TextField
+                            label="Tags"
+                            value={selectedTags.map(tag => tag.tag).join(', ')}
+                            fullWidth
+                            disabled={!editingTags} // Disable Tags field if not in edit mode
+                        />
+                        <IconButton onClick={() => setEditingTags(!editingTags)}>
+                            <EditIcon />
+                        </IconButton>
+                    </Box>
+                    {editingTags && (
+                        <Autocomplete
                             multiple
                             options={tags}
                             getOptionLabel={(option) => option.tag}
@@ -147,6 +162,7 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                             }
                             freeSolo
                         />
+                    )}
                     <Box display="flex" justifyContent="space-between" mt={2}>
                         <Button variant="contained" color="primary" onClick={handleSaveClick}>
                             Save All
