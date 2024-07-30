@@ -51,13 +51,13 @@ const SearchBar = ({ onSearch }) => {
     }
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center" my={2} width="100%">
-            <Box display="flex" justifyContent="center" alignItems="center" width="100%" maxWidth={600}>
+        <Box display="flex" flexDirection="column" alignItems="center" my={2}  position="relative">
+            <Box display="flex" justifyContent="center" alignItems="center" mb={2}width="100%" maxWidth={1000}>
                 <TextField
                     variant="outlined"
                     placeholder="Search by Post Heading..."
                     fullWidth
-                    sx={{ maxWidth: 600, mr: 1 }}
+                    sx={{ maxWidth: 700, mr: 1 }}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
