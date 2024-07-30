@@ -3,7 +3,6 @@ var router = express.Router();
 const PostsService = require('../service/posts');
 const verifySession = require('../middleware/session');
 
-router.use(verifySession);
 // Get posts
 router.get('/', async function (req, res, next) {
     console.log(req.query)
@@ -27,6 +26,18 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+router.get('/:listing_id', async function (req, res, next) {
+    const { listing_id } = req.params;
+    try {
+        const listing = await PostsService.getListing(listing_id);
+        res.send(listing);
+    } catch (err) {
+        console.error("Error in getting individual listing: ", err);
+    }
+});
+
+
+router.use(verifySession);
 // Add new post
 router.post('/', async function (req, res, next) {
     try {

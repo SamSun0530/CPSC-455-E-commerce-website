@@ -10,6 +10,14 @@ export const getPostsListAsync = createAsyncThunk(
 	}
 );
 
+export const getIndividualListingAsync = createAsyncThunk(
+	postsListActions.GET_INDIVIDUAL_POST,
+	async (id) => {
+		const response = await postsListService.getIndividualListing(id);
+		return response;
+	}
+);
+
 export const addToPostsListAsync = createAsyncThunk(
 	postsListActions.ADD_POST,
 	async (value) => {

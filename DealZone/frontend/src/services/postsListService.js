@@ -3,13 +3,16 @@ import SERVER_URL from '../../config';
 const getPostsList = async () => {
 	const response = await fetch(SERVER_URL + '/posts', {
 		method: 'GET',
-		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
-		credentials: 'include'
 	});
 	return response.json();
 };
+
+const getIndividualListing = async (id) => {
+	const response = await fetch(SERVER_URL + '/posts/' + id, {
+		method: 'GET',
+	});
+	return response.json();
+}
 
 const addToPostsList = async (item) => {
 	const response = await fetch(SERVER_URL + '/posts', {
@@ -54,6 +57,7 @@ const queryPostsList = async (query, tags) => {
 
 export default {
 	getPostsList,
+	getIndividualListing,
 	addToPostsList,
 	deleteFromPostsList,
 	queryPostsList

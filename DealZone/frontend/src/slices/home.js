@@ -53,5 +53,4 @@ const homeSlice = createSlice({
     }
 });
 
-export const { addListing } = homeSlice.actions;
 export default homeSlice.reducer;

@@ -48,7 +48,12 @@ const WishlistPage = () => {
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {item.name}
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
+                                    <Typography variant="body2" color="textSecondary" component="p"
+                                        sx={{
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            whiteSpace: 'nowrap',
+                                        }}>
                                         {item.description}
                                     </Typography>
                                     <Typography variant="h6" color="textPrimary" sx={{ mt: 2 }}>

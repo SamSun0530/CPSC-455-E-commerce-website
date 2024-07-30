@@ -54,6 +54,7 @@ export default function CheckOutDetailForm() {
         const form = document.getElementById('checkout-form');
         if (form.checkValidity()) {
             console.log(formData);
+            // call purchase API here
         } else {
             const invalidElements = form.querySelectorAll(':invalid');
             if (invalidElements.length > 0) {

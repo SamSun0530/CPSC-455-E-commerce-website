@@ -45,7 +45,7 @@ function IndividualListingWrapper() {
     const { productId } = useParams();
     const item = items.find((i) => i._id == productId);
   
-    return item ? <IndividualListingPage item={item} /> : <div>Item not found </div>;
+    return <IndividualListingPage post={item} />;
   }
   
 export default App;

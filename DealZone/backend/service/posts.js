@@ -16,11 +16,16 @@ async function getListings(query, tags) {
     return listings;
 }
 
+const getListing = async (listing_id) => {
+    return await Listing.findById(listing_id);
+}
+
 const addListing = async (title, description, image, price, posted_on, user_id) => {
     await Listing.create({ title, description, image, price, posted_on, user_id });
 }
 
 module.exports = {
     getListings,
+    getListing,
     addListing
 };

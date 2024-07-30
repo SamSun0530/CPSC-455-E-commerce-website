@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Navbar from '../components/Navbar';
 import '../css/IndividualListingPage.css';
 import { addToWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
-export const IndividualListingPage = ({ item }) => {
+import { useParams } from 'react-router-dom';
+import { getIndividualListingAsync } from '../thunks/postsListThunk';
+export const IndividualListingPage = ({post}) => {
+    const { productId } = useParams();
     const dispatch = useDispatch();
     const cartError = useSelector(state => state.cart.error);
+    let items = useSelector(state => state.individualPost.item);
+    if (post) {
+        items = [post];
+    }
+    
+    useEffect(() => {
+        dispatch(getIndividualListingAsync(productId));
+    }, []);
 
     const handleAddToCart = () => {
         dispatch(addToCartAsync(item));
@@ -19,7 +30,8 @@ export const IndividualListingPage = ({ item }) => {
     return (
         <>
             <Navbar />
-            <div className="product-container">
+            {items.map((item) => (
+            <div className="product-container" key={item._id}>
                 <div className="product-image-container">
                     <img src={item.image} alt="Item" />
                     {item.images && item.images.length > 0 && (
@@ -51,6 +63,7 @@ export const IndividualListingPage = ({ item }) => {
                     </button>
                 </div>
             </div>
+            ))}
         </>
     );
 };
