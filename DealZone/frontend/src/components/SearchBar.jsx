@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField, IconButton } from '@mui/material';
 import { Search as SearchIcon, FilterList as FilterListIcon, Clear as ClearIcon } from '@mui/icons-material';
 import { queryPostsListAsync } from '../thunks/postsListThunk';
 import TagFilterPopup from './TagFilterPopup';
+import { getTagsAsync } from '../thunks/tagsThunk';
 
 const SearchBar = ({ onSearch }) => {
-    const tags = ['Electronics', 'Free', 'Kitchen', 'Toys', 'Clothes', 'Pet Supplies', 'Furniture', 'Footwear', 'Miscellaneous']; // TODO: Remove when there are tags to fetch
+    const tags = useSelector((state) => state.tags.items);    
     const [query, setQuery] = useState('');
     const [showTagFilterPopup, setShowTagFilterPopup] = useState(false);
     const [selectedTags, setSelectedTags] = useState([]);
+    
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getTagsAsync());
+    }, []);
 
     const handleSearch = () => {
         const searchCriteria = {

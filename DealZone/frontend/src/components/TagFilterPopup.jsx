@@ -37,13 +37,13 @@ const TagFilterPopup = ({ tags, selected, onClose, onConfirm, onClearTags }) => 
           <ClearIcon />
         </IconButton>
       </div>
-      {tags.map((tag, index) => (
+      {tags.map((tagObject, index) => (
         <div
           key={index}
-          className={`tag ${selectedTags.includes(tag) ? 'selected' : ''}`}
-          onClick={() => toggleTag(tag)}
+          className={`tag ${selectedTags.includes(tagObject.tag) ? 'selected' : ''}`}
+          onClick={() => toggleTag(tagObject.tag)}
         >
-          {tag}
+          {tagObject.tag}
         </div>
       ))}
     </div>
