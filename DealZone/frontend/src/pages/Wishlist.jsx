@@ -42,11 +42,11 @@ const WishlistPage = () => {
                                     component="img"
                                     height="140"
                                     image={item.image}
-                                    alt={item.name}
+                                    alt={item.title}
                                 />
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {item.name}
+                                        {item.title}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p"
                                         sx={{

@@ -19,7 +19,7 @@ export const IndividualListingPage = ({post}) => {
         dispatch(getIndividualListingAsync(productId));
     }, []);
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (item) => {
         dispatch(addToCartAsync(item));
     };
 
@@ -50,7 +50,7 @@ export const IndividualListingPage = ({post}) => {
                     </p>
                     <button
                         className='add-to-cart-button'
-                        onClick={handleAddToCart}
+                        onClick={() => handleAddToCart(item)}
                     >
                         Add to Cart
                     </button>
