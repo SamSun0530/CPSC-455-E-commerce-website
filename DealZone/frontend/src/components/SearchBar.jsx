@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField, IconButton } from '@mui/material';
-import { Search as SearchIcon, FilterList as FilterListIcon, Clear as ClearIcon } from '@mui/icons-material';
+import { Search as SearchIcon, FilterList as FilterListIcon, Clear as ClearIcon, SwapVert as SwapVertIcon } from '@mui/icons-material';
 import { queryPostsListAsync } from '../thunks/postsListThunk';
 import TagFilterPopup from './TagFilterPopup';
 import { getTagsAsync } from '../thunks/tagsThunk';
@@ -76,6 +76,9 @@ const SearchBar = ({ onSearch }) => {
                 </IconButton>
                 <IconButton color="primary" onClick={toggleTagFilterPopup}>
                     <FilterListIcon />
+                </IconButton>
+                <IconButton color="primary">
+                    <SwapVertIcon />
                 </IconButton>
             </Box>
             {showTagFilterPopup && <TagFilterPopup tags={tags} selected={selectedTags} onClose={toggleTagFilterPopup} onConfirm={handleConfirmTags} onClearTags={handleClearTags} />}
