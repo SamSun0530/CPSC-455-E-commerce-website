@@ -13,6 +13,7 @@ var cartRouter = require('./routes/cart');
 var wishlistRouter = require('./routes/wishlist');
 var postsRouter = require('./routes/posts');
 var sellerPostsRouter = require('./routes/sellerPosts');
+var tagsRouter = require('./routes/tags');
 
 var app = express();
 app.use(cors({
@@ -34,5 +35,6 @@ app.use('/cart', cartRouter);
 app.use('/wishlist', wishlistRouter);
 app.use('/posts', postsRouter);
 app.use('/sellerPosts', sellerPostsRouter);
+app.use('/tags', tagsRouter);
 
 module.exports = app;

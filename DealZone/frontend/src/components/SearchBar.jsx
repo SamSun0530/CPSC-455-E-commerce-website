@@ -13,7 +13,6 @@ const SearchBar = ({ onSearch }) => {
     const dispatch = useDispatch();
 
     const handleSearch = () => {
-        // alert(selectedTags.join("\n"));
         const searchCriteria = {
             query: query,
             tags: selectedTags
@@ -29,8 +28,13 @@ const SearchBar = ({ onSearch }) => {
 
     const handleClear = () => {
         setQuery('');
-        setSelectedTags([]);
+        handleClearTags();
         dispatch(queryPostsListAsync({ query: '', tags: [] }));
+    }
+
+    const handleClearTags = () => {
+        setSelectedTags([]);
+        dispatch(queryPostsListAsync({ query: query, tags: [] }));
     }
 
     const toggleTagFilterPopup = () => {
@@ -44,12 +48,11 @@ const SearchBar = ({ onSearch }) => {
             tags: tags
         }
         dispatch(queryPostsListAsync(searchCriteria));
-        // alert(tags);
     }
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center" my={2} position="relative">
-            <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+        <Box display="flex" justifyContent="center" alignItems="center" my={2} width="100%">
+            <Box display="flex" justifyContent="center" alignItems="center" width="100%" maxWidth={600}>
                 <TextField
                     variant="outlined"
                     placeholder="Search by Post Heading..."
@@ -69,7 +72,7 @@ const SearchBar = ({ onSearch }) => {
                     <FilterListIcon />
                 </IconButton>
             </Box>
-            {showTagFilterPopup && <TagFilterPopup tags={tags} selected = {selectedTags} onClose={toggleTagFilterPopup} onConfirm={handleConfirmTags} />}
+            {showTagFilterPopup && <TagFilterPopup tags={tags} selected={selectedTags} onClose={toggleTagFilterPopup} onConfirm={handleConfirmTags} onClearTags={handleClearTags} />}
         </Box>
     );
 };

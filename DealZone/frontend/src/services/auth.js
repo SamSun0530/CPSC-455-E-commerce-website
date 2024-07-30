@@ -8,7 +8,7 @@ const checkSession = async () => {
         },
         credentials: 'include'
     });
-    console.log(response);
+    console.log("auth resp: ", response);
     return response.json();
 }
 

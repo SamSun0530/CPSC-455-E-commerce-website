@@ -18,7 +18,7 @@ const LoginForm = () => {
         e.preventDefault();
         console.log('login button form', email, password);
         dispatch(authUserAsync({email, password}));
-        console.log(document.cookie);
+        console.log("login cookie: ", document.cookie);
         setEmail('');
         setPassword('');
     };

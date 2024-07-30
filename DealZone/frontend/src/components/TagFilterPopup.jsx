@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
 import { Clear as ClearIcon, Check as CheckIcon } from '@mui/icons-material';
 import '../css/TagFilterPopup.css';
 
-const TagFilterPopup = ({ tags, selected, onClose, onConfirm }) => {
+const TagFilterPopup = ({ tags, selected, onClose, onConfirm, onClearTags }) => {
   const [selectedTags, setSelectedTags] = useState(selected);
+
+  useEffect(() => { setSelectedTags(selected)}, [selected]);
 
   const toggleTag = (tag) => {
     setSelectedTags((prevSelectedTags) =>
@@ -16,12 +18,12 @@ const TagFilterPopup = ({ tags, selected, onClose, onConfirm }) => {
 
   const handleConfirm = () => {
     onConfirm(selectedTags);
-    // alert(selectedTags.join("\n"));
     onClose();
   };
 
   const handleClear = () => {
     setSelectedTags([]);
+    onClearTags();
     onClose();
   }
 

@@ -2,12 +2,18 @@ import React from 'react';
 import '../css/CartItem.css';
 import { useDispatch } from 'react-redux';
 import { deleteFromCartAsync } from '../thunks/cartThunk';
+import { addToWishlistAsync } from '../thunks/wishlistThunk'
 
 const CartItem = ({ cartItem }) => {
     const dispatch = useDispatch();
 
     const handleRemove = () => {
         dispatch(deleteFromCartAsync(cartItem._id));
+    };
+
+    const handleMoveToWishlist = () => {
+        dispatch(deleteFromCartAsync(cartItem._id));
+        dispatch(addToWishlistAsync(cartItem));
     };
 
     return (
@@ -17,7 +23,7 @@ const CartItem = ({ cartItem }) => {
                 <h3>{cartItem.title}</h3>
                 <p>${cartItem.price}</p>
                 <button onClick={handleRemove} className="cart-item-button delete">Remove</button>
-                <button className="cart-item-button move">Move to Wishlist</button>
+                <button onClick={handleMoveToWishlist} className="cart-item-button move">Move to Wishlist</button>
             </div>
         </div>
     );
