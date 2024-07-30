@@ -10,14 +10,14 @@
 
 .checkout-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin: 20px 0 0 0;
 }
 
 .checkout-info {
     display: flex;
     width: 60%;
-    margin: 0 0 0 10px;
+    margin: 0 0 20px 10px;
     padding: 0 0 0 10px;
     background-color: #ffffff;
 }
@@ -41,7 +41,24 @@
 }
 
 .cart-total li .price {
-    margin-left: auto;
+    text-align: right;
+}
+
+.cart-total li .item_title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    width: 80%;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.cart-total li .item_title:hover {
+    text-emphasis-color: blue;
+}
+
+#subtotal {
+    margin: 0 0 10px 0;
 }
 
 #checkoutButton {

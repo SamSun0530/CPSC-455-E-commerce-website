@@ -1,19 +1,97 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     TextField, Select, MenuItem, InputLabel, FormControl, Grid, Typography,
     Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCartAsync } from '../thunks/cartThunk';
 
 
 export default function CheckOutDetailForm() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const blankState = {
+        firstname: "", lastname: "", email: "", street: "", city: "",
+        state_province: "", country: "", postal_code: "", card_number: "", cvc: "",
+        month: "", year: "", card_postal_code: ""
+    };
+    const cartItems = useSelector(state => state.cart.items);
+    const [formData, setFormData] = useState(blankState);
+    const [shippingExpanded, setShippingExpanded] = useState(true);
+    const [paymentExpanded, setPaymentExpanded] = useState(false);
+
+    const subtotal = cartItems.reduce((total, item) => total + item.price, 0);
+    const tax = parseFloat((subtotal * 0.12).toFixed(2));
+    const total =  subtotal + tax;
+
+    useEffect(() => {
+        console.log('fetching cart');
+        dispatch(getCartAsync());
+    }, []);
+
+    const handleFormInputChange = (event) => {
+        const { name, value } = event.target;
+        if (name === 'card_number') {
+            const cleanedValue = value.replace(/\D/g, '');
+
+            const formattedValues = cleanedValue.slice(0, 16).match(/.{1,4}/g);
+            let formattedValue
+            if (formattedValues) {
+                formattedValue = formattedValues.join('-');
+            } else {
+                formattedValue = '';
+            }
+
+            setFormData((prevFormData) => ({ ...prevFormData, [name]: formattedValue }));
+        } else {
+            setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+        }
+    };
+
+    const handlePurchase = (event) => {
+        const form = document.getElementById('checkout-form');
+        if (form.checkValidity()) {
+            console.log(formData);
+        } else {
+            const invalidElements = form.querySelectorAll(':invalid');
+            if (invalidElements.length > 0) {
+                const firstInvalidElement = invalidElements[0];
+                const lastInvalidElement = invalidElements[invalidElements.length - 1];
+                if (['firstname', 'lastname', 'email', 'street', 'city', 'state_province', 'country', 'postal_code'].includes(firstInvalidElement.getAttribute('name'))) {
+                    setShippingExpanded(true);
+                } else {
+                    setPaymentExpanded(true);
+                }
+                if (['card_number', 'cvc', 'month', 'year', 'card_postal_code'].includes(lastInvalidElement.getAttribute('name'))) {
+                    setPaymentExpanded(true);
+                }
+            }
+            setTimeout(() => {
+                form.reportValidity();
+            }, 300);
+        }
+    }
+
+    const handleCartItemClick = (listing_id) => {
+        navigate(`/listings/${listing_id}`);
+    }
+
+    const handleAccordionChange = (panel) => (event, isExpanded) => {
+        if (panel === 'shipping') {
+            setShippingExpanded(shippingExpanded ? false : true);
+        } else {
+            setPaymentExpanded(paymentExpanded ? false : true);
+        }
+    };
 
     return (
         <>
             <div className='checkout-container'>
                 <div className='checkout-info'>
-                    <form>
-                        <Accordion defaultExpanded>
+                    <form id='checkout-form'>
+                        <Accordion expanded={shippingExpanded} onChange={handleAccordionChange('shipping')}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="shipping-content"
@@ -31,6 +109,7 @@ export default function CheckOutDetailForm() {
                                             label="First Name"
                                             fullWidth
                                             autoComplete="given-name"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -41,6 +120,7 @@ export default function CheckOutDetailForm() {
                                             label="Last Name"
                                             fullWidth
                                             autoComplete="family-name"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -51,6 +131,7 @@ export default function CheckOutDetailForm() {
                                             label="Email"
                                             fullWidth
                                             autoComplete="email"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -61,6 +142,7 @@ export default function CheckOutDetailForm() {
                                             label="Street Address"
                                             fullWidth
                                             autoComplete="street-address"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -71,6 +153,7 @@ export default function CheckOutDetailForm() {
                                             label="City"
                                             fullWidth
                                             autoComplete="address-level2"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -81,18 +164,21 @@ export default function CheckOutDetailForm() {
                                             label="State/Province"
                                             fullWidth
                                             autoComplete="address-level1"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <FormControl fullWidth>
                                             <InputLabel id="country-label">Country</InputLabel>
                                             <Select
+                                                required
                                                 labelId="country-label"
                                                 id="country"
                                                 name="country"
                                                 defaultValue=""
                                                 label="Country"
                                                 autoComplete="country-name"
+                                                onChange={handleFormInputChange}
                                             >
                                                 <MenuItem value="">
                                                     <em>Select a Country</em>
@@ -110,13 +196,14 @@ export default function CheckOutDetailForm() {
                                             label="Postal Code"
                                             fullWidth
                                             autoComplete="postal-code"
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                 </Grid>
                             </AccordionDetails>
                         </Accordion>
 
-                        <Accordion style={{ marginTop: '2rem' }}>
+                        <Accordion style={{ marginTop: '2rem' }} expanded={paymentExpanded} onChange={handleAccordionChange('payment')}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="payment-content"
@@ -132,9 +219,11 @@ export default function CheckOutDetailForm() {
                                             id="card_number"
                                             name="card_number"
                                             label="Card Number"
+                                            value={formData.card_number}
                                             fullWidth
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             // autoComplete='cc-number'
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={3}>
@@ -146,6 +235,7 @@ export default function CheckOutDetailForm() {
                                             fullWidth
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             // autoComplete='cc-csc'
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={3}>
@@ -155,7 +245,9 @@ export default function CheckOutDetailForm() {
                                             name="month"
                                             label="Month"
                                             fullWidth
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             // autoComplete='cc-exp-month'
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={3}>
@@ -165,7 +257,9 @@ export default function CheckOutDetailForm() {
                                             name="year"
                                             label="Year"
                                             fullWidth
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             // autoComplete='cc-exp-year'
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -176,6 +270,7 @@ export default function CheckOutDetailForm() {
                                             label="Postal Code"
                                             fullWidth
                                             autoComplete='postal-code'
+                                            onChange={handleFormInputChange}
                                         />
                                     </Grid>
                                 </Grid>
@@ -186,25 +281,27 @@ export default function CheckOutDetailForm() {
                 <div className='cart-total'>
                     <h3>Cart Total</h3>
                     <ul>
-                        <li>
-                            <p>Product 1</p>
-                            <p className='price'>$40</p>
+                        {cartItems.map(item => (
+                            <li key={item._id}>
+                                <p className='item_title' onClick={() => handleCartItemClick(item._id)}>{item.title}</p>
+                                <p className='price'>${item.price}</p>
+                            </li>
+                        ))}
+                        <li id='subtotal'>
+                            <p><b>Subtotal</b></p>
+                            <p><b>${subtotal}</b></p>
                         </li>
                         <li>
-                            <p>Product 2</p>
-                            <p className='price'>$90</p>
+                            <p>Tax (12%)</p>
+                            <p>${tax}</p>
                         </li>
                         <li>
-                            <p>Tax</p>
-                            <p className='price'>$10</p>
-                        </li>
-                        <li>
-                            <p>Total</p>
-                            <p className='price'>$140</p>
+                            <p><b>Total</b></p>
+                            <p><b>${total}</b></p>
                         </li>
 
                     </ul>
-                    <button id='checkoutButton' className="button" type="submit">Purchase</button>
+                    <button id='checkoutButton' className="button" type="submit" onClick={handlePurchase}>Purchase</button>
                     <Link to='/cart'><button id='cancelCheckoutButton' className="button" type="submit">Cancel</button></Link>
                 </div>
             </div>
