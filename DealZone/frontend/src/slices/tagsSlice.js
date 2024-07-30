@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './util';
 import { getTagsAsync, addTagAsync } from '../thunks/tagsThunk';
 
-const homeSlice = createSlice({
+const tagsSlice = createSlice({
     name: 'tags',
     initialState: {
         items: [],
@@ -40,5 +40,4 @@ const homeSlice = createSlice({
     }
 });
 
-export const { addListing } = homeSlice.actions;
-export default homeSlice.reducer;
+export default tagsSlice.reducer;
