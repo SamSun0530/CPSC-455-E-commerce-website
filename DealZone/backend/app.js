@@ -14,6 +14,7 @@ var wishlistRouter = require('./routes/wishlist');
 var postsRouter = require('./routes/posts');
 var sellerPostsRouter = require('./routes/sellerPosts');
 var tagsRouter = require('./routes/tags');
+var purchaseHistoryRouter = require('./routes/purchaseHistory');
 
 var app = express();
 app.use(cors({
@@ -36,5 +37,6 @@ app.use('/wishlist', wishlistRouter);
 app.use('/posts', postsRouter);
 app.use('/sellerPosts', sellerPostsRouter);
 app.use('/tags', tagsRouter);
+app.use('/purchase_history', purchaseHistoryRouter);
 
 module.exports = app;
