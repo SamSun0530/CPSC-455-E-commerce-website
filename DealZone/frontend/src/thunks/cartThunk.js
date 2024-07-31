@@ -29,3 +29,10 @@ export const clearCartAsync = createAsyncThunk(
         return await cartService.clearCart();
     }
 );
+
+export const purchaseCartAsync = createAsyncThunk(
+    cartActions.PURCHASE_CART,
+    async ({cart, details}) => {
+        return await cartService.purchaseCart({cart, details});
+    }
+);

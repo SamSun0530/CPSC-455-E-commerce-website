@@ -69,13 +69,19 @@ const clearCart = async (user_id = null) => {
         { user_id: user_id },
         { $set: { items: [] } }
     );
-
-
 };
+
+const pullSoldItemsFromCart = async (idsToRemove) => {
+    await Cart.updateMany(
+        {},
+        { $pull: { items: { $in: idsToRemove } } }
+    );
+}
 
 module.exports = {
     getCart,
     addToCart,
     deleteFromCart,
-    clearCart
+    clearCart,
+    pullSoldItemsFromCart
 };

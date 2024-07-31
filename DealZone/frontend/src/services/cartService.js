@@ -45,14 +45,30 @@ const clearCart = async () => {
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
         },
-        credentials: 'include'
     });
     return response.json();
 };
+
+const purchaseCart = async ({cart, details}) => {
+    const response = await fetch(SERVER_URL + '/cart/purchase', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'session-token': sessionStorage.getItem('sessionToken')
+        },
+        body: JSON.stringify({cart, details}),
+    });
+    if (response.status === 401) {
+        const data = await response.json();
+        throw new Error(data.message);
+    }
+    return response.status;
+}
 
 export default {
     getCart,
     addToCart,
     deleteFromCart,
-    clearCart
+    clearCart,
+    purchaseCart
 };

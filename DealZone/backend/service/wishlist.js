@@ -6,7 +6,6 @@ const getWishlistListings = async (wishlist) => {
 	return await Listings.find({ _id: { $in: ids } })
 }
 
-// Returns wishlist corresponding to user.
 const getWishlist = async (user_id) => {
 	// if (user_id) {
 	const wishlist = await Wishlist.findOne({ user_id: user_id });
@@ -106,9 +105,17 @@ const clearWishlist = async (user_id = null) => {
 
 };
 
+const pullSoldItemsFromWishlist = async (idsToRemove) => {
+    await Wishlist.updateMany(
+        {},
+        { $pull: { items: { $in: idsToRemove } } }
+    );
+}
+
 module.exports = {
 	getWishlist,
 	addToWishlist,
 	deleteFromWishlist,
-	clearWishlist
+	clearWishlist,
+	pullSoldItemsFromWishlist
 };

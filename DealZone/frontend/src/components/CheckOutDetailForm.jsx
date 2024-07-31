@@ -6,7 +6,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCartAsync } from '../thunks/cartThunk';
+import { getCartAsync, purchaseCartAsync } from '../thunks/cartThunk';
+import { clearAPIStatus } from '../slices/cart';
 
 
 export default function CheckOutDetailForm() {
@@ -18,6 +19,7 @@ export default function CheckOutDetailForm() {
         month: "", year: "", card_postal_code: ""
     };
     const cartItems = useSelector(state => state.cart.items);
+    const purchaseStatus = useSelector(state => state.cart.purchaseStatus);
     const [formData, setFormData] = useState(blankState);
     const [shippingExpanded, setShippingExpanded] = useState(true);
     const [paymentExpanded, setPaymentExpanded] = useState(false);
@@ -27,9 +29,17 @@ export default function CheckOutDetailForm() {
     const total =  subtotal + tax;
 
     useEffect(() => {
+        dispatch(clearAPIStatus());
         console.log('fetching cart');
         dispatch(getCartAsync());
     }, []);
+
+    useEffect(() => {
+        if (purchaseStatus == 'success') {
+            dispatch(clearAPIStatus());
+            navigate('/purchased');
+        }
+    }, [purchaseStatus]);
 
     const handleFormInputChange = (event) => {
         const { name, value } = event.target;
@@ -54,7 +64,7 @@ export default function CheckOutDetailForm() {
         const form = document.getElementById('checkout-form');
         if (form.checkValidity()) {
             console.log(formData);
-            // call purchase API here
+            dispatch(purchaseCartAsync({cart: cartItems, details: formData}));
         } else {
             const invalidElements = form.querySelectorAll(':invalid');
             if (invalidElements.length > 0) {
@@ -222,7 +232,6 @@ export default function CheckOutDetailForm() {
                                             label="Card Number"
                                             value={formData.card_number}
                                             fullWidth
-                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             // autoComplete='cc-number'
                                             onChange={handleFormInputChange}
                                         />
@@ -304,6 +313,7 @@ export default function CheckOutDetailForm() {
                     </ul>
                     <button id='checkoutButton' className="button" type="submit" onClick={handlePurchase}>Purchase</button>
                     <Link to='/cart'><button id='cancelCheckoutButton' className="button" type="submit">Cancel</button></Link>
+                    {purchaseStatus && purchaseStatus !== 'success' && <p className="p-error">{purchaseStatus}</p>}
                 </div>
             </div>
         </>

@@ -8,6 +8,7 @@ const listingSchema = new Schema({
     price: Number,
     posted_on: Date,
     user_id: String,
+    sold: Boolean,
     tags: [String]
 });
 
