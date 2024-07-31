@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography, Container, Grid } from '@mui/material';
+import { Box, Button, Typography, Container, Grid, CircularProgress } from '@mui/material';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ export default function SellerView() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const sellerPosts = useSelector((state) => state.seller.items);
+    const loading = useSelector((state) => state.seller.loading);
     const [selectedPost, setSelectedPost] = useState(null);
 
     useEffect(() => {
@@ -57,13 +58,20 @@ export default function SellerView() {
                     </Button>
                 </Box>
                 <Box mt={4}>
-                    <Grid container spacing={3}>
-                        {sellerPosts.map((post, index) => (
-                            <Grid item xs={12} sm={6} md={4} lg={3} key={index} onClick={() => handlePostClick(post)}>
-                                <Post key={post._id} post={post} />
-                            </Grid>
-                        ))}
-                    </Grid>
+                    {loading ? (
+                        <Box display="flex" justifyContent="center" alignItems="center" height="50vh">
+                            <CircularProgress />
+                            <Typography ml={2}>Loading...</Typography>
+                        </Box>
+                    ) : (
+                        <Grid container spacing={3}>
+                            {sellerPosts.map((post, index) => (
+                                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                                    <Post key={post._id} post={post} onClick={() => handlePostClick(post)} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    )}
                 </Box>
                 {selectedPost && (
                     <EditPost 
