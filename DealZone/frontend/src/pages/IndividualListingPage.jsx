@@ -7,6 +7,7 @@ import { addToCartAsync } from '../thunks/cartThunk';
 import { useParams } from 'react-router-dom';
 import { getIndividualListingAsync } from '../thunks/postsListThunk';
 import { Modal, Typography, Button, Paper } from '@mui/material';
+import LabelIcon from '@mui/icons-material/Label';
 
 export const IndividualListingPage = ({ post }) => {
     const { productId } = useParams();
@@ -49,10 +50,10 @@ export const IndividualListingPage = ({ post }) => {
             <div className="product-container" key={item._id}>
                 <div className="product-image-container">
                     <img src={item.image} alt="Item" />
-                    {item.images && item.images.length > 0 && (
-                        <div className="product-thumbnails">
-                            {item.images.map((image, index) => (
-                                <img key={index} src={image} alt={`Thumbnail ${index + 1}`} />
+                    {item.tags && item.tags.length > 0 && (
+                        <div className="product-tags"> 
+                            {item.tags.map((tag, index) => (
+                                <label key={index}>{tag}</label>
                             ))}
                         </div>
                     )}

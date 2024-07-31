@@ -6,25 +6,33 @@
     padding: 3rem;
 }
 
+.product-tags-label{
+    margin-right: 10px;
+    font-size: 16px;
+}
+
 .product-image-container {
-    max-width: 400px;
+    max-width: 800px;
 }
 
 .product-image-container img {
     max-width: 100%;
 }
 
-.product-thumbnails {
+.product-tags {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
-.product-thumbnails img {
-    width: 100px;
-    cursor: pointer;
+.product-tags label {
+    background-color: #666;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+    display: inline-block;
 }
-
 
 .product-name {
     font-size: 1.8rem;
@@ -40,6 +48,10 @@
 .product-description {
     font-size: 1rem;
     margin-bottom: 1rem;
+    max-height: 200px;
+    max-width: 800px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .color-options {
