@@ -1,7 +1,8 @@
 const Listing = require('../db/models/listing');
 
-async function getListings(query, tags) {
+async function getListings(query, tags, sortMethod, sortOrder) {
     let searchCriteria = {};
+    let sortCriteria = {};
     if (query) {
         searchCriteria.$or = [
             { title: { $regex: query, $options: 'i' } },
@@ -12,7 +13,13 @@ async function getListings(query, tags) {
     if (tags && tags.length > 0) {
         searchCriteria.tags = { $in: tags };
     }
-    const listings = await Listing.find(searchCriteria);
+    
+    if (sortMethod) {
+        sortCriteria[sortMethod] = sortOrder === 'descending' ? -1 : 1;
+    } else {
+        sortCriteria['posted_on'] = -1; // By default, sort by most recent
+    }
+    const listings = await Listing.find(searchCriteria).sort(sortCriteria);
     return listings;
 }
 

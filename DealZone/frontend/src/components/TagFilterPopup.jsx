@@ -34,7 +34,7 @@ const TagFilterPopup = ({ tags, selected, onClose, onConfirm, onClearTags }) => 
         <Box className="tag-filter-popup" p={2} boxShadow={3} position="absolute" top="100%" zIndex="modal" bgcolor="background.paper">
             <Box display="flex" justifyContent="space-between" mb={2}>
                 <IconButton onClick={handleConfirm} className="confirm-btn">
-                    <CheckIcon />
+                    <CheckIcon/>
                 </IconButton>
                 <IconButton onClick={handleClear} className="close-btn">
                     <ClearIcon />

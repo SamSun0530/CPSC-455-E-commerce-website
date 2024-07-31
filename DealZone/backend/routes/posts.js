@@ -8,6 +8,8 @@ router.get('/', async function (req, res, next) {
     console.log("query: ", req.query);
     const query = req.query.q || "";
     let tags = req.query.tags || [];
+    const sortMethod = req.query.sortMethod || "";
+    const sortOrder = req.query.sortOrder || "descending";
     // let tags = JSON.stringify(req.query.tags);
     if (tags && tags.length) {
         try {
@@ -19,7 +21,7 @@ router.get('/', async function (req, res, next) {
         }
     }
     try {
-        const listings = await PostsService.getListings(query, tags);
+        const listings = await PostsService.getListings(query, tags, sortMethod, sortOrder);
         res.send(listings);
     } catch (err) {
         console.error("Error in getting listings: ", err);
