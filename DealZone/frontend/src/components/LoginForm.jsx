@@ -62,7 +62,7 @@ const LoginForm = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    {authState.authUser === 'REJECTED' && <p style={{ color: 'red' }}>Login Failed</p>}
+                    {authState.authUser === 'REJECTED' && <p className="p-error">Login Failed</p>}
                     <button id='loginSubmitbtn' className="button" type="submit">Login</button>
 
                     <p>Not registered yet? <Link to="/register">Register</Link> with us.</p>

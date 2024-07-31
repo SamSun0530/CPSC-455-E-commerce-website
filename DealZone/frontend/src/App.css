@@ -143,3 +143,7 @@ nav a:hover {
     text-decoration: none;
     color: black;
 }
+
+.p-error {
+    color: red;
+}

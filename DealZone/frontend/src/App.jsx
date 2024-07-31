@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import Wishlist from './pages/Wishlist'
 import { useEffect } from 'react';
 import { checkSessionAsync } from './thunks/auth';
+import PurchaseSuccess from './pages/PurchaseSuccess';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const App = () => {
                     <Route path="/createListing" element={<CreateListingPage />} />
                     <Route path="/sellerView" element={<SellerView />} />
                     <Route path="/wishlist" element={<Wishlist />} />
+                    <Route path="/purchased" element={<PurchaseSuccess />} />
                 </Routes>
             </div>
         </Router>

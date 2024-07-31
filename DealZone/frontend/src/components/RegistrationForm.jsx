@@ -81,7 +81,7 @@ export default function RegistrationForm() {
 
 				<label htmlFor="password">Password *</label>
 				<input className="input" type="password" id="password" name="password" required value={formData.password} onChange={handleChange} />
-				{authState.registerUser === 'REJECTED' && <p style={{ color: 'red' }}>Registration Failed</p>}
+				{authState.registerUser === 'REJECTED' && <p className="p-error">Registration Failed</p>}
 				<button className="register-button" type="submit">Register</button>
 				<label className="required-field">* Required fields</label>
 				<p><Link to="/login">Login</Link> with existing account or continue as <Link to="/">Guest</Link>.</p>
