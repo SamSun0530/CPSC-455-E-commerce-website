@@ -61,6 +61,7 @@ export default function SellerView() {
                     {loading ? (
                         <Box display="flex" justifyContent="center" alignItems="center" height="50vh">
                             <CircularProgress />
+                            <Typography ml={2}>Loading...</Typography>
                         </Box>
                     ) : (
                         <Grid container spacing={3}>

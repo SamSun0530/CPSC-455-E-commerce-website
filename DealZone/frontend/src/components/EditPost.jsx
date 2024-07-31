@@ -3,12 +3,12 @@ import { Box, Button, TextField, IconButton, Typography, Autocomplete, Chip } fr
 import { Edit as EditIcon, Save as SaveIcon, Cancel as CancelIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { addTagAsync, getTagsAsync } from '../thunks/tagsThunk';
 import { useDispatch, useSelector } from 'react-redux';
-import '../css/sellerView.css'
+import '../css/sellerView.css';
 
 const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const [editableFields, setEditableFields] = useState({});
     const [editingField, setEditingField] = useState(null);
-    const [editingTags, setEditingTags] = useState(false); // State for Tags field edit mode
+    const [editingTags, setEditingTags] = useState(false);
     const [selectedTags, setSelectedTags] = useState([]);
     const [newTags, setNewTags] = useState([]);
     const tags = useSelector((state) => state.tags.items);
@@ -18,7 +18,7 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
 
     useEffect(() => {
         dispatch(getTagsAsync());
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (post) {
@@ -52,12 +52,12 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
             dispatch(addTagAsync(newTagsToAdd));
         }
         setEditingField(null);
-        setEditingTags(false); // Exit Tags edit mode on save
+        setEditingTags(false);
     };
 
     const handleCancelClick = () => {
         setEditingField(null);
-        setEditingTags(false); // Exit Tags edit mode on cancel
+        setEditingTags(false);
     };
 
     const handleDeleteClick = () => {
@@ -65,13 +65,11 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
     };
 
     const handleTagAddition = (tag) => {
-        console.log("tag addition: ", tag);
         setNewTags([...newTags, { tag }]);
         setSelectedTags([...selectedTags, { tag }]);
     };
 
     const handleTagRemoval = (tagToRemove) => {
-        console.log("tag removal: ", tagToRemove);
         setNewTags(newTags.filter(tag => tag.tag !== tagToRemove.tag));
         setSelectedTags(selectedTags.filter(tag => tag.tag !== tagToRemove.tag));
     };
@@ -106,17 +104,17 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                             )}
                         </Box>
                     ))}
-                    <Box display="flex" alignItems="center">
+                    {!editingTags && <Box display="flex" alignItems="center">
                         <TextField
                             label="Tags"
                             value={selectedTags.map(tag => tag.tag).join(', ')}
                             fullWidth
-                            disabled={!editingTags} // Disable Tags field if not in edit mode
+                            disabled={!editingTags}
                         />
                         <IconButton onClick={() => setEditingTags(!editingTags)}>
                             <EditIcon />
                         </IconButton>
-                    </Box>
+                    </Box>}
                     {editingTags && (
                         <Autocomplete
                             multiple

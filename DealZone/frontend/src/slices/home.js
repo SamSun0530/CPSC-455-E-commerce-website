@@ -6,6 +6,7 @@ const homeSlice = createSlice({
     name: 'home',
     initialState: {
         items: [],
+        loading: false,
         fetchPosts: REQUEST_STATE.IDLE,
         addPost: REQUEST_STATE.IDLE,
         queryPosts: REQUEST_STATE.IDLE,
@@ -15,14 +16,17 @@ const homeSlice = createSlice({
         builder
             .addCase(getPostsListAsync.pending, (state) => {
                 state.fetchPosts = REQUEST_STATE.PENDING;
+                state.loading = true;
                 state.error = null;
             })
             .addCase(getPostsListAsync.fulfilled, (state, action) => {
                 state.fetchPosts = REQUEST_STATE.FULFILLED;
+                state.loading = false;
                 state.items = action.payload;
             })
             .addCase(getPostsListAsync.rejected, (state, action) => {
                 state.fetchPosts = REQUEST_STATE.REJECTED;
+                state.loading = false;
                 state.error = action.error.message;
             })
             .addCase(addToPostsListAsync.pending, (state) => {
@@ -49,7 +53,6 @@ const homeSlice = createSlice({
                 state.queryPosts = REQUEST_STATE.REJECTED;
                 state.error = action.error;
             });
-
     }
 });
 
