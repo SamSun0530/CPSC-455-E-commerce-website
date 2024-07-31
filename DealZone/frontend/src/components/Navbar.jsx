@@ -22,7 +22,7 @@ const Navbar = () => {
         <nav>
             <Link className="navbar-brand" to="/">DealZone</Link>
             <div className="navbar-right-div">
-                <Link className="navbar-right" to="/cart">{cartIcon}Cart</Link>
+                {isLoggedIn && <Link className="navbar-right" to="/cart">{cartIcon}Cart</Link>}
                 {!isLoggedIn && <Link className="navbar-right" to="/login">Login</Link>}
                 {!isLoggedIn && <Link className="navbar-right" to="/register">Sign Up</Link>}
                 {isLoggedIn && <NavDropdown title={navBarAccountIcon} className="navbar-right navbar-icon">
