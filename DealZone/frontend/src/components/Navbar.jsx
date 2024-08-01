@@ -33,6 +33,9 @@ const Navbar = () => {
                     <NavDropdown.Item as={Link} to="/sellerView">
                         Seller View
                     </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/purchase-history">
+                        Purchase History
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLogOut}>Log Out</NavDropdown.Item>
                 </NavDropdown>}
             </div>

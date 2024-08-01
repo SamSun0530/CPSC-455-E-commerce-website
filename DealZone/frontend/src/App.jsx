@@ -15,6 +15,7 @@ import Wishlist from './pages/Wishlist'
 import { useEffect } from 'react';
 import { checkSessionAsync } from './thunks/auth';
 import PurchaseSuccess from './pages/PurchaseSuccess';
+import PurchaseHistoryPage from './pages/PurchaseHistoryPage';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const App = () => {
                     <Route path="/sellerView" element={<SellerView />} />
                     <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/purchased" element={<PurchaseSuccess />} />
+                    <Route path="/purchase-history" element={<PurchaseHistoryPage />} />
                 </Routes>
             </div>
         </Router>

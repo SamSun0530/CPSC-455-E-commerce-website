@@ -6,6 +6,7 @@ import wishlistReducer from "./slices/wishlist";
 import sellerReducer from "./slices/seller";
 import individualPostReducer from "./slices/individualListing";
 import tagsReducer from './slices/tagsSlice';
+import purchaseHistoryReducer from './slices/purchaseHistory'
 
 export const store = configureStore({
 	reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
 		wishlist: wishlistReducer,
 		seller: sellerReducer,
 		individualPost: individualPostReducer,
-		tags: tagsReducer
+		tags: tagsReducer,
+		purchaseHistory: purchaseHistoryReducer
 	}
 });
 
