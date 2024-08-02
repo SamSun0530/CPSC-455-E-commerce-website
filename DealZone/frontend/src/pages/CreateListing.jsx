@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToPostsListAsync } from '../thunks/postsListThunk';
 import { addTagAsync, getTagsAsync } from '../thunks/tagsThunk';
+import { useNavigate } from 'react-router-dom';
 
 const AddPost = () => {
     const [title, setTitle] = useState('');
@@ -14,6 +15,7 @@ const AddPost = () => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [newTags, setNewTags] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getTagsAsync());
@@ -59,6 +61,8 @@ const AddPost = () => {
         setPrice('');
         setSelectedTags([]);
         setNewTags([]);
+
+        navigate('/sellerView');
     };
 
     return (

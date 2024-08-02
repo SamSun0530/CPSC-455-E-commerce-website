@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CartItem from '../components/CartItem';
 import { Button, Typography, Box, Container, CircularProgress } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ const CartPage = () => {
     const cartItems = useSelector(state => state.cart.items);
     const loading = useSelector(state => state.cart.loading);
     const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log('fetching cart');
@@ -18,8 +19,14 @@ const CartPage = () => {
     }, [dispatch]);
 
     const handleClearCart = () => {
-        dispatch(clearCartAsync());
+        if(cartItems.length>0)
+            dispatch(clearCartAsync());
     };
+
+    const handleBuyAll = () => {
+        if(cartItems.length>0)
+            navigate('/checkout');
+    }
 
     return (
         <>
@@ -50,11 +57,9 @@ const CartPage = () => {
                     <Typography variant="h6" mb={2}>
                         Total Price: ${totalPrice.toFixed(2)}
                     </Typography>
-                    <Link to='/checkout'>
-                        <Button variant="contained" color="primary" sx={{ mx: 1 }}>
-                            Buy All Items
-                        </Button>
-                    </Link>
+                    <Button variant="contained" color="primary" onClick={handleBuyAll} sx={{ mx: 1 }}>
+                        Buy All Items
+                    </Button>
                     <Button variant="contained" color="error" onClick={handleClearCart} sx={{ mx: 1 }}>
                         Delete All Items
                     </Button>
