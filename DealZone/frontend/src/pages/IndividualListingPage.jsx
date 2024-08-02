@@ -7,7 +7,6 @@ import { addToCartAsync } from '../thunks/cartThunk';
 import { useParams } from 'react-router-dom';
 import { getIndividualListingAsync } from '../thunks/postsListThunk';
 import { Modal, Typography, Button, Paper, CircularProgress, Box } from '@mui/material';
-import LabelIcon from '@mui/icons-material/Label';
 
 export const IndividualListingPage = ({ post }) => {
     const { productId } = useParams();
@@ -72,6 +71,13 @@ export const IndividualListingPage = ({ post }) => {
                         <p className="product-description">
                             {item.description}
                         </p>
+                        {item.sold && (
+                            <div className="sold-tag">
+                                <Typography variant="h4" component="span">
+                                    SOLD
+                                </Typography>
+                            </div>
+                        )}
                         {!item.sold && <>
                             <button
                                 className='add-to-cart-button'

@@ -67,7 +67,9 @@ const markListingsAsSold = async (listingIds) => {
 }
 
 async function getSoldListings() {
-    const soldListings = await Listing.find({ sold: true });
+    const soldListings = await Listing.find({ sold: true })
+        .sort({ posted_on: -1 })
+        .limit(10);
     return soldListings;
 }
 

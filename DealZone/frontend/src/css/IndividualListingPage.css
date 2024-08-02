@@ -117,3 +117,10 @@
 .tab:hover {
     background-color: #f7f7f7;
 }
+
+.sold-tag {
+    margin-top: 20px;
+    color: red;
+    font-weight: bold;
+    font-size: 24px;
+}
