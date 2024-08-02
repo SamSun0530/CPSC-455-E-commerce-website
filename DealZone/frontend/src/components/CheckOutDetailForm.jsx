@@ -26,7 +26,7 @@ export default function CheckOutDetailForm() {
 
     const subtotal = cartItems.reduce((total, item) => total + item.price, 0);
     const tax = parseFloat((subtotal * 0.12).toFixed(2));
-    const total =  subtotal + tax;
+    const total =  (subtotal + tax).toFixed(2);
 
     useEffect(() => {
         dispatch(clearAPIStatus());
