@@ -14,7 +14,16 @@ const Post = ({ post, onClick }) => {
         <Typography variant="subtitle1" sx={{ color: 'red' }}>
           ${post.price}
         </Typography>
-        <Typography variant="h6">{post.title}</Typography>
+        <Typography 
+          variant="h6"
+          sx={{
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {post.title}
+        </Typography>
         <Typography
           variant="body2"
           color="textSecondary"
