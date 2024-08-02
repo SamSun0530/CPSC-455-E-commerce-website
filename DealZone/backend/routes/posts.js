@@ -3,6 +3,8 @@ var router = express.Router();
 const PostsService = require('../service/posts');
 const verifySession = require('../middleware/session');
 
+router.use(verifySession);
+
 // Get posts
 router.get('/', async function (req, res, next) {
     console.log("query: ", req.query);
@@ -10,11 +12,9 @@ router.get('/', async function (req, res, next) {
     let tags = req.query.tags || [];
     const sortMethod = req.query.sortMethod || "";
     const sortOrder = req.query.sortOrder || "descending";
-    // let tags = JSON.stringify(req.query.tags);
     if (tags && tags.length) {
         try {
             tags = JSON.parse(tags);
-            // console.log(tags)
         } catch (err) {
             console.error("Error in JSON.parse(tags): ", err);
             tags = null;
@@ -28,6 +28,16 @@ router.get('/', async function (req, res, next) {
     }
 });
 
+// Get Sold Posts
+router.get('/sold', async function (req, res, next) {
+    try {
+        const soldListing = await PostsService.getSoldListings();
+        res.send(soldListing);
+    } catch (err) {
+        console.error("Error in getting sold listings: ", err);
+    }
+});
+
 router.get('/:listing_id', async function (req, res, next) {
     const { listing_id } = req.params;
     try {
@@ -38,8 +48,6 @@ router.get('/:listing_id', async function (req, res, next) {
     }
 });
 
-
-router.use(verifySession);
 // Add new post
 router.post('/', async function (req, res, next) {
     try {
@@ -58,17 +66,5 @@ router.post('/', async function (req, res, next) {
     }
     
 });
-
-// TODO: delete
-// Delete a post
-// router.delete('/:id', function (req, res, next) {
-//     const { id } = req.params;
-//     if (PostsService.deletePost(Number(id))) {
-//         return res.send(id);
-//     }
-//     else {
-//         return res.status(404).send("Specified wishlist item not found");
-//     }
-// });
 
 module.exports = router;

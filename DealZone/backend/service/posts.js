@@ -4,6 +4,8 @@ const db = require('../db/db');
 async function getListings(query, tags, sortMethod, sortOrder) {
     let searchCriteria = {};
     let sortCriteria = {};
+    searchCriteria.sold = { $ne: true };
+
     if (query) {
         searchCriteria.$or = [
             { title: { $regex: query, $options: 'i' } },
@@ -64,9 +66,16 @@ const markListingsAsSold = async (listingIds) => {
     }
 }
 
+async function getSoldListings() {
+    const soldListings = await Listing.find({ sold: true });
+    console.log("sold listings: ", soldListings);
+    return soldListings;
+}
+
 module.exports = {
     getListings,
     getListing,
     addListing,
-    markListingsAsSold
+    markListingsAsSold,
+    getSoldListings
 };
