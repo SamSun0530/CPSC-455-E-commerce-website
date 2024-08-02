@@ -6,7 +6,6 @@ const getCartListings = async (cart) => {
     return await Listings.find({ _id: { $in: ids } })
 }
 
-
 const getCart = async (user_id) => {
 
     const cart = await Cart.findOne({ user_id: user_id });
@@ -24,7 +23,6 @@ const getCart = async (user_id) => {
 
 }
 
-//
 const addToCart = async (listing, user_id = null) => {
     const listing_id = listing._id;
     const cart = await Cart.findOne({ user_id: user_id });
@@ -43,10 +41,8 @@ const addToCart = async (listing, user_id = null) => {
         }).save()
         return await Listings.findOne({ _id: listing_id })
     }
-
 }
 
-//
 const deleteFromCart = async (listing_id, user_id) => {
 
     const cart = await Cart.findOne({ user_id: user_id });
@@ -59,11 +55,8 @@ const deleteFromCart = async (listing_id, user_id) => {
         );
         return listing_id;
     }
-
-
 };
 
-//
 const clearCart = async (user_id = null) => {
     return await Cart.findOneAndUpdate(
         { user_id: user_id },

@@ -11,8 +11,12 @@ export const getWishlistAsync = createAsyncThunk(
 
 export const addToWishlistAsync = createAsyncThunk(
 	wishlistActions.ADD_TO_WISHLIST,
-  async (item) => {
-    return await wishlistService.addToWishlist(item);
+  async (item, { rejectWithValue }) => {
+    try {
+      return await wishlistService.addToWishlist(item);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 

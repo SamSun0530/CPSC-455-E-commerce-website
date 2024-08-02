@@ -23,14 +23,13 @@ router.post('/', async function (req, res, next) {
     if (req.session) {
         const item = req.body;
         if (await CartService.addToCart(item, req.session.user._id)) {
-            res.send(item)
+            res.json({ success: true, item });
         } else {
-            return res.status(409).send("Item already in cart");
+            res.status(409).json({ success: false, message: "Item already in cart" });
         }
     } else {
-        res.status(401).send("Unauthorized");
+        res.status(401).json({ success: false, message: "Unauthorized" });
     }
-
 });
 
 // Delete item from cart

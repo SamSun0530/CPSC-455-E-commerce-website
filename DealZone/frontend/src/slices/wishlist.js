@@ -35,6 +35,7 @@ export const wishlistSlice = createSlice({
           .addCase(addToWishlistAsync.fulfilled, (state, action) => {
             state.addToWishlist = REQUEST_STATE.FULFILLED;
             state.items.push(action.payload);
+            state.error = null;
           })
           .addCase(addToWishlistAsync.rejected, (state, action) => {
             state.addToWishlist = REQUEST_STATE.REJECTED;

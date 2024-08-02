@@ -11,8 +11,12 @@ export const getCartAsync = createAsyncThunk(
 
 export const addToCartAsync = createAsyncThunk(
     cartActions.ADD_TO_CART,
-    async (item) => {
-        return await cartService.addToCart(item);
+    async (item, { rejectWithValue }) => {
+        try {
+            return await cartService.addToCart(item);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
 );
 

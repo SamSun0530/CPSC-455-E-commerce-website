@@ -12,21 +12,26 @@ const getWishlist = async () => {
 };
 
 const addToWishlist = async (item) => {
-	const response = await fetch(SERVER_URL + '/wishlist', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'session-token': sessionStorage.getItem('sessionToken')
-		},
-		body: JSON.stringify(item),
-		credentials: 'include'
-	});
-	const data = await response.json();
-	if (!response.ok) {
-		const errorMsg = data?.message;
-		throw new Error(errorMsg)
+	try {
+		const response = await fetch(SERVER_URL + '/wishlist', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'session-token': sessionStorage.getItem('sessionToken')
+			},
+			body: JSON.stringify(item),
+			credentials: 'include'
+		});
+		if (!response.ok) {
+			const errorData = await response.json();
+			const errorMsg = errorData.message || 'Something went wrong';
+			throw new Error(errorMsg);
+		}
+		return await response.json();
+	} catch (error) {
+		//console.error("Error adding to wishlist:", error);
+		throw error;
 	}
-	return data;
 };
 
 const deleteFromWishlist = async (id) => {

@@ -18,12 +18,12 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         clearAPIStatus: (state) => {
-            state.getCart = REQUEST_STATE.IDLE,
-            state.addToCart = REQUEST_STATE.IDLE,
-            state.deleteFromCart = REQUEST_STATE.IDLE,
-            state.clearCart = REQUEST_STATE.IDLE,
-            state.purchaseCart = REQUEST_STATE.IDLE,
-            state.purchaseStatus = null,
+            state.getCart = REQUEST_STATE.IDLE;
+            state.addToCart = REQUEST_STATE.IDLE;
+            state.deleteFromCart = REQUEST_STATE.IDLE;
+            state.clearCart = REQUEST_STATE.IDLE;
+            state.purchaseCart = REQUEST_STATE.IDLE;
+            state.purchaseStatus = null;
             state.error = null;
         },
     },
@@ -48,6 +48,7 @@ export const cartSlice = createSlice({
             .addCase(addToCartAsync.fulfilled, (state, action) => {
                 state.addToCart = REQUEST_STATE.FULFILLED;
                 state.items.push(action.payload);
+                state.error = null;
             })
             .addCase(addToCartAsync.rejected, (state, action) => {
                 state.addToCart = REQUEST_STATE.REJECTED;

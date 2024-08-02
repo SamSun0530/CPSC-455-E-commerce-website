@@ -6,13 +6,15 @@ import { addToWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
 import { useParams } from 'react-router-dom';
 import { getIndividualListingAsync } from '../thunks/postsListThunk';
-import { Modal, Typography, Button, Paper, CircularProgress, Box } from '@mui/material';
+import { Snackbar, Alert, Typography, Button, Paper, CircularProgress, Box, Modal } from '@mui/material';
 
 export const IndividualListingPage = ({ post }) => {
     const { productId } = useParams();
     const dispatch = useDispatch();
     const cartError = useSelector(state => state.cart.error);
     const [open, setOpen] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     let items = useSelector(state => state.individualPost.item);
     const loading = useSelector(state => state.individualPost.loading);
     if (post) {
@@ -28,7 +30,15 @@ export const IndividualListingPage = ({ post }) => {
             setOpen(true);
             return;
         }
-        dispatch(addToCartAsync(item));
+        dispatch(addToCartAsync(item)).then((action) => {
+            if (addToCartAsync.fulfilled.match(action)) {
+                setSnackbarMessage('Added to Cart!');
+                setSnackbarOpen(true);
+            } else if (addToCartAsync.rejected.match(action)) {
+                setSnackbarMessage(action.payload || 'Failed to add item to cart');
+                setSnackbarOpen(true);
+            }
+        });
     };
 
     const handleAddToWishlist = (item) => {
@@ -36,7 +46,15 @@ export const IndividualListingPage = ({ post }) => {
             setOpen(true);
             return;
         }
-        dispatch(addToWishlistAsync(item));
+        dispatch(addToWishlistAsync(item)).then((action) => {
+            if (addToWishlistAsync.fulfilled.match(action)) {
+                setSnackbarMessage('Added to Wishlist!');
+                setSnackbarOpen(true);
+            } else if (addToWishlistAsync.rejected.match(action)) {
+                setSnackbarMessage(action.payload || 'Failed to add item to wishlist');
+                setSnackbarOpen(true);
+            }
+        });;
     };
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -85,7 +103,6 @@ export const IndividualListingPage = ({ post }) => {
                             >
                                 Add to Cart
                             </button>
-                            {cartError && <p className="error-message">{cartError}</p>}
                             <button
                                 className='add-to-wishlist-button'
                                 onClick={() => handleAddToWishlist(item)}
@@ -96,6 +113,16 @@ export const IndividualListingPage = ({ post }) => {
                     </div>
                 </div>
                 ))}
+
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={() => setSnackbarOpen(false)}
+                >
+                    <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarMessage.includes('Failed') ? 'error' : 'success'} sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
 
                 <Modal
                     open={open}

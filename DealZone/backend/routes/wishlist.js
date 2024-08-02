@@ -18,12 +18,11 @@ router.post('/', async function (req, res, next) {
         if (await WishlistService.addToWishlist(item, req.session.user._id)) {
             res.send(item)
         } else {
-            return res.status(409).send("Item already in wishlist");
+            res.status(409).json({ success: false, message: "Item already in wishlist" });
         }
     } else {
-        res.status(401).send("Unauthorized");
+        res.status(401).json({ success: false, message: "Unauthorized" });
     }
-    // res.send(WishlistService.addToWishlist(item));
 });
 
 router.delete('/:id', async function (req, res, next) {
