@@ -55,11 +55,9 @@ const queryPostsList = async (query, tags, sortMethod, sortOrder) => {
 };
 
 const getSoldPosts = async () => {
-	console.log("Sold service frontend");
 	const response = await fetch(SERVER_URL + '/posts/sold', {
 		method: 'GET',
 	});
-	console.log("Sold res frntend serv? ", response);
 	return response.json();
 };
 

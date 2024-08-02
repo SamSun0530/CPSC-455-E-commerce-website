@@ -8,8 +8,9 @@ export default function ListingRow({ posts }) {
     const loadingSold = useSelector((state) => state.home.loadingSold);
     const navigate = useNavigate();
 
-    const handleCardClick = (postId) => {
-        navigate(`/listings/${postId}`);
+    const handleCardClick = (post) => {
+        //if(post.sold) return;
+        navigate(`/listings/${post._id}`);
     };
 
     return (
@@ -33,7 +34,7 @@ export default function ListingRow({ posts }) {
                             key={index}
                             style={{ width: 280, flex: '0 0 auto' }}
                         >
-                            <Post post={post} onClick={() => handleCardClick(post._id)} />
+                            <Post post={post} onClick={() => handleCardClick(post)} />
                         </Grid>
                     ))}
                 </Grid>
