@@ -14,7 +14,7 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const tags = useSelector((state) => state.tags.items);
     const dispatch = useDispatch();
 
-    if (!post) return null;
+    if (!post || post.sold) return null;
 
     useEffect(() => {
         dispatch(getTagsAsync());

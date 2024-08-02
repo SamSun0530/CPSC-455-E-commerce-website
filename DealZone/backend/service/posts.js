@@ -68,7 +68,6 @@ const markListingsAsSold = async (listingIds) => {
 
 async function getSoldListings() {
     const soldListings = await Listing.find({ sold: true });
-    console.log("sold listings: ", soldListings);
     return soldListings;
 }
 

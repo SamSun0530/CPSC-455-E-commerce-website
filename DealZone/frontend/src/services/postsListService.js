@@ -52,12 +52,22 @@ const queryPostsList = async (query, tags, sortMethod, sortOrder) => {
 		credentials: 'include'
 	});
 	return response.json();
-}
+};
+
+const getSoldPosts = async () => {
+	console.log("Sold service frontend");
+	const response = await fetch(SERVER_URL + '/posts/sold', {
+		method: 'GET',
+	});
+	console.log("Sold res frntend serv? ", response);
+	return response.json();
+};
 
 export default {
 	getPostsList,
 	getIndividualListing,
 	addToPostsList,
 	deleteFromPostsList,
-	queryPostsList
+	queryPostsList,
+	getSoldPosts
 };

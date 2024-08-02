@@ -16,7 +16,7 @@ const verifySession = async (req, res, next) => {
         }
     } else {
         const sessionToken = req.headers['session-token'];
-        console.log(sessionToken);
+        console.log("token: ", sessionToken);
         if (sessionToken) {
             const auth = await authSession(sessionToken);
             if (auth) {

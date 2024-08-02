@@ -96,7 +96,7 @@ export const cartSlice = createSlice({
                         break;
                     default:
                         console.log('Unrecognized purchase cart status');
-                        console.log(action.payload);
+                        console.log("payload: ", action.payload);
                 };
             })
             .addCase(purchaseCartAsync.rejected, (state, action) => {

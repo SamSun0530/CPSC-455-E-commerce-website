@@ -60,8 +60,8 @@ router.delete('/', async function (req, res, next) {
 router.post('/purchase', async function (req, res, next) {
     if (req.session) {
         const { cart, details } = req.body;
-        console.log(cart);
-        console.log(details);
+        console.log("cart: ", cart);
+        console.log("details: ", details);
 
         if (isPurchaseMethodValid({
             card_number: details.card_number,

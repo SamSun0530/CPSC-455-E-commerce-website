@@ -1,15 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { REQUEST_STATE } from './util';
-import { getPostsListAsync, addToPostsListAsync, queryPostsListAsync } from '../thunks/postsListThunk';
+import { getPostsListAsync, addToPostsListAsync, queryPostsListAsync, getSoldPostsAsync } from '../thunks/postsListThunk';
 
 const homeSlice = createSlice({
     name: 'home',
     initialState: {
         items: [],
         loading: false,
+        loadingSold: false,
+        soldItems: [],
         fetchPosts: REQUEST_STATE.IDLE,
         addPost: REQUEST_STATE.IDLE,
         queryPosts: REQUEST_STATE.IDLE,
+        fetchSoldPosts: REQUEST_STATE.IDLE,
         error: null
     },
     extraReducers: (builder) => {
@@ -52,6 +55,21 @@ const homeSlice = createSlice({
             .addCase(queryPostsListAsync.rejected, (state, action) => {
                 state.queryPosts = REQUEST_STATE.REJECTED;
                 state.error = action.error;
+            })
+            .addCase(getSoldPostsAsync.pending, (state) => {
+                state.fetchSoldPosts = REQUEST_STATE.PENDING;
+                state.loadingSold = true;
+                state.error = null;
+            })
+            .addCase(getSoldPostsAsync.fulfilled, (state, action) => {
+                state.fetchSoldPosts = REQUEST_STATE.FULFILLED;
+                state.loadingSold = false;
+                state.soldItems = action.payload;
+            })
+            .addCase(getSoldPostsAsync.rejected, (state, action) => {
+                state.fetchSoldPosts = REQUEST_STATE.REJECTED;
+                state.loadingSold = false;
+                state.error = action.error.message;
             });
     }
 });
