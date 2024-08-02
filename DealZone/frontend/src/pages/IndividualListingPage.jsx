@@ -64,19 +64,21 @@ export const IndividualListingPage = ({ post }) => {
                     <p className="product-description">
                         {item.description}
                     </p>
-                    <button
-                        className='add-to-cart-button'
-                        onClick={() => handleAddToCart(item)}
-                    >
-                        Add to Cart
-                    </button>
-                    {cartError && <p className="error-message">{cartError}</p>}
-                    <button
-                        className='add-to-wishlist-button'
-                        onClick={() => handleAddToWishlist(item)}
-                    >
-                        Add to Wishlist
-                    </button>
+                    {!item.sold && <>
+                        <button
+                            className='add-to-cart-button'
+                            onClick={() => handleAddToCart(item)}
+                        >
+                            Add to Cart
+                        </button>
+                        {cartError && <p className="error-message">{cartError}</p>}
+                        <button
+                            className='add-to-wishlist-button'
+                            onClick={() => handleAddToWishlist(item)}
+                        >
+                            Add to Wishlist
+                        </button>
+                    </>}
                 </div>
             </div>
             ))}

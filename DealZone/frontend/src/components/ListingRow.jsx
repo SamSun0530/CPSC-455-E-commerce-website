@@ -9,7 +9,6 @@ export default function ListingRow({ posts }) {
     const navigate = useNavigate();
 
     const handleCardClick = (post) => {
-        //if(post.sold) return;
         navigate(`/listings/${post._id}`);
     };
 
