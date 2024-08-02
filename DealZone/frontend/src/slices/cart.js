@@ -10,6 +10,7 @@ const initialState = {
     clearCart: REQUEST_STATE.IDLE,
     purchaseCart: REQUEST_STATE.IDLE,
     purchaseStatus: null,
+    loading: false,
     error: null
 };
 
@@ -31,14 +32,17 @@ export const cartSlice = createSlice({
         builder
             .addCase(getCartAsync.pending, (state) => {
                 state.getCart = REQUEST_STATE.PENDING;
+                state.loading = true;
                 state.error = null;
             })
             .addCase(getCartAsync.fulfilled, (state, action) => {
                 state.getCart = REQUEST_STATE.FULFILLED;
+                state.loading = false;
                 state.items = action.payload;
             })
             .addCase(getCartAsync.rejected, (state, action) => {
                 state.getCart = REQUEST_STATE.REJECTED;
+                state.loading = false;
                 state.error = action.error;
             })
             .addCase(addToCartAsync.pending, (state) => {
