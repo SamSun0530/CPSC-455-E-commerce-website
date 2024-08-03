@@ -10,6 +10,7 @@ export const authSlice = createSlice({
         registerUser: REQUEST_STATE.IDLE,
         checkSession: REQUEST_STATE.IDLE,
         logOutUser: REQUEST_STATE.IDLE,
+        loading: true,
         error: null
     },
     reducers: {
@@ -21,6 +22,9 @@ export const authSlice = createSlice({
             state.registerUser = REQUEST_STATE.IDLE,
             state.checkSession = REQUEST_STATE.IDLE,
             state.error = null;
+        },
+        finishLoading: (state) => {
+            state.loading = false;
         }
     },
     extraReducers: (builder) => {
@@ -53,15 +57,19 @@ export const authSlice = createSlice({
             .addCase(checkSessionAsync.pending, (state) => {
                 state.checkSession = REQUEST_STATE.PENDING;
                 state.error = null;
+                state.loading = true;
             })
             .addCase(checkSessionAsync.fulfilled, (state) => {
                 state.checkSession = REQUEST_STATE.FULFILLED;
                 state.isLoggedIn = true;
+                state.loading = false;
             })
             .addCase(checkSessionAsync.rejected, (state, action) => {
                 state.checkSession = REQUEST_STATE.REJECTED;
                 state.error = action.error;
-            }).addCase(logOutUserAsync.pending, (state) => {
+                state.loading = false;
+            })
+            .addCase(logOutUserAsync.pending, (state) => {
                 state.logOutUser = REQUEST_STATE.PENDING;
                 state.error = null;
                 state.isLoggedIn = false;
@@ -77,6 +85,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const { clearAPIStatus, logOut } = authSlice.actions;
+export const { clearAPIStatus, logOut, finishLoading } = authSlice.actions;
 
 export default authSlice.reducer;

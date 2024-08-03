@@ -46,14 +46,31 @@ router.post('/register', function (req, res, next) {
 router.use(verifySession);
 /* User logout */
 router.post('/logout', function (req, res, next) {
-    const user_id = req.session.user._id;
-    SessionService.removeSession(user_id).then(() => {
-        return res.send();
-    }).catch((err) => {
-        console.log("logout error", err);
-        return res.status(500).send(err);
-    });
+    if (req.session) {
+        const user_id = req.session.user._id;
+        SessionService.removeSession(user_id).then(() => {
+            return res.send();
+        }).catch((err) => {
+            console.log("logout error", err);
+            return res.status(500).send(err);
+        });
+    } else {
+        return res.status(401).send("Unauthorized");
+    }
 });
+
+router.delete('/delete', function (req, res, next) {
+    if (req.session) {
+        const user_id = req.session.user._id;
+        UserService.deleteUser(user_id).then(() => {
+            return res.send({success: true});
+        }).catch((err) => {
+            return res.status(500).send(err);
+        })
+    } else {
+        return res.status(401).send("Unauthorized");
+    }
+})
 
 
 // Get user data by email
@@ -68,7 +85,7 @@ router.get('/:email', async function (req, res, next) {
 
 // Update user data by email, no password change here. 
 // If changing password should have a separate route, and require user enter current password again
-router.put('/:email', async function (req, res, next) {
+router.patch('/:email', async function (req, res, next) {
     try {
         const user = await UserService.updateUserByEmail(req.params.email, req.body);
         res.send(user);
