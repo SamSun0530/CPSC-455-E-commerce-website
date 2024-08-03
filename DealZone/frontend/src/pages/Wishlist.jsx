@@ -4,6 +4,8 @@ import { Container, Grid, Typography, Card, CardContent, CardActions, Button, Ca
 import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
+import { truncateTitle } from '../utils/length';
+
 const WishlistPage = () => {
     const { items } = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
@@ -26,6 +28,8 @@ const WishlistPage = () => {
 
     };
 
+    const maxLength = 50;
+
     return (
         <>
             <Navbar />
@@ -46,7 +50,7 @@ const WishlistPage = () => {
                                 />
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        {item.title}
+                                        {truncateTitle(item.title, maxLength)}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary" component="p"
                                         sx={{

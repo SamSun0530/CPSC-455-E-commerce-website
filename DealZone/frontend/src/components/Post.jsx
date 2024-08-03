@@ -1,5 +1,8 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
+import { truncateTitle } from '../utils/length';
+
+const maxLength = 20;
 
 const Post = ({ post, onClick }) => {
   return (
@@ -43,7 +46,7 @@ const Post = ({ post, onClick }) => {
             whiteSpace: 'nowrap',
           }}
         >
-          {post.title}
+          {truncateTitle(post.title, maxLength)}
         </Typography>
         <Typography
           variant="body2"

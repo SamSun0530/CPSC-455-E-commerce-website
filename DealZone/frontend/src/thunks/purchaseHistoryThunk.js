@@ -5,7 +5,9 @@ import purchaseHistoryService from '../services/purchaseHistoryService';
 export const getPurchaseHistoryAsync = createAsyncThunk(
 	purchaseHistoryActions.GET_PURCHASE_HISTORY,
 	async () => {
-		return await purchaseHistoryService.getPurchaseHistory();
+		const data = await purchaseHistoryService.getPurchaseHistory();
+		console.log('Thunk fetched purchase history:', data); // Log data to verify what is received
+		return data;
 	}
 );
 

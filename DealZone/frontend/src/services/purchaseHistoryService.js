@@ -1,18 +1,19 @@
 import SERVER_URL from '../../config';
 
 const getPurchaseHistory = async () => {
-    const response = await fetch(SERVER_URL + '/purchaseHistory', {
+    const response = await fetch(SERVER_URL + '/purchase_history', {
         method: 'GET',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')
         },
-        credentials: 'include'
+        credentials: 'include',
+        cache: 'no-store' // Ensure no caching
     });
     return response.json();
 };
 
 const addToPurchaseHistory = async (item) => {
-    const response = await fetch(SERVER_URL + '/purchaseHistory', {
+    const response = await fetch(SERVER_URL + '/purchase_history', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
