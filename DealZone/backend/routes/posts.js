@@ -3,8 +3,6 @@ var router = express.Router();
 const PostsService = require('../service/posts');
 const verifySession = require('../middleware/session');
 
-router.use(verifySession);
-
 // Get posts
 router.get('/', async function (req, res, next) {
     console.log("query: ", req.query);
@@ -47,6 +45,8 @@ router.get('/:listing_id', async function (req, res, next) {
         console.error("Error in getting individual listing: ", err);
     }
 });
+
+router.use(verifySession);
 
 // Add new post
 router.post('/', async function (req, res, next) {

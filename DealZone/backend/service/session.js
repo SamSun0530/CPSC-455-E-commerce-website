@@ -33,7 +33,12 @@ const createSession = async (user_id) => {
     return session;
 };
 
+const removeSession = async (user_id) => {
+    await Session.deleteOne({ user_id });
+}
+
 module.exports = {
     authSession,
-    createSession
+    createSession,
+    removeSession
 };

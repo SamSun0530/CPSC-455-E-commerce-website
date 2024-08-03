@@ -41,3 +41,11 @@ export const registerUserAsync = createAsyncThunk(
         }
     }
 )
+
+export const logOutUserAsync = createAsyncThunk(
+    authActions.LOG_OUT,
+    async () => {
+        await AuthService.logOutUser();
+        return;
+    }
+)

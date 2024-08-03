@@ -1,18 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { PersonLinesFill, Cart } from 'react-bootstrap-icons';
-import { logOut } from '../slices/auth';
+import { logOutUserAsync } from '../thunks/auth';
 
 const Navbar = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const isLoggedIn = useSelector((state) => {
         return state.auth.isLoggedIn;
     });
 
     const handleLogOut = () => {
-        dispatch(logOut());
+        dispatch(logOutUserAsync());
+        sessionStorage.removeItem('sessionToken');
+        navigate('/');
     }
 
     const navBarAccountIcon = (<PersonLinesFill color="white" className="account-menu-icon"/>);

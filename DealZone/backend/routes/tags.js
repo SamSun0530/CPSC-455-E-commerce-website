@@ -3,7 +3,6 @@ var router = express.Router();
 const TagsService = require('../service/tags');
 const verifySession = require('../middleware/session');
 
-router.use(verifySession);
 
 // Get all tags
 router.get('/', async function (req, res, next) {
@@ -29,6 +28,7 @@ router.post('/', async function (req, res, next) {
     
 });
 
+router.use(verifySession);
 
 // Remove tags
 /*

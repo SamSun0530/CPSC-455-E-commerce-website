@@ -4,7 +4,6 @@ const UserService = require('../service/user');
 const SessionService = require('../service/session');
 const verifySession = require('../middleware/session');
 
-router.use(verifySession);
 /* User login */
 router.post('/login', function (req, res, next) {
     const { email, password } = req.body;
@@ -44,9 +43,16 @@ router.post('/register', function (req, res, next) {
     })
 });
 
+router.use(verifySession);
 /* User logout */
 router.post('/logout', function (req, res, next) {
-    // TODO set session token expiration to now OR remove session token record.
+    const user_id = req.session.user._id;
+    SessionService.removeSession(user_id).then(() => {
+        return res.send();
+    }).catch((err) => {
+        console.log("logout error", err);
+        return res.status(500).send(err);
+    });
 });
 
 // app.use(midd)

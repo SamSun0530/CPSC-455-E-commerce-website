@@ -8,7 +8,6 @@ const checkSession = async () => {
         },
         credentials: 'include'
     });
-    console.log("auth resp: ", response);
     return response.json();
 }
 
@@ -35,11 +34,18 @@ const registerUser = async (username, email, phone_number, password) => {
 }
 
 const logOutUser = async () => {
-    // TODO: send logout req to backend server.
+    const response = await fetch(SERVER_URL + '/user/logout', {
+        method: 'POST',
+        headers: {
+            'session-token': sessionStorage.getItem('sessionToken')
+        },
+    });
+    return;
 }
 
 export default {
     authUser,
     registerUser,
-    checkSession
+    checkSession,
+    logOutUser,
 }
