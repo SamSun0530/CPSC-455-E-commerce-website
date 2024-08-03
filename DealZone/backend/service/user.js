@@ -70,10 +70,8 @@ const changeUserPassword = async (id, currentPassword, newPassword) => {
     return false;
 }
 
-// TODO: need to add button to account view page
-// should verify that user is logged in.
-const deleteUser = (email) => {
-    users = users.filter(user => user.email !== email);
+const deleteUser = async (user_id) => {
+    await User.deleteOne({_id: user_id});
     return true;
 }
 
@@ -82,5 +80,5 @@ module.exports = {
     registerUser,
     changeUserPassword,
     deleteUser,
-    getUserBasic
+    getUserBasic,
 };
