@@ -61,6 +61,20 @@ export const IndividualListingPage = ({ post }) => {
 
     const handleClose = () => setOpen(false);
 
+    // If listing was posted within 24 hours, return hours elapsed; else return date in mm/dd/yy format
+    const handleDatePosted = (date) => {
+        const posted_date = new Date(date);
+        const curr = new Date();
+        const diff = curr.getTime() - posted_date.getTime();
+        const hours_diff = Math.round(diff /(1000*3600));
+        if ( hours_diff <= 24) {
+            return `${hours_diff}h ago`;
+        }
+        return `${posted_date.getMonth()}/${posted_date.getDate()}/${posted_date.getFullYear().toString().substring(2)}`;
+
+
+    }
+
     return (
         <>
             <Navbar />
@@ -86,6 +100,7 @@ export const IndividualListingPage = ({ post }) => {
                     <div className="product-details-container">
                         <h2 className='product-name'>{item.title}</h2>
                         <h3 className="product-price">${item.price}</h3>
+                        <p className="product-date">{handleDatePosted(item.posted_on)}</p>
                         <p className="product-description">
                             {item.description}
                         </p>

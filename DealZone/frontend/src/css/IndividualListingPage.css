@@ -12,7 +12,7 @@
 }
 
 .product-image-container {
-    max-width: 800px;
+    width: 500px;
 }
 
 .product-image-container img {
@@ -43,6 +43,10 @@
     font-size: 1.5rem;
     color: #666;
     margin-bottom: 0.5rem;
+}
+
+.product-date {
+    font-style: italic;
 }
 
 .product-description {
