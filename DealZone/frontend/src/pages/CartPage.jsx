@@ -24,8 +24,9 @@ const CartPage = () => {
     };
 
     const handleBuyAll = () => {
-        if(cartItems.length>0)
+        if(cartItems.length>0) {
             navigate('/checkout');
+        }
     }
 
     return (
@@ -58,10 +59,10 @@ const CartPage = () => {
                         Total Price: ${totalPrice.toFixed(2)}
                     </Typography>
                     <Button variant="contained" color="primary" onClick={handleBuyAll} sx={{ mx: 1 }}>
-                        Buy All Items
+                        Checkout
                     </Button>
                     <Button variant="contained" color="error" onClick={handleClearCart} sx={{ mx: 1 }}>
-                        Delete All Items
+                        Clear Cart
                     </Button>
                 </Box>
             </>)}
