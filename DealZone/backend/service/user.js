@@ -1,9 +1,20 @@
+const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
 
-async function getUserByEmail(email) {
+const hashPassword = async (password) => {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return hashedPassword;
+};
+
+const verifyPassword = async (password, hashedPassword) => {
+    const isSame = await bcrypt.compare(password, hashedPassword);
+    return isSame;
+};
+
+const getUserByEmail = async (email) => {
     const user = await User.findOne({ email });
     return user;
-}
+};
 
 const getUser = async (id) => {
     return await User.findById(id);
@@ -18,16 +29,16 @@ const updateUser = async (id, data) => {
 };
 
 const authUser = async (email, password) => {
-    console.log('at userService', email, password);
     const user = await getUserByEmail(email);
-    // hash password param here in future when db is implemented
-    if (user && user.password === password) {
-        console.log(`User: ${email} logged in`);
-        return user._id;
-    } else {
-        console.log(`User: ${email} login failed. No account with email or wrong password`);
-        return false;
+    if (user) {
+        const isPasswordSame = await verifyPassword(password, user.password);
+        if (isPasswordSame) {
+            console.debug(`User: ${email} logged in`);
+            return user._id;
+        }
+        console.debug(`password does not match`);
     }
+    return false;
 }
 
 const registerUser = async (username, email, phone_number, password) => {
@@ -35,24 +46,28 @@ const registerUser = async (username, email, phone_number, password) => {
         console.log(`User with ${email} already exists.`);
         return false;
     }
-    const newUser = await User.create({username, email, phone_number, password});
+    const hashedPassword = await hashPassword(password);
+    const newUser = await User.create({ username, email, phone_number, password: hashedPassword });
     console.log(`User: ${email} registered.`);
-    // here is where session token would be created and returned
     return true;
 }
 
 // even if user is already logged in, should require current and new password
-// check current password first using authUser, then if successful call this function
-const changeUserPassword = async (email, newPassword) => {
-    const user = await getUserByEmail(email);
+// check current password first, then if successful call this function
+const changeUserPassword = async (id, currentPassword, newPassword) => {
+    const user = await getUser(id);
     if (user) {
-        user.password = newPassword;
-        console.log(`User: ${email} password changed.`);
-        return true;
-    } else {
-        console.log(`User: not found ${email} not found.`);
-        return false;
+        const isPasswordMatch = await verifyPassword(currentPassword, user.password);
+        if (isPasswordMatch) {
+            const newPasswordHashed = await hashPassword(newPassword);
+            user.password = newPasswordHashed;
+            await user.save();
+            console.log(`User: ${email} password changed.`);
+            return true;
+        }
+        console.log(`user password incorrect`);
     }
+    return false;
 }
 
 // TODO: need to add button to account view page

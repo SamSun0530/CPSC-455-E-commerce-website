@@ -25,8 +25,6 @@ export default function RegistrationForm() {
 		}
 	}, [authState.registerUser]);
 
-
-	//   const dispatch = useDispatch();
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));

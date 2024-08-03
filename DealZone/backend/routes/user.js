@@ -55,7 +55,6 @@ router.post('/logout', function (req, res, next) {
     });
 });
 
-// app.use(midd)
 
 // Get user data by email
 router.get('/:email', async function (req, res, next) {
@@ -67,7 +66,8 @@ router.get('/:email', async function (req, res, next) {
     }
 });
 
-// Update user data by email
+// Update user data by email, no password change here. 
+// If changing password should have a separate route, and require user enter current password again
 router.put('/:email', async function (req, res, next) {
     try {
         const user = await UserService.updateUserByEmail(req.params.email, req.body);
