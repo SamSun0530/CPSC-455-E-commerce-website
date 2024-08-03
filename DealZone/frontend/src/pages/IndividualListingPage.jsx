@@ -54,7 +54,7 @@ export const IndividualListingPage = ({ post }) => {
                 setSnackbarMessage(action.payload || 'Failed to add item to wishlist');
                 setSnackbarOpen(true);
             }
-        });;
+        });
     };
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -66,13 +66,11 @@ export const IndividualListingPage = ({ post }) => {
         const posted_date = new Date(date);
         const curr = new Date();
         const diff = curr.getTime() - posted_date.getTime();
-        const hours_diff = Math.round(diff /(1000*3600));
-        if ( hours_diff <= 24) {
+        const hours_diff = Math.round(diff / (1000 * 3600));
+        if (hours_diff <= 24) {
             return `${hours_diff}h ago`;
         }
-        return `${posted_date.getMonth()}/${posted_date.getDate()}/${posted_date.getFullYear().toString().substring(2)}`;
-
-
+        return `${posted_date.getMonth() + 1}/${posted_date.getDate()}/${posted_date.getFullYear().toString().substring(2)}`;
     }
 
     return (
@@ -83,97 +81,98 @@ export const IndividualListingPage = ({ post }) => {
                     <CircularProgress />
                     <Typography ml={2}>Loading...</Typography>
                 </Box>
-            ) : ( 
+            ) : (
                 <>
-                {items.map((item) => (
-                <div className="product-container" key={item._id}>
-                    <div className="product-image-container">
-                        <img src={item.image} alt="Item" />
-                        {item.tags && item.tags.length > 0 && (
-                            <div className="product-tags"> 
-                                {item.tags.map((tag, index) => (
-                                    <label key={index}>{tag}</label>
-                                ))}
+                    {items.map((item) => (
+                        <div className="product-container" key={item._id}>
+                            <div className="product-image-container">
+                                <img src={item.image} alt="Item" />
                             </div>
-                        )}
-                    </div>
-                    <div className="product-details-container">
-                        <h2 className='product-name'>{item.title}</h2>
-                        <h3 className="product-price">${item.price}</h3>
-                        <p className="product-date">{handleDatePosted(item.posted_on)}</p>
-                        <p className="product-description">
-                            {item.description}
-                        </p>
-                        {item.sold && (
-                            <div className="sold-tag">
-                                <Typography variant="h4" component="span">
-                                    SOLD
-                                </Typography>
+                            <div className="product-details-container">
+                                <h2 className='product-name'>{item.title}</h2>
+                                <h3 className="product-price">${item.price}</h3>
+                                <p className="product-date">{handleDatePosted(item.posted_on)}</p>
+                                <p className="product-description">
+                                    {item.description}
+                                </p>
+                                {item.sold && (
+                                    <div className="sold-tag">
+                                        <Typography variant="h4" component="span">
+                                            SOLD
+                                        </Typography>
+                                    </div>
+                                )}
+
+                                {item.tags && item.tags.length > 0 && (
+                                    <div className="product-tags">
+                                        {item.tags.map((tag, index) => (
+                                            <label key={index}>{tag}</label>
+                                        ))}
+                                    </div>
+                                )}
+                                {!item.sold && <>
+                                    <button
+                                        className='add-to-cart-button'
+                                        onClick={() => handleAddToCart(item)}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    <button
+                                        className='add-to-wishlist-button'
+                                        onClick={() => handleAddToWishlist(item)}
+                                    >
+                                        Add to Wishlist
+                                    </button>
+                                </>}
                             </div>
-                        )}
-                        {!item.sold && <>
-                            <button
-                                className='add-to-cart-button'
-                                onClick={() => handleAddToCart(item)}
-                            >
-                                Add to Cart
-                            </button>
-                            <button
-                                className='add-to-wishlist-button'
-                                onClick={() => handleAddToWishlist(item)}
-                            >
-                                Add to Wishlist
-                            </button>
-                        </>}
-                    </div>
-                </div>
-                ))}
+                        </div>
+                    ))}
 
-                <Snackbar
-                    open={snackbarOpen}
-                    autoHideDuration={3000}
-                    onClose={() => setSnackbarOpen(false)}
-                >
-                    <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarMessage.includes('Failed') ? 'error' : 'success'} sx={{ width: '100%' }}>
-                        {snackbarMessage}
-                    </Alert>
-                </Snackbar>
+                    <Snackbar
+                        open={snackbarOpen}
+                        autoHideDuration={3000}
+                        onClose={() => setSnackbarOpen(false)}
+                    >
+                        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarMessage.includes('Failed') ? 'error' : 'success'} sx={{ width: '100%' }}>
+                            {snackbarMessage}
+                        </Alert>
+                    </Snackbar>
 
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="login-required-title"
-                    aria-describedby="login-required-description"
-                >
-                    <Paper sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 400,
-                        bgcolor: 'background.paper',
-                        border: '2px solid #000',
-                        boxShadow: 24,
-                        p: 4,
-                        borderRadius: 2,
-                        textAlign: 'center'
-                    }}>
-                        <Typography id="login-required-title" variant="h5" component="h2" gutterBottom>
-                            Login Required
-                        </Typography>
-                        <Typography id="login-required-description" sx={{ mt: 2, mb: 3 }}>
-                            Please login or sign up to continue.
-                        </Typography>
-                        <Button
-                            variant="outlined"
-                            color="secondary"
-                            onClick={handleClose}
-                            sx={{ width: '100%' }}
-                        >
-                            Okay
-                        </Button>
-                    </Paper>
-                </Modal>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="login-required-title"
+                        aria-describedby="login-required-description"
+                    >
+                        <Paper sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 400,
+                            bgcolor: 'background.paper',
+                            border: '2px solid #000',
+                            boxShadow: 24,
+                            p: 4,
+                            borderRadius: 2,
+                            textAlign: 'center'
+                        }}>
+                            <Typography id="login-required-title" variant="h5" component="h2" gutterBottom>
+                                Login Required
+                            </Typography>
+                            <Typography id="login-required-description" sx={{ mt: 2, mb: 3 }}>
+                                Please login or sign up to continue.
+                            </Typography>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                onClick={handleClose}
+                                sx={{ width: '100%' }}
+                            >
+                                Okay
+                            </Button>
+                        </Paper>
+                    </Modal>
                 </>
             )}
         </>
