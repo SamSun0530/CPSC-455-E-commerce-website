@@ -8,7 +8,7 @@ import SortPopup from './SortPopup';
 import { getTagsAsync } from '../thunks/tagsThunk';
 
 const SearchBar = () => {
-    const INITIAL_SORT = { sortMethod: 'posted_on', sortOrder: 'descending' }
+    const INITIAL_SORT = { sortMethod: 'posted_on', sortOrder: 'descending' };
     const tags = useSelector((state) => state.tags.items);    
     const [query, setQuery] = useState('');
     const [showTagFilterPopup, setShowTagFilterPopup] = useState(false);
@@ -40,13 +40,8 @@ const SearchBar = () => {
     const handleClear = () => {
         setQuery('');
         setSelectedTags([]);
-        setSortCriteria(INITIAL_SORT)
+        setSortCriteria(INITIAL_SORT);
         dispatch(queryPostsListAsync({ query: '', tags: [], sortMethod: INITIAL_SORT.sortMethod, sortOrder: INITIAL_SORT.sortOrder }));
-    };
-
-    const handleClearTags = () => {
-        setSelectedTags([]);
-        dispatch(queryPostsListAsync({ query: query, tags: [], sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder }));
     };
 
     const toggleTagFilterPopup = () => {
@@ -59,12 +54,12 @@ const SearchBar = () => {
 
     const handleConfirmTags = (tags) => {
         setSelectedTags(tags);
-        dispatch(queryPostsListAsync({query: query, tags: tags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}))
+        dispatch(queryPostsListAsync({query: query, tags: tags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}));
     };
 
     const handleConfirmSort = (sortCriteria) => {
         setSortCriteria(sortCriteria);
-        dispatch(queryPostsListAsync({query: query, tags: selectedTags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}))
+        dispatch(queryPostsListAsync({query: query, tags: selectedTags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}));
     };
 
     return (
@@ -92,8 +87,20 @@ const SearchBar = () => {
                     <SwapVertIcon />
                 </IconButton>
             </Box>
-            {showTagFilterPopup && <TagFilterPopup tags={tags} selected={selectedTags} onClose={toggleTagFilterPopup} onConfirm={handleConfirmTags} onClearTags={handleClearTags} />}
-            {showSortPopup && <SortPopup selectedMethod={sortCriteria.sortMethod} selectedOrder={sortCriteria.sortOrder} open={showSortPopup} onClose={toggleSortPopup} onConfirm={handleConfirmSort} />}
+            <TagFilterPopup
+                tags={tags}
+                selected={selectedTags}
+                onClose={toggleTagFilterPopup}
+                onConfirm={handleConfirmTags}
+                open={showTagFilterPopup}
+            />
+            <SortPopup
+                selectedMethod={sortCriteria.sortMethod}
+                selectedOrder={sortCriteria.sortOrder}
+                open={showSortPopup}
+                onClose={toggleSortPopup}
+                onConfirm={handleConfirmSort}
+            />
         </Box>
     );
 };
