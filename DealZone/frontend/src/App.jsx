@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { checkSessionAsync } from './thunks/auth';
 import { Typography, Box, CircularProgress } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { finishLoading } from './slices/auth';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,8 @@ const App = () => {
     useEffect(() => {
         if (sessionStorage.getItem('sessionToken')) {
             dispatch(checkSessionAsync());
+        } else {
+            dispatch(finishLoading());
         }
     }, []);
 

@@ -22,6 +22,9 @@ export const authSlice = createSlice({
             state.registerUser = REQUEST_STATE.IDLE,
             state.checkSession = REQUEST_STATE.IDLE,
             state.error = null;
+        },
+        finishLoading: (state) => {
+            state.loading = false;
         }
     },
     extraReducers: (builder) => {
@@ -82,6 +85,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const { clearAPIStatus, logOut } = authSlice.actions;
+export const { clearAPIStatus, logOut, finishLoading } = authSlice.actions;
 
 export default authSlice.reducer;
