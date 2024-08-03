@@ -23,7 +23,7 @@ router.post('/', async function (req, res, next) {
     if (req.session) {
         const item = req.body;
         if (await CartService.addToCart(item, req.session.user._id)) {
-            res.json({ success: true, item });
+            res.json(item);
         } else {
             res.status(409).json({ success: false, message: "Item already in cart" });
         }
