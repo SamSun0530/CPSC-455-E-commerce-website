@@ -5,10 +5,13 @@ import Navbar from '../components/Navbar';
 import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
 import { truncateTitle } from '../utils/length';
+import { useNavigate } from 'react-router-dom';
+import '../css/Wishlist.css';
 
 const WishlistPage = () => {
     const { items } = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getWishlistAsync());
@@ -25,8 +28,11 @@ const WishlistPage = () => {
     const handleMoveToCart = (item) => {
         dispatch(deleteFromWishlistAsync(item._id));
         dispatch(addToCartAsync(item));
-
     };
+
+    const handleListingClick = (listing_id) => {
+        navigate(`/listings/${listing_id}`);
+    }
 
     const maxLength = 50;
 
@@ -47,8 +53,10 @@ const WishlistPage = () => {
                                     height="140"
                                     image={item.image}
                                     alt={item.title}
+                                    onClick={() => handleListingClick(item._id)}
+                                    className="wishlist-img"
                                 />
-                                <CardContent sx={{ flexGrow: 1 }}>
+                                <CardContent className="wishlist-content" sx={{ flexGrow: 1 }} onClick={() => handleListingClick(item._id)}>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {truncateTitle(item.title, maxLength)}
                                     </Typography>

@@ -19,6 +19,11 @@
     width: 150px;
     height: 150px;
     object-fit: cover;
+    cursor: pointer;
+}
+
+.cart-item-title {
+    cursor: pointer;
 }
 
 .cart-item-details {
