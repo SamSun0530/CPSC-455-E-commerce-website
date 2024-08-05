@@ -8,6 +8,7 @@ const initialState = {
     addToWishlist: REQUEST_STATE.IDLE,
     deleteFromWishlist: REQUEST_STATE.IDLE,
     clearWishlist: REQUEST_STATE.IDLE,
+    loading: false,
     error: null
 };
 
@@ -18,14 +19,17 @@ export const wishlistSlice = createSlice({
         builder
           .addCase(getWishlistAsync.pending, (state) => {
             state.getWishlist = REQUEST_STATE.PENDING;
+            state.loading = true;
             state.error = null;
           })
           .addCase(getWishlistAsync.fulfilled, (state, action) => {
             state.getWishlist = REQUEST_STATE.FULFILLED;
+            state.loading = false;
             state.items = action.payload;
           })
           .addCase(getWishlistAsync.rejected, (state, action) => {
             state.getWishlist = REQUEST_STATE.REJECTED;
+            state.loading = false;
             state.error = action.error;
           })
           .addCase(addToWishlistAsync.pending, (state) => {

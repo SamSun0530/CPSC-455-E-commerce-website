@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Grid, Typography, Card, CardContent, CardActions, Button, CardMedia } from '@mui/material';
+import { Container, Typography, Box, CircularProgress, Button } from '@mui/material';
 import Navbar from '../components/Navbar';
-import { getWishlistAsync, clearWishlistAsync, addToWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
+import { getWishlistAsync, clearWishlistAsync, deleteFromWishlistAsync } from '../thunks/wishlistThunk';
 import { addToCartAsync } from '../thunks/cartThunk';
 import { truncateTitle } from '../utils/length';
 import { useNavigate } from 'react-router-dom';
 import '../css/Wishlist.css';
 
 const WishlistPage = () => {
-    const { items } = useSelector((state) => state.wishlist);
+    const { items, loading } = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -30,68 +30,71 @@ const WishlistPage = () => {
         dispatch(addToCartAsync(item));
     };
 
+    const handleMoveAllToCart = () => {
+        items.forEach((item) => {
+            dispatch(deleteFromWishlistAsync(item._id));
+            dispatch(addToCartAsync(item));
+        });
+    };
+
     const handleListingClick = (listing_id) => {
         navigate(`/listings/${listing_id}`);
-    }
+    };
 
     const maxLength = 50;
 
     return (
         <>
             <Navbar />
-            <Container sx={{ mt: 4 }}>
-                <Typography variant="h4" gutterBottom>
-                    Wishlist
-                </Typography>
-                <Grid container spacing={3}>
-
-                    {items.map((item) => (
-                        <Grid item key={item._id} xs={12} sm={6} md={4}>
-                            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={item.image}
-                                    alt={item.title}
-                                    onClick={() => handleListingClick(item._id)}
-                                    className="wishlist-img"
-                                />
-                                <CardContent className="wishlist-content" sx={{ flexGrow: 1 }} onClick={() => handleListingClick(item._id)}>
-                                    <Typography gutterBottom variant="h5" component="h2">
-                                        {truncateTitle(item.title, maxLength)}
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p"
-                                        sx={{
-                                            overflow: 'hidden',
-                                            textOverflow: 'ellipsis',
-                                            whiteSpace: 'nowrap',
-                                        }}>
-                                        {item.description}
-                                    </Typography>
-                                    <Typography variant="h6" color="textPrimary" sx={{ mt: 2 }}>
-                                        ${item.price}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button className="addToCartButton" size="small" color="primary" onClick={() => handleMoveToCart(item)}>
-                                        Move to cart
-                                    </Button>
-                                    <Button className="deleteFromWishlistButton" size="small" color="secondary" onClick={() => handleRemoveFromWishlist(item._id)} >
-                                        Remove
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    ))}
-
-                </Grid>
-                <Button className="clearWishlistButton" onClick={() => handleClearWishlist()}
-                    style={{
-                        backgroundColor: '#007bff',
-                        color: '#fff',
-                        padding: '0.75rem 1.5rem',
-                        marginTop: '1.5rem'
-                    }}>Clear Wishlist</Button>
+            <Container>
+                <Box textAlign="center" my={4}>
+                    <Typography variant="h4" gutterBottom>
+                        Wishlist
+                    </Typography>
+                </Box>
+                {loading ? (
+                    <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+                        <CircularProgress />
+                        <Typography ml={2}>Loading...</Typography>
+                    </Box>
+                ) : (
+                    <>
+                        <Box my={4}>
+                            <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+                                {items.map((item) => (
+                                    <div key={item._id} className="cart-item">
+                                        <img
+                                            onClick={() => handleListingClick(item._id)}
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="cart-item-image"
+                                        />
+                                        <div className="cart-item-details">
+                                            <h3 onClick={() => handleListingClick(item._id)} className="cart-item-title">
+                                                {truncateTitle(item.title, maxLength)}
+                                            </h3>
+                                            <p>${item.price}</p>
+                                            <button onClick={() => handleMoveToCart(item)} className="cart-item-button move">
+                                                Move to Cart
+                                            </button>
+                                            <button onClick={() => handleRemoveFromWishlist(item._id)} className="cart-item-button delete">
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </Box>
+                        </Box>
+                        <Box my={4} textAlign="center">
+                            <Button variant="contained" color="primary" onClick={handleMoveAllToCart} sx={{ mx: 1 }}>
+                                Move All To Cart
+                            </Button>
+                            <Button variant="contained" color="error" onClick={handleClearWishlist} sx={{ mx: 1 }}>
+                                Clear Wishlist
+                            </Button>
+                        </Box>
+                    </>
+                )}
             </Container>
         </>
     );
