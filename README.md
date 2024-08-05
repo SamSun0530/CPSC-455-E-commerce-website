@@ -1,32 +1,18 @@
 # Group 10 - DealZone
+A marketplace website for users wanting to buy and sell items. It will allow users to search, filter, and sort for items to purchase, and sellers to create sales listings. Users may add to cart, purchase, or wishlist sales listings, while sellers can edit or delete listings. Sellers can also add tags to the listings and users can filter listings based on the tags.
 
 [![deploy](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml/badge.svg)](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml)
-
-## Describe your topic/interest in about 150-200 words
-
-To be extended, a brief description for now.
-
-An e-commerce/marketplace website for users wanting to buy and sell items. It will allow users to search, filter, and sort for items to purchase, and sellers to create sales listings. Users may add to cart, purchase, or wishlist sales listings, while sellers can edit listings, and view relevant statistics. Time permitting, we may add personal recommendations to users based on user history, email notifications, and additional seller statistics.
-
-## Team Members
-
-- Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
-- Ivena Du: 4th year CS student, interested in web development and video games.
-- Sam Sun: 4th year CS student, have few experience about web design
-- Shreya Gupta: M.Eng. student in Computer Engineering, recently worked at Powerex as full stack developer.
 
 ## Task Requirements
 
 ### Minimal
-
-- Allow users to create an account
+- Allow users to create an account 
 - Allow users to login with account to allow creating, or buying sales items. Otherwise, view only
 - View list of sales posts (organized by posting date for example)
 - Create, edit, delete sales posts.
 - Purchase items (simulate payment, empty cart, mark item(s) as sold)
 
 ### Standard
-
 - Search for listing based on keyword matching of title/description
 - Sorting function in the search results (by price, by similarity, or by date)
 - Tagging mechanism for listings, and allow results to be filtered by said tags
@@ -35,10 +21,19 @@ An e-commerce/marketplace website for users wanting to buy and sell items. It wi
 - Purchase history
 
 ### Stretch
-
 - allow users to sign up for restock/discount email notifications for specific items.
 - Graphs/ visualizations of products sold, profits, etc. Seller performance insights?
 - Utilize ai-algorithm for product suggestion based on purchase or search history
+
+## Team Members
+
+- Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
+- Ivena Du: 4th year CS student, interested in web development and video games.
+- Sam Sun: 4th year CS student, have few experience about web design
+- Shreya Gupta: M.Eng. student in Computer Engineering, recently worked at Powerex as full stack developer.
+
+
+
 
 #### Task Breakdown
 
