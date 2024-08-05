@@ -14,6 +14,8 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
     const tags = useSelector((state) => state.tags.items);
     const dispatch = useDispatch();
 
+    const MAX_TITLE_LENGTH = 50;
+
     if (!post || post.sold) return null;
 
     useEffect(() => {
@@ -74,6 +76,19 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
         setSelectedTags(selectedTags.filter(tag => tag.tag !== tagToRemove.tag));
     };
 
+    const handlePriceChange = (field, value) => {
+        if (/^\d*\.?\d{0,2}$/.test(value) && value >= 0) {
+            handleChange(field, value);
+        }
+    };
+
+    const handlePriceKeyDown = (e) => {
+        if (e.key === '-' || e.key === 'e') {
+            e.preventDefault();
+        }
+    };
+
+
     return (
         <div className="popup">
             <div className="popup-inner">
@@ -84,9 +99,12 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                             <TextField
                                 label={field.charAt(0).toUpperCase() + field.slice(1)}
                                 value={editableFields[field]}
-                                onChange={(e) => handleChange(field, e.target.value)}
+                                onChange={(e) => field === 'price' ? handlePriceChange(field, e.target.value) : handleChange(field, e.target.value)}
                                 fullWidth
                                 disabled={editingField !== field}
+                                inputProps={field === 'title' ? { maxLength: MAX_TITLE_LENGTH } : {}}
+                                helperText={field === 'title' ? `${editableFields[field].length}/${MAX_TITLE_LENGTH}` : ''}
+                                onKeyDown={field === 'price' ? handlePriceKeyDown : null}
                             />
                             {editingField === field ? (
                                 <Box>
@@ -141,7 +159,7 @@ const EditPost = ({ post, onClose, onSave, onDelete }) => {
                                     {...params}
                                     variant="outlined"
                                     label="Tags"
-                                    placeholder="Select or add 3 tags"
+                                    placeholder="Select or add up to 3 tags"
                                 />
                             )}
                             renderTags={(value, getTagProps) =>
