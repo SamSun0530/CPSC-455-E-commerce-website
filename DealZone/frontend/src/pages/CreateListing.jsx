@@ -17,6 +17,8 @@ const AddPost = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const MAX_TITLE_LENGTH = 50;
+
     useEffect(() => {
         dispatch(getTagsAsync());
     }, [dispatch]);
@@ -65,6 +67,19 @@ const AddPost = () => {
         navigate('/sellerView');
     };
 
+    const handlePriceChange = (e) => {
+        const value = e.target.value;
+        if (/^\d*\.?\d{0,2}$/.test(value) && value >= 0) {
+            setPrice(value);
+        }
+    };
+
+    const handlePriceKeyDown = (e) => {
+        if (e.key === '-' || e.key === 'e') {
+            e.preventDefault();
+        }
+    };
+
     return (
         <>
             <Navbar />
@@ -81,6 +96,8 @@ const AddPost = () => {
                             margin="normal"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
+                            inputProps={{ maxLength: MAX_TITLE_LENGTH }}
+                            helperText={`${title.length}/${MAX_TITLE_LENGTH}`}
                             required
                         />
                         <TextField
@@ -110,7 +127,8 @@ const AddPost = () => {
                             margin="normal"
                             type="number"
                             value={price}
-                            onChange={(e) => setPrice(e.target.value)}
+                            onChange={handlePriceChange}
+                            onKeyDown={handlePriceKeyDown}
                             required
                         />
                         <Autocomplete
@@ -138,7 +156,7 @@ const AddPost = () => {
                                     {...params}
                                     variant="outlined"
                                     label="Tags"
-                                    placeholder="Select or add 3 tags"
+                                    placeholder="Select or add up to 3 tags"
                                 />
                             )}
                             renderTags={(value, getTagProps) =>
