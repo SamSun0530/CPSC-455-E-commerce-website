@@ -67,6 +67,10 @@ export const IndividualListingPage = ({ post }) => {
         const curr = new Date();
         const diff = curr.getTime() - posted_date.getTime();
         const hours_diff = Math.round(diff / (1000 * 3600));
+        if (hours_diff < 1) {
+            const mins_diff = Math.round(diff / (1000 * 60));
+            return `${mins_diff} min ago`;
+        }
         if (hours_diff <= 24) {
             return `${hours_diff}h ago`;
         }
