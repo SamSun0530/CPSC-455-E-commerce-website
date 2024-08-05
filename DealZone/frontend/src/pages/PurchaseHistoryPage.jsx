@@ -11,7 +11,7 @@ const PurchaseHistoryPage = () => {
 
     useEffect(() => {
         dispatch(getPurchaseHistoryAsync());
-    }, [dispatch]);
+    }, []);
 
     return (
         <div>
@@ -19,19 +19,9 @@ const PurchaseHistoryPage = () => {
             <div className="purchase-history-page">
                 <h1>Purchase History</h1>
                 <div className="purchase-history-list">
-                    {purchaseHistoryItem.map(item => {
-                        // console.log(item); 
-                        return(
-                        <div className="cart-item">
-                            <img src={item.image} alt={item.title} className="cart-item-image" />
-                            <div className="cart-item-details">
-                                <h3>{item.title}</h3>
-                                <p>${item.price}</p>
-                                <p>Purchased on: {new Date(item.purchased_on).toLocaleDateString()}</p>
-                            </div>
-                        </div>)
-                    })}
-
+                    {purchaseHistoryItem.map(item => (
+                        <PurchasedItem key={item._id} purchasedItem={item} />
+                    ))}
                 </div>
             </div>
         </div>

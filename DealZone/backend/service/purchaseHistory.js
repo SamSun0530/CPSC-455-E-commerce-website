@@ -3,7 +3,7 @@ const Listing = require('../db/models/listing');
 
 const getPurchasedListing = async ({listing_id, purchased_on}) => {
     const listing = await Listing.findOne({ _id: listing_id });
-    return {title: listing.title, price: listing.price, image: listing.image, description: listing.description, purchased_on};
+    return {_id: listing_id, title: listing.title, price: listing.price, image: listing.image, description: listing.description, purchased_on};
 }
 
 
@@ -21,7 +21,7 @@ const getPurchaseHistory = async (user_id) => {
             items: []
         })
         await newHistory.save();
-        return newHistory;
+        return newHistory.items;
     }
 }
 
