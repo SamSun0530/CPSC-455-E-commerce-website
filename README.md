@@ -39,6 +39,8 @@ We utilised HTML, CSS, and JavaScript as fundamental technologies that serve as 
 
 ## List of contributions
 
+Shreya Gupta: I worked on the homepage display and layout of listings. I also worked on seller view, edit/delete posts and create new listings. I also added loading state to many components while posts are fetched and added snackbar on individual listing page to let user know if the item was added to cart (or wishlist) or if it was already there based on server response. 
+
 ## Team Members
 
 - Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
