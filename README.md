@@ -25,6 +25,11 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 - Graphs/ visualizations of products sold, profits, etc. Seller performance insights?
 - Utilize ai-algorithm for product suggestion based on purchase or search history
 
+## Techs used from Units 1-5
+
+### Unit 1, Front end web technologies:
+We utilised HTML, CSS, and JavaScript as fundamental technologies that serve as the backbone of our application's front-end. HTML structures the content, CSS styles it, and JavaScript adds interactivity, collectively creating a responsive and user-friendly interface. Additionally, by integrating Material UI, we leverage a robust library of pre-designed components that enhance the aesthetic appeal and consistency of the app, streamlining the development process compared to custom-styling from scratch.
+
 ## Team Members
 
 - Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
