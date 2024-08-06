@@ -30,6 +30,15 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 ### Unit 1, Front end web technologies:
 We utilised HTML, CSS, and JavaScript as fundamental technologies that serve as the backbone of our application's front-end. HTML structures the content, CSS styles it, and JavaScript adds interactivity, collectively creating a responsive and user-friendly interface. Additionally, by integrating Material UI, we leverage a robust library of pre-designed components that enhance the aesthetic appeal and consistency of the app, streamlining the development process compared to custom-styling from scratch.
 
+## Above and Beyond functionality
+
+## Next Steps
+- We can add email verification when a user registers their account or delete their account as an extra security feature.
+- In the seller view, we could show some seller statistics based on how their listings are doing, what kind of listings perform best etc.
+- We can use machine learning to show recommended posts to users, based on their searches, wishlist and purchase history.
+
+## List of contributions
+
 ## Team Members
 
 - Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
