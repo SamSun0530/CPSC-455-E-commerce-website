@@ -6,24 +6,24 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 ## Task Requirements
 
 ### Minimal
-- Allow users to create an account 
-- Allow users to login with account to allow creating, or buying sales items. Otherwise, view only
-- View list of sales posts (organized by posting date for example)
-- Create, edit, delete sales posts.
-- Purchase items (simulate payment, empty cart, mark item(s) as sold)
-
+- Allow users to create an account ✅
+- Allow users to login with account to allow creating, or buying sales items. Otherwise, view only ✅
+- View list of sales posts ✅
+- Create, edit, delete sales posts ✅
+- Purchase items (simulate payment, empty cart, mark item(s) as sold) ✅
+ 
 ### Standard
-- Search for listing based on keyword matching of title/description
-- Sorting function in the search results (by price, by similarity, or by date)
-- Tagging mechanism for listings, and allow results to be filtered by said tags
-- Cart function(put products in a row and can buy them at once)
-- Wishlist function
-- Purchase history
+- Search for listing based on keyword matching of title/description ✅
+- Sorting function in the search results (by price, by similarity, or by posted date) ✅
+- Tagging mechanism for listings, and allow results to be filtered by said tags ✅
+- Cart function ✅
+- Wishlist function ✅
+- Purchase history page to see past purchases ✅
 
 ### Stretch
-- allow users to sign up for restock/discount email notifications for specific items.
-- Graphs/ visualizations of products sold, profits, etc. Seller performance insights?
-- Utilize ai-algorithm for product suggestion based on purchase or search history
+- Session handling to maintain logged in state across browser refresh ✅
+- Graphs/ visualizations of products sold, profits, etc. Seller performance insights. ❌
+- Utilize ai-algorithm for product suggestion based on purchase or search history ❌
 
 ## Techs used from Units 1-5
 
