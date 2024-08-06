@@ -3,8 +3,8 @@ import userService from '../services/userService';
 
 export const getUserAsync = createAsyncThunk(
     'user/getUser',
-    async (id) => {
-        const response = await userService.getUser(id);
+    async () => {
+        const response = await userService.getUser();
         return response;
     }
 );

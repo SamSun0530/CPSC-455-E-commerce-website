@@ -1,7 +1,7 @@
 import SERVER_URL from '../../config';
 
-const getUser = async (id) => {
-    const response = await fetch(`${SERVER_URL}/users/${id}`, {
+const getUser = async () => {
+    const response = await fetch(`${SERVER_URL}/user`, {
         method: 'GET',
         headers: {
             'session-token': sessionStorage.getItem('sessionToken')

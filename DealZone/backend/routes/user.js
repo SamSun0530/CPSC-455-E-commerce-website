@@ -4,6 +4,7 @@ const UserService = require('../service/user');
 const SessionService = require('../service/session');
 const verifySession = require('../middleware/session');
 
+
 /* User login */
 router.post('/login', function (req, res, next) {
     const { email, password } = req.body;
@@ -63,7 +64,7 @@ router.delete('/delete', function (req, res, next) {
     if (req.session) {
         const user_id = req.session.user._id;
         UserService.deleteUser(user_id).then(() => {
-            return res.send({success: true});
+            return res.send({ success: true });
         }).catch((err) => {
             return res.status(500).send(err);
         })
@@ -73,13 +74,17 @@ router.delete('/delete', function (req, res, next) {
 })
 
 
-// Get user data by email
-router.get('/:email', async function (req, res, next) {
+// Get user data
+router.get('/', async function (req, res, next) {
     try {
-        const user = await UserService.getUserByEmail(req.params.email);
-        res.send(user);
+        if (req.session) {
+            const user = await UserService.getUserBasic(req.session.user._id);
+            return res.send(user);
+        } else {
+            return res.status(401).send("Unauthorized");
+        }
     } catch (error) {
-        next(error);
+        return res.status(500).send(error);
     }
 });
 

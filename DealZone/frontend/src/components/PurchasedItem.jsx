@@ -3,9 +3,6 @@ import '../css/CartItem.css'; // Reuse CartItem.css for styling
 
 
 const PurchasedItem = ({ purchasedItem }) => {
-    if (!purchasedItem || !purchasedItem.image || !purchasedItem.title || !purchasedItem.price || !purchasedItem.purchased_on) {
-        return null;
-    }
 
     return (
         <div className="cart-item">
