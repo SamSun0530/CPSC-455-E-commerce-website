@@ -4,7 +4,7 @@ body {
     background-color: #f4f4f4;
 }
 
-.user-account-container {
+.user-account-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@ body {
     padding: 20px;
 }
 
-.user-account-card {
+.user-info-card {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
