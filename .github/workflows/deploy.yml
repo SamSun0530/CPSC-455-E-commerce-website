@@ -9,8 +9,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy
+    - name: Deploy Backend
       env: 
         deploy_url: ${{ secrets.RENDER_API_KEY }}
+      run: |
+        curl "$deploy_url"
+    - name: Deploy Frontend
+      env:
+        deploy_url: ${{ secrets.RENDER_CLIENT_KEY }}
       run: |
         curl "$deploy_url"

@@ -1,5 +1,9 @@
 const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
+const Cart = require('../db/models/cart');
+const Listing = require('../db/models/listing');
+const PurchaseHistory = require('../db/models/purchaseHistory');
+const Wishlist = require('../db/models/wishlist');
 
 const hashPassword = async (password) => {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,7 +25,7 @@ const getUser = async (id) => {
 };
 
 const getUserBasic = async (id) => {
-    return await User.findById(id).select('_id username email');
+    return await User.findById(id).select('_id username email first_name last_name address');
 }
 
 const updateUser = async (id, data) => {
@@ -72,6 +76,10 @@ const changeUserPassword = async (id, currentPassword, newPassword) => {
 
 const deleteUser = async (user_id) => {
     await User.deleteOne({_id: user_id});
+    await Cart.deleteOne({ user_id });
+    await Listing.deleteMany({ user_id });
+    await PurchaseHistory.deleteOne({ user_id });
+    await Wishlist.deleteOne({ user_id });
     return true;
 }
 
