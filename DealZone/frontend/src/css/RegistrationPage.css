@@ -1,0 +1,46 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f2f5;
+    background-image: url("../../public/loginBackground.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+#registerHeading {
+    align-self: center;
+}
+
+.register-form input,
+.register-form button {
+    padding: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.register-button {
+    margin-top: 1rem;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}

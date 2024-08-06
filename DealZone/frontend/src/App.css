@@ -1,0 +1,149 @@
+.App {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+
+.view-details-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-right: 1rem;
+}
+
+.view-details-button:hover {
+    background-color: #0056b3;
+}
+/* shouldnt these belong in cartpage.css? */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.delete-all-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.delete-all-button:hover {
+    background-color: #c82333;
+}
+
+nav {
+    display: flex;
+    background-color: #007bff;
+    margin: 0 0px;
+    padding: 0 0 0 0px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.navbar-brand {
+    margin: 0 0 0 0px;
+    padding: 6px 16px 6px 6px;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.navbar-right-div {
+    display: flex;
+    margin-left: auto;
+}
+
+.navbar-right {
+    display:flex;
+    padding: 16px 6px 8px 6px;
+}
+
+.navbar-icon {
+    padding: 14px 6px 10px 6px;
+}
+
+.account-menu-icon {
+    font-size: 24px;
+}
+
+.account-menu-icon:hover {
+    fill: black;
+}
+
+.cart-icon {
+    font-size:24px;
+    padding: 0 0 6px 0;
+}
+
+/* make cart icon turn black together with the text "Cart" */
+.navbar-right:hover .cart-icon {
+    fill: black; 
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.p-error {
+    color: red;
+}

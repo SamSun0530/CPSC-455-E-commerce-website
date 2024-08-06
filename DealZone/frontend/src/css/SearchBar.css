@@ -1,0 +1,47 @@
+.search-bar {
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.input-group-text, .btn-outline-secondary {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#button-addon1 {
+    border-radius: 0;
+    border-left: none;
+}
+
+#button-addon2 {
+    border-radius: 0 0.25rem 0.25rem 0;
+    border-left: none;
+}
+
+@media (max-width: 576px) {
+    .search-bar {
+        margin-bottom: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    .input-group-text, .btn-outline-secondary {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,14 @@
+.purchased-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.purchased-msg {
+    text-align: center;
+    margin: 30px 0 0 0;
+}
+
+.purchased-msg button {
+    
+}
