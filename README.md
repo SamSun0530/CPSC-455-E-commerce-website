@@ -50,30 +50,6 @@ Shreya Gupta: I worked on the homepage display and layout of listings. I also wo
 
 
 
-
-#### Task Breakdown
-
-- User login
-    - Frontend design: form inputs, username, password. Stylize UI, form input validations. Display error if incorrect password, or redirect to homepage if login successful.
-    - Database: create table to keep track of sessions (session id, user id, last_activity)
-    - Backend: create login API endpoint for frontend to call on form submit, validate/sanitize inputs, salt + hash password, compare with record in DB. If successful, return session/auth token/cookie to be used in subsequent API calls.
-    - Backend: create auth function for each API that returns guest page or logged in page depending on session validation
-
-- Account registration
-    - Frontend design: form inputs, username, password, email. Stylize UI, form input validations
-    - Database: create table to keep track of users with appropriate fields (do not store password in plaintext, salt + hash)
-    - Backend: create registration API endpoint for frontend to call on form submit, validate/sanitize inputs, create DB record.
- 
-
-
-## Images (Prototype Sketches for now)
-
-<img src ="images/home_prototype.jpg" width="300px">
-
-<img src ="images/register_prototype.jpg" width="300px">
-
-<img src ="images/cartpage_prototype.jpg" width="300px">
-
 ## References
 
 DZ Logo used from: https://www.freepik.com/premium-vector/logo-dz_42660603.htm 
