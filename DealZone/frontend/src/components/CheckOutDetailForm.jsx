@@ -191,6 +191,7 @@ export default function CheckOutDetailForm() {
                                                 label="Country"
                                                 autoComplete="country-name"
                                                 onChange={handleFormInputChange}
+                                                value='CA'
                                             >
                                                 <MenuItem value="">
                                                     <em>Select a Country</em>
@@ -303,7 +304,7 @@ export default function CheckOutDetailForm() {
                             <p><b>${subtotal}</b></p>
                         </li>
                         <li>
-                            <p>Tax (12%)</p>
+                            <p>Tax</p>
                             <p>${tax}</p>
                         </li>
                         <li>
