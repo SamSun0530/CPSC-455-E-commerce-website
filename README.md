@@ -30,6 +30,18 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 ### Unit 1, Front end web technologies:
 We utilised HTML, CSS, and JavaScript as fundamental technologies that serve as the backbone of our application's front-end. HTML structures the content, CSS styles it, and JavaScript adds interactivity, collectively creating a responsive and user-friendly interface. Additionally, by integrating Material UI, we leverage a robust library of pre-designed components that enhance the aesthetic appeal and consistency of the app, streamlining the development process compared to custom-styling from scratch.
 
+### Unit 2, React:
+React is used for its hooks and for creating reusable components to be used in many pages on the website, which include the navbar, search bar, and pages for the listings; without React, the code would contain more redundant parts. Redux is used for centralized state management- the global state of our app, from listings to users, is all stored within our store- as well as its hooks (useDispatch, useSelector) that simplify the code. Finally, the Redux-toolkit is used make a lot of setup easier, from asynchronous functions via createAsyncThunk, to creating reducers and store configuration.
+
+### Unit 3， Node.js:
+Node.js is used to set up our server and handle routing functions, serving frontend requests. It interacts with our MongoDB database to perform CRUD operations including get, update, and delete that allows users to manipulate server side data at frontend.
+
+### Unit 4， MongoDB:
+We connect to and utilize MongoDB from the backend to store our site data such as user account information, listing details, cart content for each user, etc. Without a database, data would be lost and everything would start from scratch in the event of a server restart/crash. The database also allows for efficient management of large amounts of data, such as filter and sort queries.
+
+### Unit 5， Release Engineering:
+Github Actions is used to handle Continuous Delivery of changes to the cloud hosting service, Render. Once a pull request to the main branch is approved and merged, changes are automatically made live without any human intervention. 
+
 ## Above and Beyond functionality
 
 ## Next Steps
