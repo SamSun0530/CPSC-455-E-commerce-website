@@ -194,8 +194,8 @@ export default function CheckOutDetailForm() {
                                                 <MenuItem value="">
                                                     <em>Select a Country</em>
                                                 </MenuItem>
-                                                <MenuItem value="canada">Canada</MenuItem>
-                                                <MenuItem value="us">United States</MenuItem>
+                                                <MenuItem value="CA">Canada</MenuItem>
+                                                <MenuItem value="US">United States</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </Grid>
