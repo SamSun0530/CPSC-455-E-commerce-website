@@ -24,7 +24,8 @@ export default function CheckOutDetailForm() {
     const [shippingExpanded, setShippingExpanded] = useState(true);
     const [paymentExpanded, setPaymentExpanded] = useState(false);
 
-    const subtotal = cartItems.reduce((total, item) => total + item.price, 0);
+    let subtotal = cartItems.reduce((total, item) => total + item.price, 0);
+    subtotal = parseFloat(subtotal.toFixed(2));
     const tax = parseFloat((subtotal * 0.12).toFixed(2));
     const total =  (subtotal + tax).toFixed(2);
 

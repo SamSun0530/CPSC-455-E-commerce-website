@@ -75,6 +75,8 @@ const UserAccountPage = () => {
                         <span>{email}</span>
                     )}</p>
 
+                    <h3>Coming Soon</h3>
+
                     <p>First Name: {isEditing ? (
                         <input
                             type="text"
@@ -145,11 +147,11 @@ const UserAccountPage = () => {
                         <span>{postal}</span>
                     )}</p>
 
-                    {isEditing ? (
+                    {/* {isEditing ? (
                         <button onClick={handleSaveClick}>Save</button>
                     ) : (
                         <button onClick={handleEditClick}>Edit</button>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
