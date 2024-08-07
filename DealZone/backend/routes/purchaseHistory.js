@@ -5,7 +5,8 @@ const verifySession = require('../middleware/session');
 
 router.use(verifySession);
 
-router.get('/', async function (req, res, next) {
+// get purchase history for user
+router.get('/', async function (req, res) {
     if (req.session) {
         res.send(await PurchaseHistoryService.getPurchaseHistory(req.session.user._id));
     } else {

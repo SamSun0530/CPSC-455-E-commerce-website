@@ -100,7 +100,7 @@ export const cartSlice = createSlice({
                         state.purchaseStatus = "Invalid Payment Method";
                         break;
                     case 409:
-                        state.purchaseStatus = "Item(s) in cart not availible"
+                        state.purchaseStatus = "Item(s) in cart not available"
                         break;
                     default:
                         console.log('Unrecognized purchase cart status');

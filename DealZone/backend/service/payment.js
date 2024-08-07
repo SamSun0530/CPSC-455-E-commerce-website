@@ -6,7 +6,7 @@ const validCard = {
     card_postal_code: '12345'
 }
 
-const isPurchaseMethodValid = ({card_number, cvc, month, year, card_postal_code}) => {
+const isPurchaseMethodValid = ({ card_number, cvc, month, year, card_postal_code }) => {
     if (validCard.number == card_number
         && validCard.cvc == cvc
         && validCard.month == month
@@ -18,7 +18,6 @@ const isPurchaseMethodValid = ({card_number, cvc, month, year, card_postal_code}
         return false;
     }
 }
-
 
 
 module.exports = {

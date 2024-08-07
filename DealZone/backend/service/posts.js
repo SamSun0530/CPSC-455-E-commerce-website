@@ -5,22 +5,19 @@ async function getListings(query, tags, sortMethod, sortOrder) {
     let searchCriteria = {};
     let sortCriteria = {};
     searchCriteria.sold = { $ne: true };
-
     if (query) {
         searchCriteria.$or = [
             { title: { $regex: query, $options: 'i' } },
             { description: { $regex: query, $options: 'i' } },
         ];
     }
-
     if (tags && tags.length > 0) {
         searchCriteria.tags = { $in: tags };
     }
-    
     if (sortMethod) {
         sortCriteria[sortMethod] = sortOrder === 'descending' ? -1 : 1;
     } else {
-        sortCriteria['posted_on'] = -1; // By default, sort by most recent
+        sortCriteria['posted_on'] = -1;
     }
     const listings = await Listing.find(searchCriteria).sort(sortCriteria);
     return listings;
@@ -34,20 +31,17 @@ const addListing = async (title, description, image, price, posted_on, user_id, 
     await Listing.create({ title, description, image, price, posted_on, user_id, tags, sold: false });
 }
 
-
 const markListingsAsSold = async (listingIds) => {
     const session = await db.startSession();
     session.startTransaction();
-
     const itemCount = listingIds.length;
-
     try {
         const result = await Listing.updateMany(
             { _id: { $in: listingIds }, sold: false },
             { $set: { sold: true } },
             { session }
         );
-        const { acknowledged, matchedCount, modifiedCount } = result;
+        const { matchedCount, modifiedCount } = result;
         if (itemCount == matchedCount && itemCount == modifiedCount) {
             await session.commitTransaction();
             session.endSession();

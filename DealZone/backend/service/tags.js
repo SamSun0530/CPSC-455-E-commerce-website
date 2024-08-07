@@ -15,11 +15,12 @@ const deleteTag = async (id) => {
     try {
         const result = await Tags.findOneAndDelete({ _id: id });
         return result;
-    } catch(err) {
+    } catch (err) {
         console.error('Error deleting tags:', err);
         throw err;
     }
 };
+
 module.exports = {
     getAllTags,
     addTag,

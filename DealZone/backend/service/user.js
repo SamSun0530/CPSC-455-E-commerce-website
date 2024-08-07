@@ -56,8 +56,6 @@ const registerUser = async (username, email, phone_number, password) => {
     return true;
 }
 
-// even if user is already logged in, should require current and new password
-// check current password first, then if successful call this function
 const changeUserPassword = async (id, currentPassword, newPassword) => {
     const user = await getUser(id);
     if (user) {
@@ -75,7 +73,7 @@ const changeUserPassword = async (id, currentPassword, newPassword) => {
 }
 
 const deleteUser = async (user_id) => {
-    await User.deleteOne({_id: user_id});
+    await User.deleteOne({ _id: user_id });
     await Cart.deleteOne({ user_id });
     await Listing.deleteMany({ user_id });
     await PurchaseHistory.deleteOne({ user_id });

@@ -6,20 +6,20 @@ const verifySession = require('../middleware/session');
 router.use(verifySession);
 
 // Get seller posts
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
         if (!req.session.user) {
             return res.status(401).send("Unauthorized");
         }
         const sellerPosts = await SellerPostsService.getSellerPosts(req.session.user._id);
         res.send(sellerPosts);
-    } catch(err) {
-        next(err);
+    } catch (err) {
+        return res.status(500).send(err);
     }
 });
 
 // Delete seller post
-router.delete('/:id', async function (req, res, next) {
+router.delete('/:id', async function (req, res) {
     try {
         if (!req.session.user) {
             return res.status(401).send("Unauthorized");
@@ -31,17 +31,17 @@ router.delete('/:id', async function (req, res, next) {
             res.status(404).send("Error deleting post");
         }
     } catch (error) {
-        next(error);
+        return res.status(500).send(err);
     }
 });
 
 // Edit seller post
-router.patch('/:_id', async function (req, res, next) {
+router.patch('/:_id', async function (req, res) {
     try {
         const post = await SellerPostsService.updatePost(req.params._id, req.body);
         res.send(post);
     } catch (error) {
-        next(error);
+        return res.status(500).send(err);
     }
 });
 

@@ -5,13 +5,14 @@ const SessionService = require('../service/session');
 const verifySession = require('../middleware/session');
 
 
-/* User login */
-router.post('/login', function (req, res, next) {
+// User login
+router.post('/login', function (req, res) {
     const { email, password } = req.body;
     UserService.authUser(email, password).then(async (user_id) => {
         if (user_id) {
             const session = await SessionService.createSession(user_id);
             console.log('returning login true');
+            // using sessionStorage to store token instead of cookie
             // res.cookie('sessionToken', session.session_token, {
             //     sameSite: 'None',
             //     secure: true,
@@ -24,13 +25,13 @@ router.post('/login', function (req, res, next) {
             return res.status(401).send({ success: false });
         }
     }).catch((err) => {
-        console.log("User error: ", err);
-        return res.status(500).send("Encountered error");
+        console.log("Login error: ", err);
+        return res.status(500).send(err);
     });
 });
 
-/* User Registration */
-router.post('/register', function (req, res, next) {
+// User Registration 
+router.post('/register', function (req, res) {
     const { username, email, phone_number, password } = req.body;
     UserService.registerUser(username, email, phone_number, password).then((created) => {
         if (created) {
@@ -39,14 +40,14 @@ router.post('/register', function (req, res, next) {
             return res.status(400).send({ created: false });
         }
     }).catch((err) => {
-        console.log("User error: ", err);
-        return res.status(500).send("Encountered error");
+        console.log("Registration error: ", err);
+        return res.status(500).send(err);
     })
 });
 
 router.use(verifySession);
-/* User logout */
-router.post('/logout', function (req, res, next) {
+// Logout user
+router.post('/logout', function (req, res) {
     if (req.session) {
         const user_id = req.session.user._id;
         SessionService.removeSession(user_id).then(() => {
@@ -60,7 +61,8 @@ router.post('/logout', function (req, res, next) {
     }
 });
 
-router.delete('/delete', function (req, res, next) {
+// delete user account
+router.delete('/delete', function (req, res) {
     if (req.session) {
         const user_id = req.session.user._id;
         UserService.deleteUser(user_id).then(() => {
@@ -75,7 +77,7 @@ router.delete('/delete', function (req, res, next) {
 
 
 // Get user data
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
         if (req.session) {
             const user = await UserService.getUserBasic(req.session.user._id);
@@ -83,18 +85,17 @@ router.get('/', async function (req, res, next) {
         } else {
             return res.status(401).send("Unauthorized");
         }
-    } catch (error) {
-        return res.status(500).send(error);
+    } catch (err) {
+        return res.status(500).send(err);
     }
 });
 
-// Update user data by email, no password change here. 
-// If changing password should have a separate route, and require user enter current password again
-router.patch('/:id', async function (req, res, next) {
+// Update user information
+router.patch('/', async function (req, res) {
     try {
         const { username, email, password, first_name, last_name, phone_number, street, city, province, country, postal } = req.body;
         const updateFields = {
-            username, email, first_name, last_name, phone_number, street, city, province, country, postal
+            username, email, password, first_name, last_name, phone_number, street, city, province, country, postal
         };
         Object.keys(updateFields).forEach(key => {
             if (updateFields[key] === undefined) {
@@ -103,8 +104,8 @@ router.patch('/:id', async function (req, res, next) {
         });
         const updatedUser = await UserService.updateUser(req.session.user.id, updateFields);
         res.send(updatedUser);
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        return res.status(500).send(err);
     }
 });
 

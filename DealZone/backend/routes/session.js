@@ -4,7 +4,8 @@ var router = express.Router();
 
 router.use(verifySession);
 
-router.get('/', async function (req, res, next) {
+// retrieve session
+router.get('/', async function (req, res) {
     if (req.session) {
         res.status(200).send({ loggedIn: true });
     } else {
