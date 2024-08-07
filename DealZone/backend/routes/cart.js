@@ -6,6 +6,7 @@ const WishlistService = require('../service/wishlist');
 const PurchaseHistoryService = require('../service/purchaseHistory');
 const verifySession = require('../middleware/session');
 const { isPurchaseMethodValid } = require('../service/payment');
+const { verifyAddress } = require('../service/address');
 
 router.use(verifySession);
 
@@ -59,29 +60,40 @@ router.delete('/', async function (req, res, next) {
 router.post('/purchase', async function (req, res, next) {
     if (req.session) {
         const { cart, details } = req.body;
-        console.log("cart: ", cart);
-        console.log("details: ", details);
-
-        if (isPurchaseMethodValid({
-            card_number: details.card_number,
-            cvc: details.cvc,
-            month: details.month,
-            year: details.year,
-            card_postal_code: details.card_postal_code
-        })) {
-            const ids = cart.map(listing => listing._id);
-            const success = await ListingService.markListingsAsSold(ids);
-            const purchasedDate = new Date().toISOString();
-            if (success) {
-                await CartService.pullSoldItemsFromCart(ids);
-                await WishlistService.pullSoldItemsFromWishlist(ids);
-                await PurchaseHistoryService.addToPurchaseHistory(req.session.user._id, ids, purchasedDate);
-                return res.status(200).send("success");
+        const { missing, unconfirmed } = await verifyAddress({
+            address: {
+                regionCode: details.country,
+                locality: details.city,
+                postalCode: details.postal_code,
+                addressLines: [details.street]
+            }
+        });
+        console.log(missing);
+        console.log(unconfirmed);
+        if (missing.length == 0 && unconfirmed.length == 0) {
+            if (isPurchaseMethodValid({
+                card_number: details.card_number,
+                cvc: details.cvc,
+                month: details.month,
+                year: details.year,
+                card_postal_code: details.card_postal_code
+            })) {
+                const ids = cart.map(listing => listing._id);
+                const success = await ListingService.markListingsAsSold(ids);
+                const purchasedDate = new Date().toISOString();
+                if (success) {
+                    await CartService.pullSoldItemsFromCart(ids);
+                    await WishlistService.pullSoldItemsFromWishlist(ids);
+                    await PurchaseHistoryService.addToPurchaseHistory(req.session.user._id, ids, purchasedDate);
+                    return res.status(200).send("success");
+                } else {
+                    return res.status(409).send("Item(s) in cart not availible");
+                }
             } else {
-                return res.status(409).send("Item(s) in cart not availible");
+                return res.status(402).send("Invalid Payment Method");
             }
         } else {
-            return res.status(400).send("Invalid Payment Method");
+            return res.status(400).send("Invalid Address");
         }
     } else {
         return res.status(401).send("Unauthorized");

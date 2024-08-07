@@ -1,33 +1,21 @@
 name: deploy
 
 on:
-  pull_request:
-    branches:
-      - "**"
   push:
     branches:
       - main
-      - p5
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      deployments: write
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: Install dependencies
-      run: npm install
-      working-directory: DealZone/backend
-      
-    - name: Deploy
+    - name: Deploy Backend
       env: 
         deploy_url: ${{ secrets.RENDER_API_KEY }}
+      run: |
+        curl "$deploy_url"
+    - name: Deploy Frontend
+      env:
+        deploy_url: ${{ secrets.RENDER_CLIENT_KEY }}
       run: |
         curl "$deploy_url"
