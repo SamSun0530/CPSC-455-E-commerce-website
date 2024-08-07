@@ -7,7 +7,7 @@
 }
 
 .product-image-container {
-    width:400px;
+    width: 400px;
     height: auto;
     display: flex;
     justify-content: center;
@@ -85,7 +85,8 @@
     border: 1px solid #ccc;
 }
 
-.add-to-cart-button, .add-to-wishlist-button {
+.add-to-cart-button,
+.add-to-wishlist-button {
     background-color: #007bff;
     color: #fff;
     padding: 0.75rem 1.5rem;
@@ -97,7 +98,8 @@
     font-size: 1rem;
 }
 
-.add-to-cart-button:hover, .add-to-wishlist-button:hover {
+.add-to-cart-button:hover,
+.add-to-wishlist-button:hover {
     background-color: #0056b3;
 }
 

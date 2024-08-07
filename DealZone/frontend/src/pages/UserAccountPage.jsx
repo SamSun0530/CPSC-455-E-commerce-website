@@ -51,7 +51,7 @@ const UserAccountPage = () => {
         <div>
             <Navbar />
             <div className="user-account-page">
-                
+
                 <div className="user-info-card">
                     <h1>User Account</h1>
 

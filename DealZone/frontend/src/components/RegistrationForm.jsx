@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUserAsync } from "../thunks/auth";
 import { clearAPIStatus } from "../slices/auth";
-// import { nanoid } from '@reduxjs/toolkit'
 
 
 export default function RegistrationForm() {
@@ -13,7 +12,7 @@ export default function RegistrationForm() {
 	const blankState = { username: "", email: "", phone: "", password: "" };
 	const [formData, setFormData] = useState(blankState);
 	const authState = useSelector((state) => state.auth);
-	
+
 	useEffect(() => {
 		dispatch(clearAPIStatus());
 	}, []);
@@ -33,24 +32,10 @@ export default function RegistrationForm() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (areTextFieldsValid(formData.username, formData.password)) {
-			// TODO: maybe pass in more fields, only email and pw for now.
-
-			//   dispatch(
-			//     registerUser({
-			//       id: nanoid(),
-			//       firstName: formData.firstName,
-			// 	  lastName: formData.lastName,
-			//       email: formData.email,
-			// 	  phone: formData.phone,
-			//       address: formData.address,
-			// 	  password: formData.password
-			//     })
-			//   )
-			// alert(`Username: ${formData.username} \nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}\nUsername: ${formData.username}\nPassword: ${formData.password}`); // alert for testing purpose
-			dispatch(registerUserAsync({username: formData.username, email: formData.email, phone_number: formData.phone_number, password: formData.password}));
+			dispatch(registerUserAsync({ username: formData.username, email: formData.email, phone_number: formData.phone_number, password: formData.password }));
 			setFormData(blankState);
 		} else {
-			alert("Invalid form inputs detected."); // alert for testing purpose
+			alert("Invalid form inputs detected.");
 		}
 	};
 
@@ -60,7 +45,7 @@ export default function RegistrationForm() {
 
 	const handlePhoneChange = (event) => {
 		handleChange(event);
-		event.target.setCustomValidity(""); // reset validity message
+		event.target.setCustomValidity("");
 	};
 
 	return (
@@ -90,5 +75,5 @@ export default function RegistrationForm() {
 }
 
 function areTextFieldsValid(username, password) {
-	return !(username.trim().length === 0|| password.trim().length === 0);
+	return !(username.trim().length === 0 || password.trim().length === 0);
 }

@@ -27,7 +27,7 @@ export const addToPostsListAsync = createAsyncThunk(
 
 export const queryPostsListAsync = createAsyncThunk(
 	postsListActions.QUERY_POSTS,
-	async ({query, tags, sortMethod, sortOrder}) => {
+	async ({ query, tags, sortMethod, sortOrder }) => {
 		return await postsListService.queryPostsList(query, tags, sortMethod, sortOrder);
 	}
 );

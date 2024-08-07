@@ -5,34 +5,33 @@ const verifySession = require('../middleware/session');
 
 
 // Get all tags
-router.get('/', async function (req, res, next) {
+router.get('/', async function (req, res) {
     try {
         const allTags = await TagsService.getAllTags();
         res.send(allTags);
-    } catch(err) {
-        next(err);
+    } catch (err) {
+        return res.status(500).send(err);
     }
 });
 
 // Add new tag
-router.post('/', async function (req, res, next) {
+router.post('/', async function (req, res) {
     try {
         const tag = req.body;
-        console.log("Req body in routes: ", req.body);
         console.log("Tags received in routes: ", tag);
         await TagsService.addTag(tag);
         res.status(201).send();
     } catch (err) {
         console.error("error adding new tag: ", err);
+        return res.status(500).send(err);
     }
-    
+
 });
 
 router.use(verifySession);
 
 // Remove tags
-/*
-router.delete('/:id', async function (req, res, next) {
+router.delete('/:id', async function (req, res) {
     try {
         if (!req.session.user) {
             return res.status(401).send("Unauthorized");
@@ -43,11 +42,10 @@ router.delete('/:id', async function (req, res, next) {
         } else {
             res.status(404).send("Error deleting tag");
         }
-    } catch (error) {
-        next(error);
+    } catch (err) {
+        return res.status(500).send(err);
     }
 });
-*/
 
 
 module.exports = router;

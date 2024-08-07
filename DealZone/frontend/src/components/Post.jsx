@@ -7,7 +7,7 @@ const maxLength = 20;
 const Post = ({ post, onClick }) => {
   return (
     <Card onClick={onClick} sx={{ cursor: 'pointer', position: 'relative' }}>
-      <Box 
+      <Box
         sx={{
           position: 'relative',
           height: 180,
@@ -38,7 +38,7 @@ const Post = ({ post, onClick }) => {
         <Typography variant="subtitle1" sx={{ color: post.sold ? 'grey' : 'green' }}>
           ${post.price}
         </Typography>
-        <Typography 
+        <Typography
           variant="h6"
           sx={{
             overflow: 'hidden',

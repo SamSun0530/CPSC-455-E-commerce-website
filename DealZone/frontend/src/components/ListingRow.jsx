@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CircularProgress, Typography, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Post from './Post';
 
 export default function ListingRow({ posts }) {

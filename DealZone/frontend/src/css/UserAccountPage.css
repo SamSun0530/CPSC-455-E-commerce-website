@@ -21,9 +21,9 @@ body {
     max-width: 600px;
 }
 
-    .user-account-card h1 {
-        margin-bottom: 20px;
-    }
+.user-account-card h1 {
+    margin-bottom: 20px;
+}
 
 .user-account-item {
     display: flex;
@@ -34,23 +34,23 @@ body {
     padding-bottom: 10px;
 }
 
-    .user-account-item label {
-        font-weight: bold;
-        width: 100px;
-    }
+.user-account-item label {
+    font-weight: bold;
+    width: 100px;
+}
 
-    .user-account-item span {
-        flex-grow: 1;
-        margin-left: 10px;
-    }
+.user-account-item span {
+    flex-grow: 1;
+    margin-left: 10px;
+}
 
-    .user-account-item input {
-        flex-grow: 1;
-        margin-left: 10px;
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
+.user-account-item input {
+    flex-grow: 1;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 
 .edit-icon {
     color: #007bff;
@@ -59,6 +59,6 @@ body {
     transition: color 0.3s;
 }
 
-    .edit-icon:hover {
-        color: #0056b3;
-    }
+.edit-icon:hover {
+    color: #0056b3;
+}

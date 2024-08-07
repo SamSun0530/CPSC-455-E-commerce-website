@@ -19,7 +19,6 @@ const authSession = async (token) => {
 };
 
 const createSession = async (user_id) => {
-    const current_time = new Date().toISOString();   
     let session = await Session.findOne({ user_id });
     const expiry = new Date(new Date().getTime() + 15 * 60000).toISOString();
     const token = uuidv4();

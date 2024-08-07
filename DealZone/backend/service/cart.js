@@ -7,7 +7,6 @@ const getCartListings = async (cart) => {
 }
 
 const getCart = async (user_id) => {
-
     const cart = await Cart.findOne({ user_id: user_id });
     if (cart) {
         return await getCartListings(cart);
@@ -19,8 +18,6 @@ const getCart = async (user_id) => {
         await new_cart.save();
         return await getCartListings(new_cart)
     }
-
-
 }
 
 const addToCart = async (listing, user_id = null) => {
@@ -44,7 +41,6 @@ const addToCart = async (listing, user_id = null) => {
 }
 
 const deleteFromCart = async (listing_id, user_id) => {
-
     const cart = await Cart.findOne({ user_id: user_id });
     const item = cart.items.find(item_id => item_id === listing_id);
     if (item) {

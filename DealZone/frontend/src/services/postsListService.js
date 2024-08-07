@@ -36,8 +36,8 @@ const deleteFromPostsList = async (id) => {
 	const response = await fetch(`${SERVER_URL}/posts/${id}`, {
 		method: 'DELETE',
 		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+			'session-token': sessionStorage.getItem('sessionToken')
+		},
 		credentials: 'include'
 	});
 	return response.json();
@@ -47,8 +47,8 @@ const queryPostsList = async (query, tags, sortMethod, sortOrder) => {
 	const response = await fetch(`${SERVER_URL}/posts?q=${query}&tags=${encodeURIComponent(JSON.stringify(tags))}&sortMethod=${sortMethod}&sortOrder=${sortOrder}`, {
 		method: 'GET',
 		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+			'session-token': sessionStorage.getItem('sessionToken')
+		},
 		credentials: 'include'
 	});
 	return response.json();

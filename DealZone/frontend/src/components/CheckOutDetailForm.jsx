@@ -27,11 +27,10 @@ export default function CheckOutDetailForm() {
     let subtotal = cartItems.reduce((total, item) => total + item.price, 0);
     subtotal = parseFloat(subtotal.toFixed(2));
     const tax = parseFloat((subtotal * 0.12).toFixed(2));
-    const total =  (subtotal + tax).toFixed(2);
+    const total = (subtotal + tax).toFixed(2);
 
     useEffect(() => {
         dispatch(clearAPIStatus());
-        console.log('fetching cart');
         dispatch(getCartAsync());
     }, []);
 
@@ -64,8 +63,7 @@ export default function CheckOutDetailForm() {
     const handlePurchase = (event) => {
         const form = document.getElementById('checkout-form');
         if (form.checkValidity()) {
-            console.log(formData);
-            dispatch(purchaseCartAsync({cart: cartItems, details: formData}));
+            dispatch(purchaseCartAsync({ cart: cartItems, details: formData }));
         } else {
             const invalidElements = form.querySelectorAll(':invalid');
             if (invalidElements.length > 0) {
@@ -234,7 +232,6 @@ export default function CheckOutDetailForm() {
                                             label="Card Number"
                                             value={formData.card_number}
                                             fullWidth
-                                            // autoComplete='cc-number'
                                             onChange={handleFormInputChange}
                                         />
                                     </Grid>
@@ -246,7 +243,6 @@ export default function CheckOutDetailForm() {
                                             label="CVC"
                                             fullWidth
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                                            // autoComplete='cc-csc'
                                             onChange={handleFormInputChange}
                                         />
                                     </Grid>
@@ -258,7 +254,6 @@ export default function CheckOutDetailForm() {
                                             label="Month"
                                             fullWidth
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                                            // autoComplete='cc-exp-month'
                                             onChange={handleFormInputChange}
                                         />
                                     </Grid>
@@ -270,7 +265,6 @@ export default function CheckOutDetailForm() {
                                             label="Year"
                                             fullWidth
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                                            // autoComplete='cc-exp-year'
                                             onChange={handleFormInputChange}
                                         />
                                     </Grid>

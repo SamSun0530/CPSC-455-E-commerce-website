@@ -55,7 +55,7 @@ form button:hover {
 .view-details-button:hover {
     background-color: #0056b3;
 }
-/* shouldnt these belong in cartpage.css? */
+
 .delete-button {
     background-color: #dc3545;
     color: white;
@@ -91,7 +91,6 @@ nav {
     background-color: #007bff;
     margin: 0 0px;
     padding: 0 0 0 0px;
-    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 nav a {
@@ -113,7 +112,7 @@ nav a {
 }
 
 .navbar-right {
-    display:flex;
+    display: flex;
     padding: 16px 6px 8px 6px;
 }
 
@@ -130,13 +129,12 @@ nav a {
 }
 
 .cart-icon {
-    font-size:24px;
+    font-size: 24px;
     padding: 0 0 6px 0;
 }
 
-/* make cart icon turn black together with the text "Cart" */
 .navbar-right:hover .cart-icon {
-    fill: black; 
+    fill: black;
 }
 
 nav a:hover {

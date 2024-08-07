@@ -24,13 +24,11 @@ const AddPost = () => {
     }, [dispatch]);
 
     const handleTagAddition = (tag) => {
-        console.log("tag addition: ", tag);
         setNewTags([...newTags, { tag }]);
         setSelectedTags([...selectedTags, { tag }]);
     };
 
     const handleTagRemoval = (tagToRemove) => {
-        console.log("tag removal: ", tagToRemove);
         setNewTags(newTags.filter(tag => tag.tag !== tagToRemove.tag));
         setSelectedTags(selectedTags.filter(tag => tag.tag !== tagToRemove.tag));
     };
@@ -41,7 +39,6 @@ const AddPost = () => {
         const allSelectedTags = selectedTags.map(tag => tag.tag);
         const finalTags = [...new Set(allSelectedTags)];
 
-        console.log('final tags: ', finalTags);
         if (newTags.length > 0) {
             const newTagsToAdd = newTags.map(tag => tag.tag);
             dispatch(addTagAsync(newTagsToAdd));
@@ -55,7 +52,6 @@ const AddPost = () => {
             tags: finalTags
         };
 
-        console.log("new: ", newListing);
         dispatch(addToPostsListAsync(newListing));
         setTitle('');
         setDesc('');

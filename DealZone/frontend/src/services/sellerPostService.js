@@ -23,18 +23,18 @@ const deleteSellerPost = async (id) => {
     return await response.json();
 };
 
-const updateSellerPost = async (updatedMember) => { 
-    const response = await fetch(`${SERVER_URL}/sellerPosts/${updatedMember._id}`,{
+const updateSellerPost = async (updatedMember) => {
+    const response = await fetch(`${SERVER_URL}/sellerPosts/${updatedMember._id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
-          'session-token': sessionStorage.getItem('sessionToken')
+            'Content-Type': 'application/json',
+            'session-token': sessionStorage.getItem('sessionToken')
         },
         body: JSON.stringify(updatedMember)
     });
 
-    return response.json(); 
+    return response.json();
 };
 
 export default {

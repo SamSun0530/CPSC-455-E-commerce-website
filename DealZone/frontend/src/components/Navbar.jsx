@@ -18,8 +18,8 @@ const Navbar = () => {
         navigate('/');
     }
 
-    const navBarAccountIcon = (<PersonLinesFill color="white" className="account-menu-icon"/>);
-    const cartIcon = (<span><Cart color="white" className="cart-icon"/></span>);
+    const navBarAccountIcon = (<PersonLinesFill color="white" className="account-menu-icon" />);
+    const cartIcon = (<span><Cart color="white" className="cart-icon" /></span>);
 
     return (
         <nav>

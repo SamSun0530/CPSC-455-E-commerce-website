@@ -5,5 +5,4 @@ export const postsListActions = {
 	DELETE_POST: 'posts/deletePost',
 	QUERY_POSTS: 'posts/queryPosts',
 	SOLD_POSTS: 'posts/getPosts/sold'
-  };
-  
+};

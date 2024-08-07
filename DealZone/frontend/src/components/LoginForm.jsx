@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../css/LoginPage.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import Navbar from './Navbar';
 import { authUserAsync } from '../thunks/auth';
 import { clearAPIStatus } from '../slices/auth';
 
@@ -16,18 +15,16 @@ const LoginForm = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log('login button form', email, password);
-        dispatch(authUserAsync({email, password}));
+        dispatch(authUserAsync({ email, password }));
         setEmail('');
         setPassword('');
     };
 
     useEffect(() => {
-		dispatch(clearAPIStatus());
-	}, []);
+        dispatch(clearAPIStatus());
+    }, []);
 
     useEffect(() => {
-        console.log("login state?", authState.isLoggedIn);
         if (authState.isLoggedIn) {
             navigate('/');
         }

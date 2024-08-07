@@ -19,17 +19,17 @@ const PurchaseHistoryPage = () => {
         <>
             <Navbar />
             <Container>
-                    <Box textAlign="center" my={4}>
-                        <Typography variant="h4" gutterBottom>
-                            Purchase History
-                        </Typography>
-                    </Box>
-                    <div className="purchase-history-list">
-                        {purchaseHistoryItem.map(item => (
-                            <PurchasedItem key={item._id} purchasedItem={item} />
-                        ))}
-                    </div>
-                
+                <Box textAlign="center" my={4}>
+                    <Typography variant="h4" gutterBottom>
+                        Purchase History
+                    </Typography>
+                </Box>
+                <div className="purchase-history-list">
+                    {purchaseHistoryItem.map(item => (
+                        <PurchasedItem key={item._id} purchasedItem={item} />
+                    ))}
+                </div>
+
             </Container>
         </>
     );

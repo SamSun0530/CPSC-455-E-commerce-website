@@ -10,9 +10,11 @@ const verifyAddress = async (reqBody) => {
             body: JSON.stringify(reqBody),
         });
         const result = await response.json();
-        return {missing: result.result.address.missingComponentTypes, unconfirmed: result.result.address.unconfirmedComponentTypes};
+        console.log(JSON.stringify(result, null, 2));
+        return { missing: result.result.address.missingComponentTypes, unconfirmed: result.result.address.unconfirmedComponentTypes };
     } catch (err) {
         console.log(err);
+        return;
     }
 }
 
