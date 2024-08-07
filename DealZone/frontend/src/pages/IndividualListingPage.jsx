@@ -11,7 +11,6 @@ import { Snackbar, Alert, Typography, Button, Paper, CircularProgress, Box, Moda
 export const IndividualListingPage = ({ post }) => {
     const { productId } = useParams();
     const dispatch = useDispatch();
-    const cartError = useSelector(state => state.cart.error);
     const [open, setOpen] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -61,7 +60,6 @@ export const IndividualListingPage = ({ post }) => {
 
     const handleClose = () => setOpen(false);
 
-    // If listing was posted within 24 hours, return hours elapsed; else return date in mm/dd/yy format
     const handleDatePosted = (date) => {
         const posted_date = new Date(date);
         const curr = new Date();

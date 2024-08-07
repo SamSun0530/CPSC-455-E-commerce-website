@@ -16,7 +16,7 @@ export const deleteFromSellerPostAsync = createAsyncThunk(
         return await sellerService.deleteSellerPost(id);
     }
 );
- 
+
 export const updatePostAsync = createAsyncThunk(
     sellerPostActions.UPDATE_SELLER_POST,
     async (updatedPost) => {

@@ -9,13 +9,13 @@ import { getTagsAsync } from '../thunks/tagsThunk';
 
 const SearchBar = () => {
     const INITIAL_SORT = { sortMethod: 'posted_on', sortOrder: 'descending' };
-    const tags = useSelector((state) => state.tags.items);    
+    const tags = useSelector((state) => state.tags.items);
     const [query, setQuery] = useState('');
     const [showTagFilterPopup, setShowTagFilterPopup] = useState(false);
     const [selectedTags, setSelectedTags] = useState([]);
     const [showSortPopup, setShowSortPopup] = useState(false);
     const [sortCriteria, setSortCriteria] = useState(INITIAL_SORT);
-    
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -54,12 +54,12 @@ const SearchBar = () => {
 
     const handleConfirmTags = (tags) => {
         setSelectedTags(tags);
-        dispatch(queryPostsListAsync({query: query, tags: tags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}));
+        dispatch(queryPostsListAsync({ query: query, tags: tags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder }));
     };
 
     const handleConfirmSort = (sortCriteria) => {
         setSortCriteria(sortCriteria);
-        dispatch(queryPostsListAsync({query: query, tags: selectedTags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder}));
+        dispatch(queryPostsListAsync({ query: query, tags: selectedTags, sortMethod: sortCriteria.sortMethod, sortOrder: sortCriteria.sortOrder }));
     };
 
     return (

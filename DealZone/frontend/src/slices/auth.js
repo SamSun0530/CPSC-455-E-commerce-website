@@ -19,9 +19,9 @@ export const authSlice = createSlice({
         },
         clearAPIStatus: (state) => {
             state.authUser = REQUEST_STATE.IDLE,
-            state.registerUser = REQUEST_STATE.IDLE,
-            state.checkSession = REQUEST_STATE.IDLE,
-            state.error = null;
+                state.registerUser = REQUEST_STATE.IDLE,
+                state.checkSession = REQUEST_STATE.IDLE,
+                state.error = null;
         },
         finishLoading: (state) => {
             state.loading = false;

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/CartItem.css'; // Reuse CartItem.css for styling
+import '../css/CartItem.css';
 
 
 const PurchasedItem = ({ purchasedItem }) => {

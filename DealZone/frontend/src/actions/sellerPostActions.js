@@ -3,4 +3,3 @@ export const sellerPostActions = {
 	UPDATE_SELLER_POST: 'seller/updateSellerPost',
 	DELETE_SELLER_POST: 'seller/deleteSellerPost'
 };
-  

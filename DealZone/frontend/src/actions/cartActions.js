@@ -4,5 +4,4 @@ export const cartActions = {
 	DELETE_FROM_CART: 'cart/deleteFromCart',
 	CLEAR_CART: 'cart/clearAll',
 	PURCHASE_CART: 'cart/purchase',
-  };
-  
+};

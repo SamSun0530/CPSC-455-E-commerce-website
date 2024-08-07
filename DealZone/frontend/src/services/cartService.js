@@ -55,14 +55,14 @@ const clearCart = async () => {
     return response.json();
 };
 
-const purchaseCart = async ({cart, details}) => {
+const purchaseCart = async ({ cart, details }) => {
     const response = await fetch(SERVER_URL + '/cart/purchase', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'session-token': sessionStorage.getItem('sessionToken')
         },
-        body: JSON.stringify({cart, details}),
+        body: JSON.stringify({ cart, details }),
     });
     if (response.status === 401) {
         const data = await response.json();

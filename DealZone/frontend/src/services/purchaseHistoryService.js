@@ -7,7 +7,7 @@ const getPurchaseHistory = async () => {
             'session-token': sessionStorage.getItem('sessionToken')
         },
         credentials: 'include',
-        cache: 'no-store' // Ensure no caching
+        cache: 'no-store'
     });
     return response.json();
 };

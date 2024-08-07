@@ -4,7 +4,8 @@
     margin-right: 100px;
 }
 
-.input-group-text, .btn-outline-secondary {
+.input-group-text,
+.btn-outline-secondary {
     background-color: white;
     border: 1px solid #ced4da;
     border-radius: 0;
@@ -41,7 +42,8 @@
         font-size: 14px;
     }
 
-    .input-group-text, .btn-outline-secondary {
+    .input-group-text,
+    .btn-outline-secondary {
         font-size: 14px;
     }
 }

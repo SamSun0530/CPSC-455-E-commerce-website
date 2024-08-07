@@ -4,8 +4,8 @@ const getWishlist = async () => {
 	const response = await fetch(SERVER_URL + '/wishlist', {
 		method: 'GET',
 		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+			'session-token': sessionStorage.getItem('sessionToken')
+		},
 		credentials: 'include'
 	});
 	return response.json();
@@ -29,7 +29,6 @@ const addToWishlist = async (item) => {
 		}
 		return await response.json();
 	} catch (error) {
-		//console.error("Error adding to wishlist:", error);
 		throw error;
 	}
 };
@@ -38,8 +37,8 @@ const deleteFromWishlist = async (id) => {
 	const response = await fetch(`${SERVER_URL}/wishlist/${id}`, {
 		method: 'DELETE',
 		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+			'session-token': sessionStorage.getItem('sessionToken')
+		},
 		credentials: 'include'
 	});
 	const data = await response.json();
@@ -54,8 +53,8 @@ const clearWishlist = async () => {
 	const response = await fetch(SERVER_URL + '/wishlist', {
 		method: 'DELETE',
 		headers: {
-            'session-token': sessionStorage.getItem('sessionToken')
-        },
+			'session-token': sessionStorage.getItem('sessionToken')
+		},
 		credentials: 'include'
 	});
 	return response.json();

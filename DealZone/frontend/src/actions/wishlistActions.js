@@ -3,5 +3,4 @@ export const wishlistActions = {
 	ADD_TO_WISHLIST: 'wishlist/addPost',
 	DELETE_FROM_WISHLIST: 'wishlist/deletePost',
 	CLEAR_WISHLIST: 'wishlist/clearAll',
-  };
-// add additional actions like moving all items to cart?
+};

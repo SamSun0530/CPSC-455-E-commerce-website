@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Radio, RadioGroup, FormControlLabel, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, Radio, RadioGroup, FormControlLabel, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 const SortPopup = ({ selectedMethod, selectedOrder, open, onClose, onConfirm }) => {
     const [sortCriteria, setSortCriteria] = useState({ sortMethod: selectedMethod, sortOrder: selectedOrder });

@@ -1,4 +1,5 @@
 import SERVER_URL from '../../config';
+
 const getTags = async () => {
 	const response = await fetch(SERVER_URL + '/tags', {
 		method: 'GET',
@@ -8,7 +9,6 @@ const getTags = async () => {
 };
 
 const addTag = async (tags) => {
-	console.log("tags in frontend service: ", tags);
 	const response = await fetch(SERVER_URL + '/tags', {
 		method: 'POST',
 		headers: {
@@ -18,7 +18,6 @@ const addTag = async (tags) => {
 		credentials: 'include'
 	});
 	const data = await response.json();
-	console.log("res in service: ", data);
 	if (!response.ok) {
 		const errorMsg = data?.message;
 		throw new Error(errorMsg)

@@ -74,10 +74,10 @@ export default function SellerView() {
                     )}
                 </Box>
                 {selectedPost && (
-                    <EditPost 
-                        post={selectedPost} 
-                        onClose={handleCloseEdit} 
-                        onSave={handleSaveEdit} 
+                    <EditPost
+                        post={selectedPost}
+                        onClose={handleCloseEdit}
+                        onSave={handleSaveEdit}
                         onDelete={handleDelete}
                     />
                 )}
