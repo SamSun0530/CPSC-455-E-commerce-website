@@ -83,4 +83,5 @@ Andy Lee: Implemented checkout page, Navbar, password encryption, session token 
 ## References
 
 DZ Logo used from: https://www.freepik.com/premium-vector/logo-dz_42660603.htm 
+
 Login/Register background image from: https://www.freepik.com/premium-photo/shopping-online-home-concept-blue-background-copyspace_6019235.htm
