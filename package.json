@@ -6,5 +6,19 @@
     "@mui/material": "^5.15.19",
     "react-icons": "^5.2.1",
     "uuid": "^10.0.0"
-  }
+  },
+  "name": "project-10_tech_titans",
+  "version": "1.0.0",
+  "description": "- Your title can change over time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install-server": "cd DealZone/backend && npm install",
+    "start-server": "cd DealZone/backend && npm start",
+    "install-client": "cd DealZone/frontend && npm install",
+    "build-client": "cd DealZone/frontend && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

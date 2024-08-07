@@ -1,6 +1,6 @@
 # Group 10 - DealZone
 
-- Your title can change over time.
+[![deploy](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml/badge.svg)](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml)
 
 ## Describe your topic/interest in about 150-200 words
 
