@@ -22,8 +22,8 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 
 ### Stretch
 - Session handling to maintain logged in state across browser refresh ✅
+- Utilize API for address validation ✅ 
 - Graphs/ visualizations of products sold, profits, etc. Seller performance insights. ❌
-- Utilize ai-algorithm for product suggestion based on purchase or search history ❌
 
 ## Techs used from Units 1-5
 
