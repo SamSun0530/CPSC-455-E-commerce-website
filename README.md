@@ -3,6 +3,8 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 
 [![deploy](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml/badge.svg)](https://github.com/ubc-cpsc455-2024S/project-10_tech_titans/actions/workflows/deploy.yml)
 
+Deployed on: https://project-10-tech-titans-1.onrender.com/
+
 ## Task Requirements
 
 ### Minimal
