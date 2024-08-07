@@ -43,6 +43,8 @@ Shreya Gupta: I worked on the homepage display and layout of listings. I also wo
 
 Ivena Du: Contributed to the registration page styling, wishlist styling and functionality, and the individual listing page display. Implemented search bar functionalities and initially deployed site on Render.
 
+Sam Sun: Worked on the cart page, made the functionality of cart operation and its style. Function of fetching purchase history page data with display on frontend. Also the display of user account page.
+
 ## Team Members
 
 - Andy Lee: 4th year BSc student, currently working as a backend developer, hoping to gain some frontend experience.
