@@ -5,6 +5,15 @@ A marketplace website for users wanting to buy and sell items. It will allow use
 
 Deployed on: https://project-10-tech-titans-1.onrender.com/
 
+For testing purchases, only the below payment method will work:
+ - Card Number: 1111-2222-3333-4444
+ - CVC: 123
+ - Month: 12
+ - Year: 12
+ - Postal Code: 12345
+
+Also keep in mind that when registering an account, email must be unique so if getting an error, please try a different email.
+
 ## Task Requirements
 
 ### Minimal
