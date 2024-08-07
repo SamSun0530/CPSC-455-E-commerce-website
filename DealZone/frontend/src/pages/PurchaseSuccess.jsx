@@ -14,7 +14,7 @@ export default function PurchaseSuccess() {
             <div className="purchased-page">
                 <div className="purchased-msg">
                     <h2>Purchase Successful</h2>
-                    <p>An order confirmation will be emailed to you shortly.</p>
+                    <p>An order confirmation will be emailed to you shortly. (Coming soon)</p>
                     <button className='button' onClick={continueShopping}>Continue Shopping</button>
                 </div>
             </div>

@@ -7,7 +7,8 @@ import '../css/PurchaseHistoryPage.css';
 
 const PurchaseHistoryPage = () => {
     const dispatch = useDispatch();
-    const purchaseHistoryItem = useSelector((state) => state.purchaseHistory.items);
+    let purchaseHistoryItem = useSelector((state) => state.purchaseHistory.items);
+    purchaseHistoryItem = JSON.parse(JSON.stringify(purchaseHistoryItem)).reverse();
 
     useEffect(() => {
         dispatch(getPurchaseHistoryAsync());
