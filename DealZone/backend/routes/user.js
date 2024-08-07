@@ -90,10 +90,19 @@ router.get('/', async function (req, res, next) {
 
 // Update user data by email, no password change here. 
 // If changing password should have a separate route, and require user enter current password again
-router.patch('/:email', async function (req, res, next) {
+router.patch('/:id', async function (req, res, next) {
     try {
-        const user = await UserService.updateUserByEmail(req.params.email, req.body);
-        res.send(user);
+        const { username, email, password, first_name, last_name, phone_number, street, city, province, country, postal } = req.body;
+        const updateFields = {
+            username, email, first_name, last_name, phone_number, street, city, province, country, postal
+        };
+        Object.keys(updateFields).forEach(key => {
+            if (updateFields[key] === undefined) {
+                delete updateFields[key];
+            }
+        });
+        const updatedUser = await UserService.updateUser(req.session.user.id, updateFields);
+        res.send(updatedUser);
     } catch (error) {
         next(error);
     }

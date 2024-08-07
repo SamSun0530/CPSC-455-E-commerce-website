@@ -94,6 +94,9 @@ export const cartSlice = createSlice({
                         state.purchaseStatus = "success";
                         break;
                     case 400:
+                        state.purchaseStatus = "Invalid Address";
+                        break;
+                    case 402:
                         state.purchaseStatus = "Invalid Payment Method";
                         break;
                     case 409:

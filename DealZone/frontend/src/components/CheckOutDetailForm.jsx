@@ -24,7 +24,8 @@ export default function CheckOutDetailForm() {
     const [shippingExpanded, setShippingExpanded] = useState(true);
     const [paymentExpanded, setPaymentExpanded] = useState(false);
 
-    const subtotal = cartItems.reduce((total, item) => total + item.price, 0);
+    let subtotal = cartItems.reduce((total, item) => total + item.price, 0);
+    subtotal = parseFloat(subtotal.toFixed(2));
     const tax = parseFloat((subtotal * 0.12).toFixed(2));
     const total =  (subtotal + tax).toFixed(2);
 
@@ -190,12 +191,13 @@ export default function CheckOutDetailForm() {
                                                 label="Country"
                                                 autoComplete="country-name"
                                                 onChange={handleFormInputChange}
+                                                value='CA'
                                             >
                                                 <MenuItem value="">
                                                     <em>Select a Country</em>
                                                 </MenuItem>
-                                                <MenuItem value="canada">Canada</MenuItem>
-                                                <MenuItem value="us">United States</MenuItem>
+                                                <MenuItem value="CA">Canada</MenuItem>
+                                                <MenuItem value="US">United States</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </Grid>
@@ -302,7 +304,7 @@ export default function CheckOutDetailForm() {
                             <p><b>${subtotal}</b></p>
                         </li>
                         <li>
-                            <p>Tax (12%)</p>
+                            <p>Tax</p>
                             <p>${tax}</p>
                         </li>
                         <li>

@@ -13,7 +13,7 @@ const getUser = async () => {
 
 const updateUser = async (id, data) => {
     const response = await fetch(`${SERVER_URL}/users/${id}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'session-token': sessionStorage.getItem('sessionToken')

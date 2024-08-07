@@ -35,7 +35,7 @@ const Post = ({ post, onClick }) => {
         )}
       </Box>
       <CardContent>
-        <Typography variant="subtitle1" sx={{ color: 'red' }}>
+        <Typography variant="subtitle1" sx={{ color: post.sold ? 'grey' : 'green' }}>
           ${post.price}
         </Typography>
         <Typography 
