@@ -12,7 +12,7 @@ For testing purchases, only the below payment method will work:
  - Year: 12
  - Postal Code: 12345
 
-Also keep in mind that when registering an account, email must be unique so if getting an error, please try a different email.
+Also keep in mind that when registering an account, email must be unique so if getting an error, please try a different email. Also allow some time for render to spin up, you will know it is ready when the home page shows a grid of items.
 
 ## Task Requirements
 
